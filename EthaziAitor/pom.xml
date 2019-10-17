@@ -17,7 +17,8 @@
     </plugins>
   </build>
   <dependencies>
-  
+  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+  <!-- Hau da my sql connectorea jartzen duen etiquetak -->
   	<dependency>
     		<groupId>mysql</groupId>
     		<artifactId>mysql-connector-java</artifactId>
