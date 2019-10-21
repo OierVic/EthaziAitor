@@ -7,24 +7,16 @@ import java.util.ArrayList;
 
 public class Departamentua {
 	
-	
+	private int Kodea;
+	private String Izena;
+	private String Kokapena;
+		
 	public Departamentua(int kodea, String izena, String kokapena) {
-		super();
 		Kodea = kodea;
 		Izena = izena;
 		Kokapena = kokapena;
 	}
-	
-	public Departamentua() {
-		// TODO Auto-generated constructor stub
-	}
 
-	private int Kodea;
-	private String Izena;
-	private String Kokapena;
-	
-	static String fichero = "C:\\Diego\\Depart.txt";
-	
 	
 	public int getKodea() {
 		return Kodea;
@@ -60,8 +52,8 @@ public class Departamentua {
 		  String katea;
 	      String[] kateArray = new String[7];
 	      int kant=1;
-	  
-	      FileReader f = new FileReader(fichero);
+
+	      FileReader f = new FileReader(".\\src\\Depart.txt");
 	      BufferedReader b = new BufferedReader(f);
 	      ArrayList<Departamentua> DepartList = new ArrayList<Departamentua>();
 	  

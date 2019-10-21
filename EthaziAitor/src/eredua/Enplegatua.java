@@ -1,12 +1,18 @@
 package eredua;
 
 public class Enplegatua {
-	public Enplegatua() {
-		super();
-	}
-	public Enplegatua(int zenbaki, String izena, String abizenak, int soldata, String ardura, String alta,
-			String depKod) {
-		super();
+	
+	private int zenbaki;
+	private String izena;
+	private String abizenak;
+	private int soldata;
+	private String ardura;
+	private String alta;
+	private String depKod;
+	
+	
+	public Enplegatua(int zenbaki, String izena, String abizenak, int soldata, String ardura, String alta,String depKod) {
+		
 		this.zenbaki = zenbaki;
 		this.izena = izena;
 		this.abizenak = abizenak;
@@ -16,13 +22,7 @@ public class Enplegatua {
 		this.depKod = depKod;
 	}
 	
-	private int zenbaki;
-	private String izena;
-	private String abizenak;
-	private int soldata;
-	private String ardura;
-	private String alta;
-	private String depKod;
+	
 	
 	
 	public int getZenbaki() {
