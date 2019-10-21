@@ -1,10 +1,15 @@
 package kontroladorea;
 
+import eredua.konexioa;
+
 public class Nagusia {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		konexioa konexioa = new konexioa("test");
 
+		
+		
 	}
 
 }
