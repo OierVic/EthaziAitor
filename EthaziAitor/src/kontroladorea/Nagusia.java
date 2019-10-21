@@ -6,7 +6,7 @@ public class Nagusia {
 
 	public static void main(String[] args) {
 		
-		konexioa konexioa = new konexioa("test");
+		konexioa konexioa = new konexioa("enplegatuenKudeaketa");
 
 		
 		
