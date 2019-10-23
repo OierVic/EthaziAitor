@@ -17,7 +17,7 @@ public class KonexioaMariaDB {
 
 	// init database konstanteak
 	private static final String DATABASE_DRIVER = "org.mariadb.jdbc.Driver";
-	private static final String DATABASE_URL = "jdbc:mariadb://kasserver.synology.me:3307/enplegatuenKudeaketa";
+	private static final String DATABASE_URL = "jdbc:mariadb://kasserver.synology.me:3307/ethazi";
 	private static final String USERNAME = "gp1";
 	private static final String PASSWORD = "ZBlrkPWaSdVs5F3l";
 	private static final String MAX_POOL = "250";

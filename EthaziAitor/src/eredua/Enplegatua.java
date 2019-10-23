@@ -21,73 +21,85 @@ public class Enplegatua {
 	private String izena;
 	private String abizenak;
 	private int soldata;
-	private String ardura;
 	private String alta;
 	private String depKod;
+	private String arduraMota;
 	
 	
-	public Enplegatua(int zenbaki, String izena, String abizenak, int soldata, String ardura, String alta,String depKod) {
+	public Enplegatua(int zenbaki, String izena, String abizenak, int soldata, String alta, String depKod,String arduraMota) {
 		
 		this.zenbaki = zenbaki;
 		this.izena = izena;
 		this.abizenak = abizenak;
 		this.soldata = soldata;
-		this.ardura = ardura;
 		this.alta = alta;
 		this.depKod = depKod;
+		this.arduraMota = arduraMota;
 	}
-	
-	
-	
-	
+
 	public int getZenbaki() {
 		return zenbaki;
 	}
+
 	public void setZenbaki(int zenbaki) {
 		this.zenbaki = zenbaki;
 	}
+
 	public String getIzena() {
 		return izena;
 	}
+
 	public void setIzena(String izena) {
 		this.izena = izena;
 	}
+
 	public String getAbizenak() {
 		return abizenak;
 	}
+
 	public void setAbizenak(String abizenak) {
 		this.abizenak = abizenak;
 	}
+
 	public int getSoldata() {
 		return soldata;
 	}
+
 	public void setSoldata(int soldata) {
 		this.soldata = soldata;
 	}
-	public String getArdura() {
-		return ardura;
-	}
-	public void setArdura(String ardura) {
-		this.ardura = ardura;
-	}
+	
 	public String getAlta() {
 		return alta;
 	}
+
 	public void setAlta(String alta) {
 		this.alta = alta;
 	}
+
 	public String getDepKod() {
 		return depKod;
 	}
+
 	public void setDepKod(String depKod) {
 		this.depKod = depKod;
+	}
+
+	public String getArduraMota() {
+		return arduraMota;
+	}
+
+	public void setArduraMota(String arduraMota) {
+		this.arduraMota = arduraMota;
 	}
 
 	@Override
 	public String toString() {
 		return "Enplegatua [zenbaki=" + zenbaki + ", izena=" + izena + ", abizenak=" + abizenak + ", soldata=" + soldata
-				+ ", ardura=" + ardura + ", alta=" + alta + ", depKod=" + depKod + "]";
+				+ ", alta=" + alta + ", depKod=" + depKod + ", arduraMota=" + arduraMota + "]";
 	}
+	
+	
 	
 	
 	public static void reiniciarArray (String [] array) {

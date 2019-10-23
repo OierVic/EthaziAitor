@@ -1,10 +1,4 @@
-data,ordua,nori,nork,titulua,edukia
-"2019-7-3,""10:20:30"",""Ander"",""Aitor"",""Galdera"",""Kaixo zelan zaude?"""
-"2019-7-3,""10:20:50"",""Aitor"",""Ander"",""Erantzuna"",""Ni ondo eta zu?"""
-"2019-7-3,""10:21:00"",""Ander"",""Aitor"",""Erantzuna 2"",""Ni kili-kolo."""
-"2019-7-3,""10:21:30"",""Aitor"",""Ander"",""Erantzuna 3"",""Zer ba?"""
-"2019-7-3,""10:21:50"",""Ander"",""Aitor"",""Erantzuna 4"",""Ez zaidalako programa ondo ibiltzen."""
-"2019-7-3,""10:22:30"",""Aitor"",""Ander"",""Erantzuna 5"",""Lasai lan eta lan eta azkenean oso ondo irtengo zaizu eta."""
-2019-10-04,1:0,h,hhhhhhhhhhh,hhhhhhhhhh,hhhhhhhhhhhh
-2019-10-18,1:1,jj,jjjjjjjjj,jj,jjjjjjjjjjjjjjjjjjj
-2019-10-04,2:0,ttt,tttttttttttttttttttttt,tttttttt,tttttttttttttt
+kodea,izena,kokapena
+1,Lehengo Departamentua,Madrid
+2,Bigarren Departamentua,Barcelona
+3,Hirugarren Departamentua,Sevilla
