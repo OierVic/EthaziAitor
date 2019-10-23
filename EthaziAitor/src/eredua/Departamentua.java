@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -128,7 +132,7 @@ public class Departamentua {
 	
 	//Departamentua XMLtik irakurtzeko
 	
-	public static ArrayList<Departamentua> XMLDepartamentuaIrakurri() {
+	public static ArrayList<Departamentua> XMLDepartamentuakIrakurri() {
 
 		//Bariableak
 		ArrayList<Departamentua> arrayDepartamentuaXML = new ArrayList<Departamentua>();
@@ -189,6 +193,47 @@ public class Departamentua {
 	
 	
 	
+	//Departamentua JSONetik irakurtzeko
+
+	
+	public static ArrayList<Departamentua> irakurriDepartamentuak() {
+		ArrayList<Departamentua> arrayDepartamentuaJSON = new ArrayList<Departamentua>();
+
+		JSONParser jsonParser = new JSONParser();
+
+		try (FileReader reader = new FileReader(".\\src\\Departamentuak.json")) {
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseDepartamentuakObject((JSONObject) emp,arrayDepartamentuaJSON));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return arrayDepartamentuaJSON;
+		
+		
+	}
+
+	private static void parseDepartamentuakObject(JSONObject employee,ArrayList<Departamentua> arraylist) {
+
+		JSONObject departamentuaObject = (JSONObject) employee.get("departamentua");
+
+		String kodea_string = (String) departamentuaObject.get("kodea");
+		String izena = (String) departamentuaObject.get("izena");
+		String kokapena = (String) departamentuaObject.get("kokapena");
+
+		int kodea_int = Integer.parseInt(kodea_string);
+
+		//Oharra oharra = new Oharra(data, ordua, nori, nork, titulua, edukia);
+		Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
+		arraylist.add(departamentua);
+		
+		
+	}
 	
 	
 	

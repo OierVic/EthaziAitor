@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,13 +24,13 @@ public class Enplegatua {
 	private int zenbaki;
 	private String izena;
 	private String abizenak;
-	private int soldata;
+	private double soldata;
 	private String alta;
-	private String depKod;
+	private int depKod;
 	private String arduraMota;
 	
 	
-	public Enplegatua(int zenbaki, String izena, String abizenak, int soldata, String alta, String depKod,String arduraMota) {
+	public Enplegatua(int zenbaki, String izena, String abizenak, double soldata, String alta, int depKod,String arduraMota) {
 		
 		this.zenbaki = zenbaki;
 		this.izena = izena;
@@ -61,11 +65,11 @@ public class Enplegatua {
 		this.abizenak = abizenak;
 	}
 
-	public int getSoldata() {
+	public double getSoldata() {
 		return soldata;
 	}
 
-	public void setSoldata(int soldata) {
+	public void setSoldata(double soldata) {
 		this.soldata = soldata;
 	}
 	
@@ -77,11 +81,11 @@ public class Enplegatua {
 		this.alta = alta;
 	}
 
-	public String getDepKod() {
+	public int getDepKod() {
 		return depKod;
 	}
 
-	public void setDepKod(String depKod) {
+	public void setDepKod(int depKod) {
 		this.depKod = depKod;
 	}
 
@@ -119,12 +123,13 @@ public class Enplegatua {
 		String zenbaki_string=null;
 		int zenbaki_int=0;
 		String izena=null;
-		String abizena=null;
+		String abizenak=null;
 		String soldata_string=null;
-		int soldata_int=0;
+		double soldata_double=0.00;
 		String ardura=null;
 		String alta=null;
-		String depKod=null;
+		String depKod_string=null;
+		int depKod_int=0;
 
 		String csvFile = ".\\src\\Enplegatuak.csv";
 		BufferedReader br = null;
@@ -139,19 +144,21 @@ public class Enplegatua {
 				String[] datos = line.split(cvsSplitBy);
 				zenbaki_string = datos[0];
 				izena = datos[1];
-				abizena = datos[2];
+				abizenak = datos[2];
 				soldata_string = datos[3];
-				ardura = datos[4];
-				alta = datos[5];
-				depKod = datos[6];
+				alta = datos[4];
+				depKod_string = datos[5];
+				ardura = datos[6];
+
 
 				//Imprime datos.
-				System.out.println(datos[0] + " " + datos[1] + " " + datos[2]);
+				System.out.println(datos[0] + " " + datos[1] + " " + datos[2]+ " " + datos[3]+ " " + datos[4]+ " " + datos[5]+ " " + datos[6]);
 
 				zenbaki_int = Integer.parseInt(zenbaki_string);
-				soldata_int = Integer.parseInt(soldata_string);
-
-				Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizena, soldata_int, ardura, alta, depKod);
+				soldata_double = Double.parseDouble(soldata_string);
+				depKod_int = Integer.parseInt(depKod_string);
+				
+				Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
 				arrayEnplegatuakCSV.add(enplegatua);
 
 				reiniciarArray(datos);
@@ -183,19 +190,21 @@ public class Enplegatua {
 	//Enplegatua XMLtik irakurtzeko
 
 	
-	public static ArrayList<Enplegatua> XMLEnplegatuaIrakurri() {
+	public static ArrayList<Enplegatua> XMLEnplegatuakIrakurri() {
 
 		//Bariableak
 		ArrayList<Enplegatua> arrayEnplegatuaXML = new ArrayList<Enplegatua>();
 		String zenbaki_string=null;
 		int zenbaki_int=0;
 		String izena=null;
-		String abizena=null;
+		String abizenak=null;
 		String soldata_string=null;
-		int soldata_int=0;
+		double soldata_double=0.00;
 		String ardura=null;
 		String alta=null;
-		String depKod=null;
+		String depKod_string=null;
+		int depKod_int=0;
+		
 		//String xmlFile = ".\\src\\Oharrak.xml";
 		int count = 0;
 
@@ -218,17 +227,18 @@ public class Enplegatua {
 
 					zenbaki_string = document.getElementsByTagName("kodea").item(temp).getTextContent();
 					izena = document.getElementsByTagName("izena").item(temp).getTextContent();
-					abizena = document.getElementsByTagName("abizena").item(temp).getTextContent();
+					abizenak = document.getElementsByTagName("abizena").item(temp).getTextContent();
 					soldata_string = document.getElementsByTagName("soldata").item(temp).getTextContent();
-					ardura = document.getElementsByTagName("ardura").item(temp).getTextContent();
 					alta = document.getElementsByTagName("alta").item(temp).getTextContent();
-					depKod = document.getElementsByTagName("depKod").item(temp).getTextContent();
+					depKod_string = document.getElementsByTagName("depKod").item(temp).getTextContent();
+					ardura = document.getElementsByTagName("ardura").item(temp).getTextContent();
 
 
 					zenbaki_int = Integer.parseInt(zenbaki_string);
-					soldata_int = Integer.parseInt(soldata_string);
-
-					Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizena, soldata_int, ardura, alta, depKod);
+					soldata_double = Double.parseDouble(soldata_string);
+					depKod_int = Integer.parseInt(depKod_string);
+					
+					Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
 					
 					System.out.println(enplegatua.toString());
 					arrayEnplegatuaXML.add(enplegatua);
@@ -252,6 +262,58 @@ public class Enplegatua {
 
 
 	}
+	
+	
+	
+	
+	//Enplegatua JSONtik irakurtzeko
+	
+	public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri() {
+		ArrayList<Enplegatua> arrayEnplegatuakJSON = new ArrayList<Enplegatua>();
+
+		JSONParser jsonParser = new JSONParser();
+
+		try (FileReader reader = new FileReader(".\\src\\Enplegatuak.json")) {
+			Object obj = jsonParser.parse(reader);
+			JSONArray employeeList = (JSONArray) obj;
+			employeeList.forEach(emp -> parseEnplegatuakObject((JSONObject) emp,arrayEnplegatuakJSON));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return arrayEnplegatuakJSON;
+		
+		
+	}
+
+	private static void parseEnplegatuakObject(JSONObject employee,ArrayList<Enplegatua> arraylist) {
+
+		JSONObject departamentuaObject = (JSONObject) employee.get("enplegatua");
+
+		String zenbaki_string = (String) departamentuaObject.get("zenbaki");
+		String izena = (String) departamentuaObject.get("izena");
+		String abizenak = (String) departamentuaObject.get("abizenak");
+		String soldata_string = (String) departamentuaObject.get("soldata");
+		String alta = (String) departamentuaObject.get("alta");
+		String depKod_string = (String) departamentuaObject.get("depKod");
+		String ardura = (String) departamentuaObject.get("ardura");
+		
+		int zenbaki_int = Integer.parseInt(zenbaki_string);
+		double soldata_double = Double.parseDouble(soldata_string);
+		int depKod_int = Integer.parseInt(depKod_string);
+
+		//Oharra oharra = new Oharra(data, ordua, nori, nork, titulua, edukia);
+		Enplegatua enplegatu = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
+		arraylist.add(enplegatu);
+		
+		
+	}
+	
+	
 	
 	
 	
