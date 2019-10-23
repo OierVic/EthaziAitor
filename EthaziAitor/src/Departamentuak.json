@@ -1,0 +1,17 @@
+[
+ {
+   "kodea": 1,
+   "izena": "Lehengo Departamentua",
+   "kokapena": "Madrid"
+ },
+ {
+   "kodea": 2,
+   "izena": "Bigarren Departamentua",
+   "kokapena": "Barcelona"
+ },
+ {
+   "kodea": 3,
+   "izena": "Hirugarren Departamentua",
+   "kokapena": "Sevilla"
+ }
+]

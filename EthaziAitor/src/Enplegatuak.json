@@ -1,0 +1,20 @@
+[
+ {
+   "zenbaki": 1,
+   "izena": "Aitor",
+   "abizena": "Etxebarria",
+   "soldata": 1500,
+   "alta": "2019-10-1",
+   "departamentu_kodea": 1,
+   "ardurak_arduraMota": "z_ikasketaBurua"
+ },
+ {
+   "zenbaki": 2,
+   "izena": "Txema",
+   "abizena": "Chamero",
+   "soldata": 1200,
+   "alta": "2019-09-1",
+   "departamentu_kodea": 1,
+   "ardurak_arduraMota": "atezaina"
+ }
+]
