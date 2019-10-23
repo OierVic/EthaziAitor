@@ -196,7 +196,7 @@ public class Departamentua {
 	//Departamentua JSONetik irakurtzeko
 
 	
-	public static ArrayList<Departamentua> irakurriDepartamentuak() {
+	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri() {
 		ArrayList<Departamentua> arrayDepartamentuaJSON = new ArrayList<Departamentua>();
 
 		JSONParser jsonParser = new JSONParser();
