@@ -44,12 +44,16 @@ public class DepKonexio {
 	
 	
 	public static void prueba(){ //funciona
-		Connection conexion = konexioa.getConnection();
+		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();
 	        
-			s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES ('3', 'PEPO', 'CUlA')");
-	
+			s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
+					+ " ('3', 'PEPO', 'CUlA')");
+			
+			s.close();
+			
+			System.out.println("Konexioa Eginda");
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
 		}

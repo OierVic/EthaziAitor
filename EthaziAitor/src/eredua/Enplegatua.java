@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -315,7 +318,27 @@ public class Enplegatua {
 	
 	
 	
-	
+	public static void EnplegatuakIgo (ArrayList<Enplegatua> arraylistEnplegatua) {
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+			
+			for (int i = 0; i < arraylistEnplegatua.size() - 1; i++) {
+			
+			s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `aradurak_arduraMota`) VALUES"
+					+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
+					
+			}
+			s.close();
+
+			System.out.println("Konexioa Eginda");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+
+	}
 	
 	
 	
