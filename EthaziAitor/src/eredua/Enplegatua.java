@@ -326,8 +326,8 @@ public class Enplegatua {
 			
 			for (int i = 0; i < arraylistEnplegatua.size() - 1; i++) {
 			
-			s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `aradurak_arduraMota`) VALUES"
-					+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
+			s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `ardurak_arduraMota`) VALUES"
+					+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+ arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
 					
 			}
 			s.close();
