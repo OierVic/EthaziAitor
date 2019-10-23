@@ -7,7 +7,7 @@ public class prueba {
 	
 	public static void main(String[] args) throws IOException {
 		
-		
+		Departamentua.leerjsonDepartamentua();
 		ArrayList<Departamentua> arrayDep = new ArrayList<Departamentua>();
 		arrayDep = Departamentua.JSONDepartamentuakIrakurri();
 		for (int i = 0; i < arrayDep.size(); i++) {
