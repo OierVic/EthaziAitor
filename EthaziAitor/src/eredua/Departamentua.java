@@ -29,6 +29,11 @@ import java.util.Map.Entry;
 
 public class Departamentua {
 
+	public Departamentua() {
+		super();
+	}
+
+
 	private int Kodea;
 	private String Izena;
 	private String Kokapena;

@@ -24,6 +24,12 @@ import org.w3c.dom.NodeList;
 
 public class Enplegatua {
 	
+	public Enplegatua() {
+		super();
+	}
+
+
+
 	private int zenbaki;
 	private String izena;
 	private String abizenak;

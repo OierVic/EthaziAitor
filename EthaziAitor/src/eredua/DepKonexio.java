@@ -13,46 +13,55 @@ public class DepKonexio {
 
 
 	
-//	public static ArrayList<Departamentua> geltokiGeltokiak(){
-//		ArrayList <Departamentua> Depart = new ArrayList<Departamentua>();
-//		Connection conexion = konexioa.getConnection();
-//		try {
-//			Statement s = conexion.createStatement();
-//	        
-//	        // Se realiza la consulta. Los resultados se guardan en el ResultSet rs
-//	        String query = "select * from departamentu";
-//	        
-//	        ResultSet rs = s.executeQuery(query);
-//	        
-//	        // Se recorre el ResultSet, mostrando por pantalla los resultados.
-//	        while (rs.next()) {
-//	        	int Kodea=rs.getInt(1);
-//	        	 String Izena=rs.getString(2);
-//	        	 String Kokapena=rs.getString(3);
-//	        	 
-//	        	 System.out.println(Kodea + " " + Izena + " " +Kokapena);
-//	        	
-////	        	 Geltokia biltegi=new Geltokia(cod_Parada,izena,kalea,latitudea,longitudea);
-////	        	 geltokiDatuak.add(biltegi);
-////	        	
-//	        	 }
-//			
-//	    } catch (SQLException e) {
-//	        System.out.println(e.getMessage());
-//		}
-//		return null;}
+	public static ArrayList<String> kontsulaArdurak(){ // ArduraMotak kontsula
+		ArrayList<String> arduraArrayList = new ArrayList<String>();
+		Connection conexion = konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+	        String query = "select * from ardurak";
+	        ResultSet rs = s.executeQuery(query);
+	        
+	        while (rs.next()) {
+	        	String arduraMota=rs.getString(1);
+	        	arduraArrayList.add(arduraMota);       	
+	        	 }
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+		}
+		return arduraArrayList;
+		}
 	
-	
-	public static void prueba(){ //funciona
+	public static void gordeDepart(ArrayList<Departamentua> depArrayList){ //Departamentu arrayList sartu bd
+		Departamentua p = new Departamentua();
 		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();
-	        
-			s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
-					+ " ('3', 'PEPO', 'CUlA')");
-			
-			s.close();
-			
+			for(int x=0;x<depArrayList.size();x++) {
+				  p = depArrayList.get(x);
+				  s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
+						  + " ('" + p.getKodea() + "', '" + p.getIzena() + "', '" + p.getKokapena() + "')");	
+				}s.close();
+	
+			System.out.println("Konexioa Eginda");
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	        }}
+	
+
+	
+	public static void gordeEnple(ArrayList<Enplegatua> EnpArrayList){ //Enplegatu arrayList satu bd
+		Enplegatua en = new Enplegatua();
+		Connection conexion = (Connection) konexioa.getConnection();
+		ArrayList<String> arduraArrayList = kontsulaArdurak();
+		try {
+			Statement s = conexion.createStatement();
+			for(int x=0;x<EnpArrayList.size();x++) {
+				  en = EnpArrayList.get(x);
+				  s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`"
+				  		+ ",`soldata`, `alta`, `departamentu_kodea`,`ardurak_arduraMota`) VALUES"
+							+ " ('" + en.getZenbaki() + "', '" + en.getIzena() + "', '" + en.getAbizenak() + "','" + en.getSoldata() + "'"
+									+ ",'" + en.getAlta() + "','" + en.getDepKod() + "','" + en.getArduraMota() + "')");
+				  }	s.close();
 			System.out.println("Konexioa Eginda");
 	    } catch (SQLException e) {
 	        System.out.println(e.getMessage());
