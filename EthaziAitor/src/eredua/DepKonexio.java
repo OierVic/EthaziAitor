@@ -32,7 +32,7 @@ public class DepKonexio {
 		}
 	
 	public static void gordeDepart(ArrayList<Departamentua> depArrayList){ //Departamentu arrayList sartu bd
-		Departamentua p = new Departamentua();
+		Departamentua p = new Departamentua(0, null, null);
 		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();
