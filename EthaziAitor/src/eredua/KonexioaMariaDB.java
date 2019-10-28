@@ -3,67 +3,53 @@ package eredua;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
+
 
 public class KonexioaMariaDB {
-	//erabili singleton txantiloi diseinua
-	private static KonexioaMariaDB instantzia;
-	public static KonexioaMariaDB getInstance(){
-		if(instantzia == null) {
-			instantzia = new KonexioaMariaDB();
-		}
-		return instantzia;
-	}
-
-	// init database konstanteak
-	private static final String DATABASE_DRIVER = "org.mariadb.jdbc.Driver";
-	private static final String DATABASE_URL = "jdbc:mariadb://kasserver.synology.me:3307/ethazi";
-	private static final String USERNAME = "gp1";
-	private static final String PASSWORD = "ZBlrkPWaSdVs5F3l";
-	private static final String MAX_POOL = "250";
-
-	// konexioa
-	private Connection konexioa;
-
-	private Properties propietateak;
-
-
-	private Properties getProperties() {
-		if(propietateak == null) {
-			propietateak = new Properties();
-			propietateak.setProperty("user", USERNAME);
-			propietateak.setProperty("password", PASSWORD);
-			propietateak.setProperty("MaxPooledStatements", MAX_POOL);
-		}
-		return propietateak;
-	}
-
-	// konektatu datubasera
-
-	public Connection konektatu() {
-		if (konexioa == null) {
-			try {
-				Class.forName(DATABASE_DRIVER);
-				konexioa =  DriverManager.getConnection(DATABASE_URL, getProperties());
-			} catch (ClassNotFoundException | SQLException e) {
-				System.err.println("Konexioa ezin izan da burutu.");
-				e.printStackTrace();
-			}
-		}
-		return konexioa;
-	}
-
-	// datubasetik deskonektatu
-	public void deskonektatu() {
-		if(konexioa != null) {
-			try {
-				konexioa.close();
-				konexioa = null;
-			} catch (SQLException e) {
-				System.err.println("Ezin izan da deskonektatu.");
-				e.printStackTrace();
-			}
-		}
-	}    
-
+	private String  maquina="localhost/";
+    private String  usuario="root";
+    private String  clave="";
+    private int puerto          = 3306;
+    private String  servidor="127.0.0.1";
+    private static Connection conexion  = null;
+ 
+    //CONSTRUCTOR
+    //Recibe el nombre de la base de datos
+    /**
+     * 
+     * @param baseDatos
+     */
+    public KonexioaMariaDB(String baseDatos){
+       
+    		String server="jdbc:mysql://";
+    	
+    	this.servidor="jdbc:mysql://"+this.maquina+baseDatos+":"+ this.puerto+"/"+baseDatos;
+    	//String Servidor2="jdbc:mysql://localhost/filmeak:3306/filmeak";
+        //Registrar el driver
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.err.println("ERROR AL REGISTRAR EL DRIVER");
+            System.exit(0); //parar la ejecución
+        }
+ 
+        //Establecer la conexión con el servidor
+        try {
+           conexion = DriverManager.getConnection("jdbc:mysql://"+this.maquina+baseDatos+"",this.usuario, this.clave);
+        } catch (SQLException e) {
+            System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
+            System.exit(0); //parar la ejecución
+        }
+        System.out.println("Conectado a "+baseDatos);
+    }
+ 
+/**
+ * 
+ * @return conexion
+ */
+    //Devuelve el objeto Connection que se usará en la clase Controller
+    public static Connection getConnection() {
+        return conexion;
+    }
+ 
 }
