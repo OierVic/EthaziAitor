@@ -142,14 +142,14 @@ public class Kudeaketa extends JFrame {
         contenedor.add(btnAdd);
         //BOTÓN BORRAR
         btnDel          = new JButton("Borrar");
-        btnDel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        sp.putConstraint(SpringLayout.NORTH, btnDel, 0, SpringLayout.NORTH, btnAdd);
-        sp.putConstraint(SpringLayout.WEST, btnDel, 25, SpringLayout.EAST, btnAdd);
+        sp.putConstraint(SpringLayout.NORTH, btnDel, 6, SpringLayout.SOUTH, scroll);
+        sp.putConstraint(SpringLayout.WEST, btnDel, 173, SpringLayout.EAST, btnAdd);
         sp.putConstraint(SpringLayout.SOUTH, btnDel, 0, SpringLayout.SOUTH, btnAdd);
-        sp.putConstraint(SpringLayout.EAST, btnDel, 240, SpringLayout.WEST, contenedor);
+        btnDel.setFont(new Font("Tahoma", Font.PLAIN, 13));
         contenedor.add(btnDel);
         //BOTÓN MODIFICAR
         btnUpd          = new JButton("Editar");
+        sp.putConstraint(SpringLayout.EAST, btnDel, -176, SpringLayout.WEST, btnUpd);
         btnUpd.setFont(new Font("Tahoma", Font.PLAIN, 13));
         sp.putConstraint(SpringLayout.NORTH, btnUpd, 6, SpringLayout.SOUTH, scroll);
         sp.putConstraint(SpringLayout.WEST, btnUpd, -120, SpringLayout.EAST, contenedor);
