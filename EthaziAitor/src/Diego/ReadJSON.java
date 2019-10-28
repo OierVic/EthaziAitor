@@ -12,12 +12,12 @@ import org.json.simple.parser.ParseException;
 public class ReadJSON
 {
 	@SuppressWarnings("unchecked")
-	public static void read()
+	public static void read(String json)
 	{
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
 		
-		try (FileReader reader = new FileReader("C:\\Diego\\prueba.json"))
+		try (FileReader reader = new FileReader(json))
 		{
 			//Read JSON file
             Object obj = jsonParser.parse(reader);

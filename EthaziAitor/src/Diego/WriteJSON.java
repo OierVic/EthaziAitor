@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 public class WriteJSON
 {
     @SuppressWarnings("unchecked")
-	public static void write()
+	public static void write(String json)
     {
     	//First Employee
     	JSONObject employeeDetails = new JSONObject();
@@ -23,7 +23,7 @@ public class WriteJSON
     	
     	//Second Employee
     	JSONObject employeeDetails2 = new JSONObject();
-    	employeeDetails2.put("firstName", "Brian2");
+    	employeeDetails2.put("firstName", "Brian5");
     	employeeDetails2.put("lastName", "Schultz");
     	employeeDetails2.put("website", "example.com");
     	
@@ -36,7 +36,7 @@ public class WriteJSON
     	employeeList.add(employeeObject2);
     	
     	//Write JSON file
-    	try (FileWriter file = new FileWriter("C:\\Diego\\prueba.json")) {
+    	try (FileWriter file = new FileWriter(json)) {
 
             file.write(employeeList.toJSONString());
             file.flush();

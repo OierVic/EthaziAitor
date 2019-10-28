@@ -5,11 +5,13 @@ public class pruebaJSON {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ReadJSON.read();
+		String json = "C:\\Users\\diego\\git\\EthaziAitor\\EthaziAitor\\src\\Diego";
 		
-		WriteJSON.write();
+		ReadJSON.read(json);
 		
-		ReadJSON.read();
+		WriteJSON.write(json);
+		
+		ReadJSON.read(json);
 
 	}
 
