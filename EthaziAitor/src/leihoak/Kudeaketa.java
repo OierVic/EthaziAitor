@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
  
 public class Kudeaketa extends JFrame {
  
@@ -42,7 +45,7 @@ public class Kudeaketa extends JFrame {
     /**************** MÉTODOS ***************************/
     public Kudeaketa(){
         //Métodos de la JFrame
-        setBounds(100, 100, 450, 300);//Definir las dimensiones de la ventana
+        setBounds(525,200,700,600);//Definir las dimensiones de la ventana
         setTitle("GESTIÓN DE CLIENTES - KADUM");    //Barra de título
         setDefaultCloseOperation(EXIT_ON_CLOSE);    //Acción al pulsar salir
  
@@ -58,6 +61,7 @@ public class Kudeaketa extends JFrame {
         /**************** BOF ETIQUETAS  vvvvvvvvvvvvvvvv **/
         //ETIQUETA NOMBRE
         lblNombre = new JLabel("Nombre:");  //Crear el objeto
+        lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
         contenedor.add(lblNombre);      //Añadirlo al contenedor
         sp.putConstraint(SpringLayout.NORTH, lblNombre, 10,
                         SpringLayout.NORTH, contenedor);
@@ -65,6 +69,7 @@ public class Kudeaketa extends JFrame {
                         SpringLayout.WEST, contenedor);
         //ETIQUETA APELLIDOS
         lblApellido = new JLabel("Apellidos:");
+        lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 13));
         contenedor.add(lblApellido);
         sp.putConstraint(SpringLayout.NORTH, lblApellido, 50,
                         SpringLayout.NORTH, contenedor);
@@ -72,6 +77,7 @@ public class Kudeaketa extends JFrame {
                         SpringLayout.WEST, contenedor);
         //ETIQUETA NIF
         lblNIF = new JLabel("NIF:");
+        lblNIF.setFont(new Font("Tahoma", Font.PLAIN, 13));
         contenedor.add(lblNIF);
         sp.putConstraint(SpringLayout.NORTH, lblNIF, 90,
                         SpringLayout.NORTH, contenedor);
@@ -82,28 +88,28 @@ public class Kudeaketa extends JFrame {
         /**************** BOF CUADROS DE  TEXTO vvvvvvvvv **/
         //CUADRO DE TEXTO PARA EL NOMBRE
         txtNombre       = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtNombre, 365,
+                        SpringLayout.WEST, contenedor);
         contenedor.add(txtNombre);
         sp.putConstraint(SpringLayout.NORTH, txtNombre, 10,
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, txtNombre, 100,
                         SpringLayout.WEST, contenedor);
-        sp.putConstraint(SpringLayout.EAST, txtNombre, 300,
-                        SpringLayout.WEST, contenedor);
         //CUADRO DE TEXTO PARA EL NIF
         txtApellido = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtApellido, 0,
+                        SpringLayout.EAST, txtNombre);
         contenedor.add(txtApellido);    //añadir al contenedor
         sp.putConstraint(SpringLayout.NORTH, txtApellido, 50,
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, txtApellido, 100,
                         SpringLayout.WEST, contenedor);
-        sp.putConstraint(SpringLayout.EAST, txtApellido, 300,
-                        SpringLayout.WEST, contenedor);
         //CUADRO DE TEXTO PARA LOS APELLIDOS
         txtNIF      = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtNIF, 0, SpringLayout.EAST, txtNombre);
         contenedor.add(txtNIF);
         sp.putConstraint(SpringLayout.NORTH, txtNIF, 90, SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, txtNIF, 100, SpringLayout.WEST, contenedor);
-        sp.putConstraint(SpringLayout.EAST, txtNIF, 300, SpringLayout.WEST, contenedor);
         /**************** EOF CUADROS DE  TEXTO ^^^^^^^^^ **/
  
         /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
@@ -127,25 +133,33 @@ public class Kudeaketa extends JFrame {
         /**************** BOF BOTONES vvvvvvvvvvvvvvvvvv **/
         //BOTÓN AÑADIR
         btnAdd          = new JButton("Añadir");
-        contenedor.add(btnAdd);
+        btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        sp.putConstraint(SpringLayout.NORTH, btnAdd, 6, SpringLayout.SOUTH, scroll);
+        sp.putConstraint(SpringLayout.WEST, btnAdd, 33, SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.SOUTH, btnAdd, -10,
-                        SpringLayout.SOUTH, contenedor);//colocarlo
-        sp.putConstraint(SpringLayout.WEST, btnAdd,   60,
-                        SpringLayout.WEST, contenedor);
+                        SpringLayout.SOUTH, contenedor);
+        sp.putConstraint(SpringLayout.EAST, btnAdd, 128, SpringLayout.WEST, contenedor);
+        contenedor.add(btnAdd);
         //BOTÓN BORRAR
         btnDel          = new JButton("Borrar");
+        btnDel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        sp.putConstraint(SpringLayout.NORTH, btnDel, 0, SpringLayout.NORTH, btnAdd);
+        sp.putConstraint(SpringLayout.WEST, btnDel, 25, SpringLayout.EAST, btnAdd);
+        sp.putConstraint(SpringLayout.SOUTH, btnDel, 0, SpringLayout.SOUTH, btnAdd);
+        sp.putConstraint(SpringLayout.EAST, btnDel, 240, SpringLayout.WEST, contenedor);
         contenedor.add(btnDel);
-        sp.putConstraint(SpringLayout.SOUTH, btnDel, -10,
-                        SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btnDel,  190,
-                        SpringLayout.WEST, contenedor);
         //BOTÓN MODIFICAR
         btnUpd          = new JButton("Editar");
+        btnUpd.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        sp.putConstraint(SpringLayout.NORTH, btnUpd, 6, SpringLayout.SOUTH, scroll);
+        sp.putConstraint(SpringLayout.WEST, btnUpd, -120, SpringLayout.EAST, contenedor);
+        sp.putConstraint(SpringLayout.SOUTH, btnUpd, 40, SpringLayout.SOUTH, scroll);
+        sp.putConstraint(SpringLayout.EAST, btnUpd, -40, SpringLayout.EAST, contenedor);
+        btnUpd.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
         contenedor.add(btnUpd);
-        sp.putConstraint(SpringLayout.SOUTH, btnUpd, -10,
-                        SpringLayout.SOUTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, btnUpd,  310,
-                        SpringLayout.WEST, contenedor);
         /**************** EOF BOTONES ^^^^^^^^^^^^^^^^^^^^ **/
  
         //Se hace visible la ventana
