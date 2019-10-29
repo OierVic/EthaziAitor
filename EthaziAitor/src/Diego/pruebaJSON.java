@@ -15,7 +15,13 @@ public class pruebaJSON {
 		ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 
 		 
-		ReadJSON.read(json);
+		depArrayList = ReadJSON.read(json);
+		
+		
+		System.out.println("hola buenas2");
+		for(int x=0;x<depArrayList.size();x++) {
+			  System.out.println(depArrayList.get(x));
+			}	
 		
 //		WriteJSON.write(json);
 //		

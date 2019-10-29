@@ -1,4 +1,4 @@
-package com.howtodoinjava.demo.jsonsimple;
+package Diego;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

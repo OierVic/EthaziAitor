@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 
 import eredua.Departamentua;
 
+
 public class ReadJSON
 {
 	
@@ -19,7 +20,7 @@ public class ReadJSON
 	private static ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 	
 	@SuppressWarnings("unchecked")
-	public static void read(String json)
+	public static ArrayList<Departamentua> read(String json)
 	
 	{
 		
@@ -38,7 +39,14 @@ public class ReadJSON
             
             
             
-            employeeList.forEach( emp -> parsedepartObject( (JSONObject) emp ) );
+            employeeList.forEach( emp -> {
+				try {
+					parsedepartObject( (JSONObject) emp );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} );
             
           
 
@@ -49,58 +57,42 @@ public class ReadJSON
         } catch (ParseException e) {
             e.printStackTrace();
         }
+			
 		
-		System.out.println("hola buenas");
-		for(int x=0;x<depArrayList.size();x++) {
-			  System.out.println(depArrayList.get(x));
-			}		
-		
-		
+		return depArrayList;
 	}
 
 	
+	public static void Gordearrayan(Departamentua dep) throws IOException {
+		Departamentua departamentua = new Departamentua(0, null, null);
 
+		departamentua.setKodea(dep.getKodea());
+		departamentua.setIzena(dep.getIzena());
+		departamentua.setKokapena(dep.getKokapena());
+	
+		depArrayList.add(departamentua);
+	}
 	
 
-	private static void parsedepartObject(JSONObject employee){
-		
+
+	private static void parsedepartObject(JSONObject employee) throws IOException{
+		Departamentua dep = new Departamentua(0, null, null);
 		//Get employee object within list
-		JSONObject departamentua = (JSONObject) employee.get("employee");
+		JSONObject departamentua = (JSONObject) employee.get("departamentua");
 		int Kodea=0;
 		String Izena= "";
 		String Kokapena = "";
 		
-		//Get employee first name
 		if(departamentua != null) {
-			
-		System.out.println("hola");
-		Kodea = (int) departamentua.get("Kodea");
-		
-		System.out.println(Kodea);
-		
-		
-		//Get employee last name
+		Kodea = Integer.parseInt((String) departamentua.get("Kodea"));
 		Izena = (String) departamentua.get("Izena");	
-		
-		System.out.println(Izena);
-		
-		//Get employee website name
 		Kokapena = (String) departamentua.get("Kokapena");
-		
-		System.out.println(Kokapena);
-		
-		
-		for(int x=0;x<depArrayList.size();x++) {
-			  System.out.println(depArrayList.get(x));
-			}	
-		
-		
-		
 		}
-		System.out.println("________________________________________________________________________________________________________________________________");
-		depart.setKodea(Kodea);
-		depart.setIzena(Izena);
-		depart.setKokapena(Kokapena);
-		depArrayList.add(depart);
+
+		dep.setKodea(Kodea);
+		dep.setIzena(Izena);
+		dep.setKokapena(Kokapena);
+		Gordearrayan(dep);
+	
 	}
 }
