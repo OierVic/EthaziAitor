@@ -16,7 +16,6 @@ import eredua.Departamentua;
 public class ReadJSON
 {
 	
-	private static Departamentua depart = new Departamentua(0, null, null);
 	private static ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 	
 	@SuppressWarnings("unchecked")
