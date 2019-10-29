@@ -11,7 +11,7 @@ public class pruebaJSON {
 		
 		String json = "C:\\Diego Gomez\\Aitor\\Ethazi\\Depart.json";
 		
-		Departamentua dep = new Departamentua(0, null, null);
+		
 		ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 
 		 
@@ -23,7 +23,12 @@ public class pruebaJSON {
 			  System.out.println(depArrayList.get(x));
 			}	
 		
-//		WriteJSON.write(json);
+		
+	System.out.println("------------------------------------------------------------------");	
+	Departamentua d = new Departamentua(4,"Pepo", "Pipo");
+	depArrayList.add(d);
+		
+		//WriteJSON.write(json, depArrayList);
 //		
 //		ReadJSON.read(json);
 
