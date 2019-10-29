@@ -10,6 +10,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kontroladorea.Kontroladorea;
 
@@ -55,12 +56,27 @@ public class FitxategiaAukeratu extends JFrame {
 						| UnsupportedLookAndFeelException e1) {
 					e1.printStackTrace();
 				}
-				JFileChooser fc = new JFileChooser();
+				JFileChooser fc = new JFileChooser(".\\src");
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				fc.setMultiSelectionEnabled(false);
+				
+				FileNameExtensionFilter filtroCSV = new FileNameExtensionFilter("*.CSV", "csv");
+				FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("*.XML", "xml");
+				FileNameExtensionFilter filtroJSON = new FileNameExtensionFilter("*.JSON", "json");
+				fc.setFileFilter(filtroJSON);
+				fc.setFileFilter(filtroXML);
+				fc.setFileFilter(filtroCSV);
+				
+
+				
 				fc.showOpenDialog(fc);
 				File archivo = fc.getSelectedFile();
+
+
 				if (archivo != null) {
 					textfieldFitxategia.setText(archivo.getAbsolutePath());
 				}
+				
 				
 			}
 		});
