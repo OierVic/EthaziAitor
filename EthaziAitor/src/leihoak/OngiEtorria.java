@@ -1,8 +1,12 @@
 package leihoak;
 
-import java.awt.SystemColor;
+import java.awt.SystemColor; 
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import kontroladorea.Kontroladorea;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -15,7 +19,8 @@ public class OngiEtorria extends JFrame {
 	private JButton btnDepartamentuak = new JButton("Departamentuak");
 	private JButton btnEnplegatuak = new JButton("Enplegatuak");
 	private JButton btnTxostena = new JButton("Formularioa edo txostena");
-
+	//Leihoak
+	private Kontroladorea kontroladorea;
 
 	public OngiEtorria() {
 
@@ -25,7 +30,7 @@ public class OngiEtorria extends JFrame {
 		btnDepartamentuak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				kontroladorea.fitxategiakaukeratu();
 				
 				
 			}
@@ -38,7 +43,8 @@ public class OngiEtorria extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				
+				kontroladorea.fitxategiakaukeratu();
+
 				
 			}
 		});
@@ -50,7 +56,7 @@ public class OngiEtorria extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Txostena
 				
-				
+				JOptionPane.showMessageDialog(null, "Ez du ezer egiten");
 				
 			}
 		});
@@ -60,4 +66,19 @@ public class OngiEtorria extends JFrame {
 		getContentPane().add(btnTxostena);
 
 	}
+	
+	
+	//Para que las ventanas aparezcan
+
+		public void Kontroladorea(Kontroladorea kontroladorea) {
+			this.kontroladorea = kontroladorea;
+		}
+		
+//--------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
 }

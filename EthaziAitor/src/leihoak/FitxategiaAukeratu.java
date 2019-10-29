@@ -4,8 +4,15 @@ import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import kontroladorea.Kontroladorea;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -18,7 +25,10 @@ public class FitxategiaAukeratu extends JFrame {
 	private JTextField textfieldFitxategia = new JTextField();
 	private JLabel lblFitxategiaZabaldu = new JLabel("Fitxategia zabaldu");
 	private JButton btnAukeratu = new JButton("Aukeratu");
-
+	private JButton btnAtzera = new JButton("Atzera");
+	//Leihoak
+	private Kontroladorea kontroladorea;
+	private final JButton btnHurrengoa = new JButton("Hurrengoa");
 
 
 	public FitxategiaAukeratu() {
@@ -39,9 +49,18 @@ public class FitxategiaAukeratu extends JFrame {
 		textfieldFitxategia.setEditable(false);
 		btnAukeratu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+						| UnsupportedLookAndFeelException e1) {
+					e1.printStackTrace();
+				}
 				JFileChooser fc = new JFileChooser();
 				fc.showOpenDialog(fc);
-				 
+				File archivo = fc.getSelectedFile();
+				if (archivo != null) {
+					textfieldFitxategia.setText(archivo.getAbsolutePath());
+				}
 				
 			}
 		});
@@ -49,8 +68,57 @@ public class FitxategiaAukeratu extends JFrame {
 		btnAukeratu.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnAukeratu.setBounds(509, 140, 153, 39);
 		getContentPane().add(btnAukeratu);
+		
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				kontroladorea.AteraOngietorria();
+				
+			}
+		});
+		btnAtzera.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnAtzera.setBounds(58, 471, 184, 47);
+		getContentPane().add(btnAtzera);
+		btnHurrengoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, "Ez du ezer egiten");
 
-
+				
+				
+				
+				
+			}
+		});
+		btnHurrengoa.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnHurrengoa.setBounds(394, 471, 246, 47);
+		
+		getContentPane().add(btnHurrengoa);
+		
+		
+		
+		
+//		java.awt.EventQueue.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//						| UnsupportedLookAndFeelException e) {
+//					e.printStackTrace();
+//				}
+//				//new FitxategiaAukeratu().setVisible(true);
+//			}
+//		});
+		
 
 	}
+	//Para que las ventanas aparezcan
+	
+	public void Kontroladorea(Kontroladorea kontroladorea) {
+		this.kontroladorea = kontroladorea;
+	}
+	
+	
+	
 }
