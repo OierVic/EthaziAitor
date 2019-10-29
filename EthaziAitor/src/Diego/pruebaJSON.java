@@ -28,7 +28,7 @@ public class pruebaJSON {
 	Departamentua d = new Departamentua(4,"Pepo", "Pipo");
 	depArrayList.add(d);
 		
-		//WriteJSON.write(json, depArrayList);
+		WriteJSON.write(json, depArrayList);
 //		
 //		ReadJSON.read(json);
 

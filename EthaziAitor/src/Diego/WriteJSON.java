@@ -13,64 +13,30 @@ import eredua.Departamentua;
 public class WriteJSON
 {
     @SuppressWarnings("unchecked")
-	public static void write(String json, ArrayList<Departamentua> depArrayList){
+	
+   
+    public static void write(String json, ArrayList<Departamentua> depArrayList){
     	//First Employee
-    	JSONObject employeeDetails = new JSONObject();
-    	employeeDetails.put("firstName", "Lokesh");
-    	employeeDetails.put("lastName", "Gupta");
-    	employeeDetails.put("website", "howtodoinjava.com");
+    	JSONArray employeeList = new JSONArray();
+    	
+    	for(int x=0;x<depArrayList.size();x++) {
+			  System.out.println(depArrayList.get(x));
+			
+    	JSONObject deptBlokea = new JSONObject();
+    	deptBlokea.put("Kodea", depArrayList.get(x).getKodea());
+    	deptBlokea.put("Izena", depArrayList.get(x).getIzena());
+    	deptBlokea.put("Kokapena", depArrayList.get(x).getKokapena());
     	
     	JSONObject employeeObject = new JSONObject(); 
-    	employeeObject.put("employee", employeeDetails);
+    	employeeObject.put("departamentua", deptBlokea);
     	
-    	//Second Employee
-    	JSONObject employeeDetails2 = new JSONObject();
-    	employeeDetails2.put("firstName", "Brian5");
-    	employeeDetails2.put("lastName", "Schultz");
-    	employeeDetails2.put("website", "example.com");
-    	
-    	JSONObject employeeObject2 = new JSONObject(); 
-    	employeeObject2.put("employee", employeeDetails2);
     	
     	//Add employees to list
-    	JSONArray employeeList = new JSONArray();
-    	employeeList.add(employeeObject);
-    	employeeList.add(employeeObject2);
     	
-    	//Write JSON file
-    	try (FileWriter file = new FileWriter(json)) {
-
-            file.write(employeeList.toJSONString());
-            file.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    	System.out.println(x);
+    	employeeList.add(deptBlokea);
+    	
     
-    public static void write2(String json, ArrayList<Departamentua> depArrayList){
-    	//First Employee
-    	JSONObject employeeDetails = new JSONObject();
-    	employeeDetails.put("firstName", "Lokesh");
-    	employeeDetails.put("lastName", "Gupta");
-    	employeeDetails.put("website", "howtodoinjava.com");
-    	
-    	JSONObject employeeObject = new JSONObject(); 
-    	employeeObject.put("employee", employeeDetails);
-    	
-    	//Second Employee
-    	JSONObject employeeDetails2 = new JSONObject();
-    	employeeDetails2.put("firstName", "Brian5");
-    	employeeDetails2.put("lastName", "Schultz");
-    	employeeDetails2.put("website", "example.com");
-    	
-    	JSONObject employeeObject2 = new JSONObject(); 
-    	employeeObject2.put("employee", employeeDetails2);
-    	
-    	//Add employees to list
-    	JSONArray employeeList = new JSONArray();
-    	employeeList.add(employeeObject);
-    	employeeList.add(employeeObject2);
     	
     	//Write JSON file
     	try (FileWriter file = new FileWriter(json)) {
@@ -81,5 +47,6 @@ public class WriteJSON
         } catch (IOException e) {
             e.printStackTrace();
         }
+    	}
     }
 }
