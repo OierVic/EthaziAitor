@@ -21,14 +21,14 @@ public class Kudeaketa extends JFrame {
     private JPanel contenedor;
  
     //DEFINICIÓN DE LAS ETIQUETAS
-    private JLabel lblNombre;
-    private JLabel lblApellido;
-    private JLabel lblNIF;
+    private JLabel lblKodea;
+    private JLabel lblIzena;
+    private JLabel lblKokapena;
  
     //DEFINICIÓN DE LOS CUADROS DE TEXTO
-    protected JTextField txtNombre;
-    protected JTextField txtApellido;
-    protected JTextField txtNIF;
+    protected JTextField txtKodea;
+    protected JTextField txtIzena;
+    protected JTextField txtKokapena;
  
     //DEFINICIÓN DE LOS BOTONES
     protected JButton btnAdd;
@@ -60,61 +60,61 @@ public class Kudeaketa extends JFrame {
         //Vamos al lío
         /**************** BOF ETIQUETAS  vvvvvvvvvvvvvvvv **/
         //ETIQUETA NOMBRE
-        lblNombre = new JLabel("Nombre:");  //Crear el objeto
-        lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        contenedor.add(lblNombre);      //Añadirlo al contenedor
-        sp.putConstraint(SpringLayout.NORTH, lblNombre, 10,
+        lblKodea = new JLabel("Kodea:");  //Crear el objeto
+        lblKodea.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        contenedor.add(lblKodea);      //Añadirlo al contenedor
+        sp.putConstraint(SpringLayout.NORTH, lblKodea, 10,
                         SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, lblNombre,  10,
+        sp.putConstraint(SpringLayout.WEST, lblKodea,  10,
                         SpringLayout.WEST, contenedor);
         //ETIQUETA APELLIDOS
-        lblApellido = new JLabel("Apellidos:");
-        lblApellido.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        contenedor.add(lblApellido);
-        sp.putConstraint(SpringLayout.NORTH, lblApellido, 50,
+        lblIzena = new JLabel("Izena:");
+        lblIzena.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        contenedor.add(lblIzena);
+        sp.putConstraint(SpringLayout.NORTH, lblIzena, 50,
                         SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, lblApellido,  10,
+        sp.putConstraint(SpringLayout.WEST, lblIzena,  10,
                         SpringLayout.WEST, contenedor);
         //ETIQUETA NIF
-        lblNIF = new JLabel("NIF:");
-        lblNIF.setFont(new Font("Tahoma", Font.PLAIN, 13));
-        contenedor.add(lblNIF);
-        sp.putConstraint(SpringLayout.NORTH, lblNIF, 90,
+        lblKokapena = new JLabel("Kokapena:");
+        lblKokapena.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        contenedor.add(lblKokapena);
+        sp.putConstraint(SpringLayout.NORTH, lblKokapena, 90,
                         SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, lblNIF,  10,
+        sp.putConstraint(SpringLayout.WEST, lblKokapena,  10,
                         SpringLayout.WEST, contenedor);
         /**************** EOF ETIQUETAS  ^^^^^^^^^^^^^^^^ **/
  
         /**************** BOF CUADROS DE  TEXTO vvvvvvvvv **/
         //CUADRO DE TEXTO PARA EL NOMBRE
-        txtNombre       = new JTextField();
-        sp.putConstraint(SpringLayout.EAST, txtNombre, 365,
+        txtKodea       = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtKodea, 365,
                         SpringLayout.WEST, contenedor);
-        contenedor.add(txtNombre);
-        sp.putConstraint(SpringLayout.NORTH, txtNombre, 10,
+        contenedor.add(txtKodea);
+        sp.putConstraint(SpringLayout.NORTH, txtKodea, 10,
                         SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, txtNombre, 100,
+        sp.putConstraint(SpringLayout.WEST, txtKodea, 100,
                         SpringLayout.WEST, contenedor);
         //CUADRO DE TEXTO PARA EL NIF
-        txtApellido = new JTextField();
-        sp.putConstraint(SpringLayout.EAST, txtApellido, 0,
-                        SpringLayout.EAST, txtNombre);
-        contenedor.add(txtApellido);    //añadir al contenedor
-        sp.putConstraint(SpringLayout.NORTH, txtApellido, 50,
+        txtIzena = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtIzena, 0,
+                        SpringLayout.EAST, txtKodea);
+        contenedor.add(txtIzena);    //añadir al contenedor
+        sp.putConstraint(SpringLayout.NORTH, txtIzena, 50,
                         SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, txtApellido, 100,
+        sp.putConstraint(SpringLayout.WEST, txtIzena, 100,
                         SpringLayout.WEST, contenedor);
         //CUADRO DE TEXTO PARA LOS APELLIDOS
-        txtNIF      = new JTextField();
-        sp.putConstraint(SpringLayout.EAST, txtNIF, 0, SpringLayout.EAST, txtNombre);
-        contenedor.add(txtNIF);
-        sp.putConstraint(SpringLayout.NORTH, txtNIF, 90, SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, txtNIF, 100, SpringLayout.WEST, contenedor);
+        txtKokapena      = new JTextField();
+        sp.putConstraint(SpringLayout.EAST, txtKokapena, 0, SpringLayout.EAST, txtKodea);
+        contenedor.add(txtKokapena);
+        sp.putConstraint(SpringLayout.NORTH, txtKokapena, 90, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.WEST, txtKokapena, 100, SpringLayout.WEST, contenedor);
         /**************** EOF CUADROS DE  TEXTO ^^^^^^^^^ **/
  
         /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
         scroll      = new JScrollPane();
-        cabecera    = new String[] {"ID","NOMBRE","NIF"};
+        cabecera    = new String[] {"Kodea","Izena","Kokapena"};
         dtm         = new DefaultTableModel(datos,cabecera);
         tabla       = new JTable(dtm);
         scroll.setViewportView(tabla);
