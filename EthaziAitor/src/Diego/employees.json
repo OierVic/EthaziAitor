@@ -1,16 +1,16 @@
 [
 	{
-		"employee": {
-			"firstName": "Lokesh",
-			"lastName": "Gupta",
-			"website": "howtodoinjava.com"
+		"departamentua": {
+			"Kodea": "Lokesh",
+			"Izena": "Gupta",
+			"Kokapena": "howtodoinjava.com"
 		}
 	},
 	{
-		"employee": {
-			"firstName": "Brian",
-			"lastName": "Schultz",
-			"website": "example.com"
+		"departamentua": {
+			"Kodea": "Brian",
+			"Izena": "Schultz",
+			"Kokapena": "example.com"
 		}
 	}
 ]
