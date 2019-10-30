@@ -16,12 +16,10 @@ import eredua.Departamentua;
 public class ReadJSON
 {
 	
-	private static ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
+	 ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 	
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Departamentua> read(String json)
-	
-	{
+	public static ArrayList<Departamentua> read(String json, ArrayList<Departamentua> depArrayList){
 		
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
@@ -32,7 +30,7 @@ public class ReadJSON
             Object obj = jsonParser.parse(reader);
 
             JSONArray employeeList = (JSONArray) obj;
-            System.out.println(employeeList);
+           
             
             //Iterate over employee array
             
@@ -40,9 +38,9 @@ public class ReadJSON
             
             employeeList.forEach( emp -> {
 				try {
-					parsedepartObject( (JSONObject) emp );
+					parsedepartObject( (JSONObject) emp, depArrayList );
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 			} );
@@ -62,36 +60,27 @@ public class ReadJSON
 	}
 
 	
-	public static void Gordearrayan(Departamentua dep) throws IOException {
-		Departamentua departamentua = new Departamentua(0, null, null);
-
-		departamentua.setKodea(dep.getKodea());
-		departamentua.setIzena(dep.getIzena());
-		departamentua.setKokapena(dep.getKokapena());
-	
-		depArrayList.add(departamentua);
-	}
-	
-
-
-	private static void parsedepartObject(JSONObject employee) throws IOException{
-		Departamentua dep = new Departamentua(0, null, null);
+	private static void parsedepartObject(JSONObject employee, ArrayList<Departamentua> depArrayList) throws IOException{
+		
+		Departamentua dep = new Departamentua(0, null, null); // creamos objeto 
 		//Get employee object within list
 		JSONObject departamentua = (JSONObject) employee.get("departamentua");
-		int Kodea=0;
-		String Izena= "";
-		String Kokapena = "";
+	
 		
-		if(departamentua != null) {
-		Kodea = Integer.parseInt((String) departamentua.get("Kodea"));
-		Izena = (String) departamentua.get("Izena");	
-		Kokapena = (String) departamentua.get("Kokapena");
-		}
-
+		
+		int Kodea = Integer.parseInt((String) departamentua.get("Kodea"));
+		String Izena = (String) departamentua.get("Izena");	
+		 String Kokapena = (String) departamentua.get("Kokapena");
+		
+		
+		
 		dep.setKodea(Kodea);
 		dep.setIzena(Izena);
 		dep.setKokapena(Kokapena);
-		Gordearrayan(dep);
+		
+		depArrayList.add(dep);
+	
 	
 	}
+	
 }
