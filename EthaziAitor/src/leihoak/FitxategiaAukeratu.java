@@ -75,6 +75,7 @@ public class FitxategiaAukeratu extends JFrame {
 
 				if (archivo != null) {
 					textfieldFitxategia.setText(archivo.getAbsolutePath());
+					btnHurrengoa.setEnabled(true);
 				}
 				
 				
@@ -110,6 +111,7 @@ public class FitxategiaAukeratu extends JFrame {
 		btnHurrengoa.setBounds(394, 471, 246, 47);
 		
 		getContentPane().add(btnHurrengoa);
+		btnHurrengoa.setEnabled(false);
 		
 		
 		
