@@ -17,6 +17,7 @@ public class Nagusia {
 		Kontroladorea kontroladorea = new Kontroladorea();
 		OngiEtorria ongietorria = new OngiEtorria();
 		FitxategiaAukeratu fitxategiaukeratu = new FitxategiaAukeratu();
+		Kudeaketa kudeaketa = new Kudeaketa();
 		
 //***********************************************************************************
 		kontroladorea.ateraOngietorria(ongietorria);
@@ -26,7 +27,9 @@ public class Nagusia {
 		fitxategiaukeratu.Kontroladorea(kontroladorea);
 		
 //***********************************************************************************
-
+		kontroladorea.ateraKudeatu(kudeaketa);
+		kudeaketa.Kontroladorea(kontroladorea);
+		
 		
 		ongietorria.setVisible(true);
 		

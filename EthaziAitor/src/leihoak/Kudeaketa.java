@@ -9,13 +9,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import kontroladorea.Kontroladorea;
+
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
  
 public class Kudeaketa extends JFrame {
- 
+	
+	//Leihoak
+	private Kontroladorea kontroladorea;
+	
     /**************** ATRIBUTOS ***************************/
     //CONTENEDOR PRINCIPAL
     private JPanel contenedor;
@@ -166,6 +172,9 @@ public class Kudeaketa extends JFrame {
         setVisible(true);
  
     }
+    public void Kontroladorea(Kontroladorea kontroladorea) {
+		this.kontroladorea = kontroladorea;
+	}
  
 //    public void conectaControlador(  Controller c  ){
 // 

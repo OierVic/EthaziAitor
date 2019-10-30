@@ -30,7 +30,7 @@ public class FitxategiaAukeratu extends JFrame {
 	//Leihoak
 	private Kontroladorea kontroladorea;
 	private final JButton btnHurrengoa = new JButton("Hurrengoa");
-
+	private File archivo = new File("");
 
 	public FitxategiaAukeratu() {
 
@@ -50,13 +50,13 @@ public class FitxategiaAukeratu extends JFrame {
 		textfieldFitxategia.setEditable(false);
 		btnAukeratu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-						| UnsupportedLookAndFeelException e1) {
-					e1.printStackTrace();
-				}
-				JFileChooser fc = new JFileChooser(".\\src");
+//				try {
+//					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+//						| UnsupportedLookAndFeelException e1) {
+//					e1.printStackTrace();
+//				}
+				JFileChooser fc = new JFileChooser(".\\src\\");
 				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				fc.setMultiSelectionEnabled(false);
 				
@@ -70,8 +70,8 @@ public class FitxategiaAukeratu extends JFrame {
 
 				
 				fc.showOpenDialog(fc);
-				File archivo = fc.getSelectedFile();
-
+				archivo = fc.getSelectedFile();
+				
 
 				if (archivo != null) {
 					textfieldFitxategia.setText(archivo.getAbsolutePath());
@@ -99,10 +99,10 @@ public class FitxategiaAukeratu extends JFrame {
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "Ez du ezer egiten");
-
 				
-				
+				kontroladorea.fitxategiaGorde(archivo);
+				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da ");
+				kontroladorea.KudeatuLeihoa();
 				
 				
 			}
