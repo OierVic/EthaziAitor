@@ -16,10 +16,13 @@ public class OngiEtorria extends JFrame {
 
 
 	private static final long serialVersionUID = 1L;
-	private JButton btnDepartamentuak = new JButton("Departamentuak\n edo \nEnplegatuak");
+	private JButton btnDepartamentuak = new JButton("Departamentuak");
+	private JButton btnEnplegatuak = new JButton("Enplegatuak");
 	private JButton btnTxostena = new JButton("Formularioa edo txostena");
+	
 	//Leihoak
 	private Kontroladorea kontroladorea;
+	
 
 	public OngiEtorria() {
 
@@ -29,14 +32,14 @@ public class OngiEtorria extends JFrame {
 		btnDepartamentuak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				String DepartamentuaDa="Departamentuak";
-				kontroladorea.fitxategiakaukeratuLeihoa();
+				kontroladorea.fitxategiakaukeratuDepartLeihoa();
 				
 				
 			}
 		});
 		
 		btnDepartamentuak.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnDepartamentuak.setBounds(109, 115, 455, 133);
+		btnDepartamentuak.setBounds(140, 29, 381, 90);
 		getContentPane().add(btnDepartamentuak);
 		btnTxostena.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -50,6 +53,18 @@ public class OngiEtorria extends JFrame {
 		btnTxostena.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnTxostena.setBounds(140, 378, 381, 73);
 		getContentPane().add(btnTxostena);
+		
+		btnEnplegatuak.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				kontroladorea.fitxategiakaukeratuEnplegLeihoa();
+				
+				
+			}
+		});
+		btnEnplegatuak.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnEnplegatuak.setBounds(140, 196, 381, 79);
+		getContentPane().add(btnEnplegatuak);
 
 	}
 	
@@ -59,12 +74,4 @@ public class OngiEtorria extends JFrame {
 		public void Kontroladorea(Kontroladorea kontroladorea) {
 			this.kontroladorea = kontroladorea;
 		}
-		
-//--------------------------------------------------------------------------------------
-	
-	
-	
-	
-	
-	
 }

@@ -1,11 +1,14 @@
 package kontroladorea;
 
+import Oier.Kudeaketa;
 import eredua.Enplegatua;
 import eredua.KonexioaMariaDB;
 import eredua.konexioa;
 import leihoak.OngiEtorria;
-import leihoak.FitxategiaAukeratu;
-import leihoak.Kudeaketa;
+import leihoak.DepartamentuakMenu;
+import leihoak.EnplegatuakMenu;
+import leihoak.FitxategiaAukeratuDepartamentuak;
+import leihoak.FitxategiaAukeratuEnplegatuak;
 
 public class Nagusia {
 
@@ -16,21 +19,35 @@ public class Nagusia {
 		//Ventanas
 		Kontroladorea kontroladorea = new Kontroladorea();
 		OngiEtorria ongietorria = new OngiEtorria();
-		FitxategiaAukeratu fitxategiaukeratu = new FitxategiaAukeratu();
-		Kudeaketa kudeaketa = new Kudeaketa();
+		
+		FitxategiaAukeratuDepartamentuak fitxategiaukeratuDepartamentuak = new FitxategiaAukeratuDepartamentuak();
+		FitxategiaAukeratuEnplegatuak fitxategiaukeratuEnplegatuak = new FitxategiaAukeratuEnplegatuak();
+		
+		DepartamentuakMenu departamentuakmenu = new DepartamentuakMenu();
+		EnplegatuakMenu enplegatuakmenu = new EnplegatuakMenu();
 		
 //***********************************************************************************
 		kontroladorea.ateraOngietorria(ongietorria);
 		ongietorria.Kontroladorea(kontroladorea);
 //***********************************************************************************
-		kontroladorea.ateraFitxategiaAukeratu(fitxategiaukeratu);
-		fitxategiaukeratu.Kontroladorea(kontroladorea);
+		kontroladorea.ateraFitxategiaAukeratuDepartamentuak(fitxategiaukeratuDepartamentuak);
+		fitxategiaukeratuDepartamentuak.Kontroladorea(kontroladorea);
 		
 //***********************************************************************************
-		kontroladorea.ateraKudeatu(kudeaketa);
-		kudeaketa.Kontroladorea(kontroladorea);
+		kontroladorea.ateraFitxategiaAukeratuEnplegatuak(fitxategiaukeratuEnplegatuak);
+		fitxategiaukeratuEnplegatuak.Kontroladorea(kontroladorea);
 		
+//***********************************************************************************
+		kontroladorea.ateraDepartamentumenu(departamentuakmenu);
+		departamentuakmenu.Kontroladorea(kontroladorea);
 		
+//***********************************************************************************
+		kontroladorea.ateraEnplegatuakmenu(enplegatuakmenu);
+		enplegatuakmenu.Kontroladorea(kontroladorea);
+		
+//***********************************************************************************
+
+
 		ongietorria.setVisible(true);
 		
 //		ArrayList<Enplegatua> arrayEnplegatu = new ArrayList<Enplegatua>();

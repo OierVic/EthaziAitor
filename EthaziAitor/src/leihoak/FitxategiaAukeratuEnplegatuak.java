@@ -21,10 +21,10 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
 
-public class FitxategiaAukeratu extends JFrame {
+public class FitxategiaAukeratuEnplegatuak extends JFrame {
 	
 	private JTextField textfieldFitxategia = new JTextField();
-	private JLabel lblFitxategiaZabaldu = new JLabel("Fitxategia zabaldu");
+	private JLabel lblFitxategiaZabaldu = new JLabel("Enplegatuen fitxategia zabaldu");
 	private JButton btnAukeratu = new JButton("Aukeratu");
 	private JButton btnAtzera = new JButton("Atzera");
 	//Leihoak
@@ -32,7 +32,7 @@ public class FitxategiaAukeratu extends JFrame {
 	private final JButton btnHurrengoa = new JButton("Hurrengoa");
 	private File archivo = new File("");
 
-	public FitxategiaAukeratu() {
+	public FitxategiaAukeratuEnplegatuak() {
 
 
 		this.setBounds(525,200,700,600);
@@ -40,7 +40,7 @@ public class FitxategiaAukeratu extends JFrame {
 		getContentPane().setLayout(null);
 		
 		lblFitxategiaZabaldu.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblFitxategiaZabaldu.setBounds(184, 24, 280, 60);
+		lblFitxategiaZabaldu.setBounds(103, 26, 465, 60);
 		getContentPane().add(lblFitxategiaZabaldu);
 		
 
@@ -102,8 +102,7 @@ public class FitxategiaAukeratu extends JFrame {
 				
 				kontroladorea.fitxategiaGorde(archivo);
 				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da ");
-				kontroladorea.KudeatuLeihoa();
-				
+				kontroladorea.enplegatuMenura();
 				
 			}
 		});
