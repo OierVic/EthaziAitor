@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -96,7 +100,7 @@ public class Departamentua {
 
 	//Departamentua CSVtik irakurtzeko
 
-	public static ArrayList<Departamentua> CSVDepartamentuakIrakurri (){
+	public static ArrayList<Departamentua> CSVDepartamentuakIrakurri (File fitxategiaDepartamentuak){
 
 		//Bariableak
 		ArrayList<Departamentua> arrayDepartamentuakCSV = new ArrayList<Departamentua>();
@@ -105,7 +109,7 @@ public class Departamentua {
 		String Izena=null;
 		String Kokapena=null;
 
-		String csvFile = ".\\src\\Departamentuak.csv";
+		String csvFile = fitxategiaDepartamentuak.getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		//Se define separador ","
@@ -158,7 +162,7 @@ public class Departamentua {
 
 	//Departamentua XMLtik irakurtzeko
 
-	public static ArrayList<Departamentua> XMLDepartamentuakIrakurri() {
+	public static ArrayList<Departamentua> XMLDepartamentuakIrakurri(File fitxategiaDepartamentuak) {
 
 		//Bariableak
 		ArrayList<Departamentua> arrayDepartamentuaXML = new ArrayList<Departamentua>();
@@ -171,7 +175,7 @@ public class Departamentua {
 
 		try {
 
-			File archivo = new File(".\\src\\Departamentuak.xml");
+			File archivo = new File(fitxategiaDepartamentuak.getAbsolutePath());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
 			Document document = documentBuilder.parse(archivo);
@@ -224,17 +228,17 @@ public class Departamentua {
 
 
 	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri () {
-		
+
 		ArrayList<Departamentua> arrayDepartamentuaJSON = new ArrayList<Departamentua>();
-		
+
 		JSONParser parser = new JSONParser();
-		
+
 		int count=0;
 		String kodea_string=null;
 		int kodea_int=0;
 		String izena=null;
 		String kokapena=null;
-		
+
 		try {
 
 			Object obj = parser.parse(new FileReader(".\\src\\Departamentuak.json"));
@@ -261,9 +265,9 @@ public class Departamentua {
 					arrayDepartamentuaJSON.add(departamentua);
 					count=0;
 				}
-					
-				
-				
+
+
+
 			}
 
 			departamentu = (JSONArray) jsonObject.get("departamentubi");
@@ -306,9 +310,9 @@ public class Departamentua {
 					arrayDepartamentuaJSON.add(departamentua);
 					count=0;
 				}
-				
+
 			}
-			
+
 
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -439,6 +443,59 @@ public class Departamentua {
 	//		return arrayDepartamentuak;
 	//	}
 
+
+
+	public static ArrayList <Departamentua> DepartamentuakSelect() {
+
+		ArrayList <Departamentua> departamentuak = new ArrayList<Departamentua>();
+		int kodea=0;
+		String izena=null;
+		String kokapena=null;
+
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT kodea,izena,kokapena FROM departamentu");
+			while (rs.next()) {
+				kodea = rs.getInt("zenbaki");
+				izena = rs.getString("izena");
+				kokapena = rs.getString("abizena");
+
+				Departamentua departamentua = new Departamentua(kodea, izena, kokapena);
+				departamentuak.add(departamentua);
+
+
+			}
+			System.out.println("Conexioa eginda Departamentuak Select");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return departamentuak;
+
+	}
+
+	public static void DepartamentuakIgo(ArrayList<Departamentua> depArrayList){ //Departamentu arrayList sartu bd
+		Departamentua p = new Departamentua(0, null, null);
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+			for(int x=0;x<depArrayList.size();x++) {
+				p = depArrayList.get(x);
+				s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
+						+ " (" + p.getKodea() + ", '" + p.getIzena() + "', '" + p.getKokapena() + "')");	
+			}
+			s.close();
+
+			System.out.println("Konexioa Eginda Insert Departamentua");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
 
 
 

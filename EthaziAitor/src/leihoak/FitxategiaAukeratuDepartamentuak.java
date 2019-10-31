@@ -24,13 +24,14 @@ import java.awt.event.ActionEvent;
 public class FitxategiaAukeratuDepartamentuak extends JFrame {
 	
 	private JTextField textfieldFitxategia = new JTextField();
-	private JLabel lblFitxategiaZabaldu = new JLabel("Departamentuen fitxategia zabaldu");
+	private JLabel lblFitxategiaKargatu = new JLabel("Departamentuen fitxategia kargatu");
 	private JButton btnAukeratu = new JButton("Aukeratu");
 	private JButton btnAtzera = new JButton("Atzera");
 	//Leihoak
 	private Kontroladorea kontroladorea;
-	private final JButton btnHurrengoa = new JButton("Hurrengoa");
+	private final JButton btnHurrengoa = new JButton("Hurrengoa (Igo datu Basera)");
 	private File archivo = new File("");
+	private final JButton btnEzEgin = new JButton("Ez egin");
 
 	public FitxategiaAukeratuDepartamentuak() {
 
@@ -39,9 +40,9 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 		this.setBackground(SystemColor.control);
 		getContentPane().setLayout(null);
 		
-		lblFitxategiaZabaldu.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblFitxategiaZabaldu.setBounds(75, 24, 519, 60);
-		getContentPane().add(lblFitxategiaZabaldu);
+		lblFitxategiaKargatu.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		lblFitxategiaKargatu.setBounds(75, 24, 519, 60);
+		getContentPane().add(lblFitxategiaKargatu);
 		
 
 		textfieldFitxategia.setBounds(0, 140, 499, 39);
@@ -94,23 +95,36 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 			}
 		});
 		btnAtzera.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnAtzera.setBounds(58, 471, 184, 47);
+		btnAtzera.setBounds(33, 471, 184, 47);
 		getContentPane().add(btnAtzera);
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 				kontroladorea.fitxategiaGorde(archivo);
-				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da ");
+				kontroladorea.fitxategiaIgoDepartamentua();
+				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 				kontroladorea.depatamentuMenura();
 				
 			}
 		});
 		btnHurrengoa.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnHurrengoa.setBounds(394, 471, 246, 47);
+		btnHurrengoa.setBounds(276, 471, 364, 47);
 		
 		getContentPane().add(btnHurrengoa);
 		btnHurrengoa.setEnabled(false);
+		btnEzEgin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				kontroladorea.depatamentuMenura();
+				
+				
+			}
+		});
+		btnEzEgin.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnEzEgin.setBounds(394, 392, 246, 47);
+		
+		getContentPane().add(btnEzEgin);
 		
 		
 		

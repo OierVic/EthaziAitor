@@ -24,13 +24,14 @@ import java.awt.event.ActionEvent;
 public class FitxategiaAukeratuEnplegatuak extends JFrame {
 	
 	private JTextField textfieldFitxategia = new JTextField();
-	private JLabel lblFitxategiaZabaldu = new JLabel("Enplegatuen fitxategia zabaldu");
+	private JLabel lblFitxategiaKargatu = new JLabel("Enplegatuen fitxategia kargatu");
 	private JButton btnAukeratu = new JButton("Aukeratu");
 	private JButton btnAtzera = new JButton("Atzera");
 	//Leihoak
 	private Kontroladorea kontroladorea;
-	private final JButton btnHurrengoa = new JButton("Hurrengoa");
+	private final JButton btnHurrengoa = new JButton("Hurrengoa (Igo datu Basera)");
 	private File archivo = new File("");
+	private final JButton btnEzEgin = new JButton("Ez Egin");
 
 	public FitxategiaAukeratuEnplegatuak() {
 
@@ -39,9 +40,9 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 		this.setBackground(SystemColor.control);
 		getContentPane().setLayout(null);
 		
-		lblFitxategiaZabaldu.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblFitxategiaZabaldu.setBounds(103, 26, 465, 60);
-		getContentPane().add(lblFitxategiaZabaldu);
+		lblFitxategiaKargatu.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		lblFitxategiaKargatu.setBounds(103, 26, 465, 60);
+		getContentPane().add(lblFitxategiaKargatu);
 		
 
 		textfieldFitxategia.setBounds(0, 140, 499, 39);
@@ -94,7 +95,7 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 			}
 		});
 		btnAtzera.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnAtzera.setBounds(58, 471, 184, 47);
+		btnAtzera.setBounds(34, 471, 184, 47);
 		getContentPane().add(btnAtzera);
 		btnHurrengoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,10 +108,24 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 			}
 		});
 		btnHurrengoa.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnHurrengoa.setBounds(394, 471, 246, 47);
+		btnHurrengoa.setBounds(270, 471, 370, 47);
 		
 		getContentPane().add(btnHurrengoa);
 		btnHurrengoa.setEnabled(false);
+		btnEzEgin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				kontroladorea.enplegatuMenura();
+				
+				
+				
+			}
+		});
+		btnEzEgin.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnEzEgin.setBounds(394, 394, 246, 47);
+		
+		getContentPane().add(btnEzEgin);
 		
 		
 		

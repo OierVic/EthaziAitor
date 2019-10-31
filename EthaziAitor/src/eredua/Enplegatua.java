@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Enplegatua {
-	
+
 	public Enplegatua() {
 		super();
 	}
@@ -37,10 +38,10 @@ public class Enplegatua {
 	private String alta;
 	private int depKod;
 	private String arduraMota;
-	
-	
+
+
 	public Enplegatua(int zenbaki, String izena, String abizenak, double soldata, String alta, int depKod,String arduraMota) {
-		
+
 		this.zenbaki = zenbaki;
 		this.izena = izena;
 		this.abizenak = abizenak;
@@ -81,7 +82,7 @@ public class Enplegatua {
 	public void setSoldata(double soldata) {
 		this.soldata = soldata;
 	}
-	
+
 	public String getAlta() {
 		return alta;
 	}
@@ -111,21 +112,21 @@ public class Enplegatua {
 		return "Enplegatua [zenbaki=" + zenbaki + ", izena=" + izena + ", abizenak=" + abizenak + ", soldata=" + soldata
 				+ ", alta=" + alta + ", depKod=" + depKod + ", arduraMota=" + arduraMota + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 	public static void reiniciarArray (String [] array) {
 		for (int i = 0; i < array.length-1; i++) {
 			array[i]=null;
 		}
 	}
-	
-	
-	
+
+
+
 	//Enplegatua CSVtik irakurtzeko
-	
-	public static ArrayList<Enplegatua> CSVEnplegatuakIrakurri (){
+
+	public static ArrayList<Enplegatua> CSVEnplegatuakIrakurri (File fitxategiaEnplegatuak){
 
 		//Bariableak
 		ArrayList<Enplegatua> arrayEnplegatuakCSV = new ArrayList<Enplegatua>();
@@ -140,7 +141,7 @@ public class Enplegatua {
 		String depKod_string=null;
 		int depKod_int=0;
 
-		String csvFile = ".\\src\\Enplegatuak.csv";
+		String csvFile = fitxategiaEnplegatuak.getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		//Se define separador ","
@@ -166,7 +167,7 @@ public class Enplegatua {
 				zenbaki_int = Integer.parseInt(zenbaki_string);
 				soldata_double = Double.parseDouble(soldata_string);
 				depKod_int = Integer.parseInt(depKod_string);
-				
+
 				Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
 				arrayEnplegatuakCSV.add(enplegatua);
 
@@ -194,12 +195,12 @@ public class Enplegatua {
 		return arrayEnplegatuakCSV;
 
 	}
-	
-	
+
+
 	//Enplegatua XMLtik irakurtzeko
 
-	
-	public static ArrayList<Enplegatua> XMLEnplegatuakIrakurri() {
+
+	public static ArrayList<Enplegatua> XMLEnplegatuakIrakurri(File fitxategiaEnplegatuak) {
 
 		//Bariableak
 		ArrayList<Enplegatua> arrayEnplegatuaXML = new ArrayList<Enplegatua>();
@@ -213,13 +214,13 @@ public class Enplegatua {
 		String alta=null;
 		String depKod_string=null;
 		int depKod_int=0;
-		
+
 		//String xmlFile = ".\\src\\Oharrak.xml";
 		int count = 0;
 
 		try {
 
-			File archivo = new File(".\\src\\Enplegatuak.xml");
+			File archivo = new File(fitxategiaEnplegatuak.getAbsolutePath());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
 			Document document = documentBuilder.parse(archivo);
@@ -246,9 +247,9 @@ public class Enplegatua {
 					zenbaki_int = Integer.parseInt(zenbaki_string);
 					soldata_double = Double.parseDouble(soldata_string);
 					depKod_int = Integer.parseInt(depKod_string);
-					
+
 					Enplegatua enplegatua = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
-					
+
 					System.out.println(enplegatua.toString());
 					arrayEnplegatuaXML.add(enplegatua);
 					//count++;
@@ -271,12 +272,12 @@ public class Enplegatua {
 
 
 	}
-	
-	
-	
-	
+
+
+
+
 	//Enplegatua JSONtik irakurtzeko
-	
+
 	public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri() {
 		ArrayList<Enplegatua> arrayEnplegatuakJSON = new ArrayList<Enplegatua>();
 
@@ -293,10 +294,10 @@ public class Enplegatua {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return arrayEnplegatuakJSON;
-		
-		
+
+
 	}
 
 	private static void parseEnplegatuakObject(JSONObject employee,ArrayList<Enplegatua> arraylist) {
@@ -310,7 +311,7 @@ public class Enplegatua {
 		String alta = (String) departamentuaObject.get("alta");
 		String depKod_string = (String) departamentuaObject.get("depKod");
 		String ardura = (String) departamentuaObject.get("ardura");
-		
+
 		int zenbaki_int = Integer.parseInt(zenbaki_string);
 		double soldata_double = Double.parseDouble(soldata_string);
 		int depKod_int = Integer.parseInt(depKod_string);
@@ -318,38 +319,79 @@ public class Enplegatua {
 		//Oharra oharra = new Oharra(data, ordua, nori, nork, titulua, edukia);
 		Enplegatua enplegatu = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
 		arraylist.add(enplegatu);
-		
-		
+
+
 	}
-	
-	
-	
+
+
+
 	public static void EnplegatuakIgo (ArrayList<Enplegatua> arraylistEnplegatua) {
 
 		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();
-			
+
 			for (int i = 0; i < arraylistEnplegatua.size() - 1; i++) {
-			
-			s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `ardurak_arduraMota`) VALUES"
-					+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+ arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
-					
+
+				s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `ardurak_arduraMota`) VALUES"
+						+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+ arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
+
 			}
 			s.close();
 
-			System.out.println("Konexioa Eginda");
+			System.out.println("Konexioa Eginda Enplegatuak Igo");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 
 
 	}
-	
-	
-	
-	
-	
+
+
+	public static ArrayList <Enplegatua> EnplegatuakSelect() {
+
+		ArrayList <Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
+		int zenbaki=0;
+		String izena=null;
+		String abizenak=null;
+		double soldata=0.00;
+		String alta=null;
+		int depKod=0;
+		String arduraMota=null;
+
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT zenbaki,izena,abizena,soldata,alta,departamentu_kodea,ardurak_arduraMota FROM enplegatu");
+			while (rs.next()) {
+				zenbaki = rs.getInt("zenbaki");
+				izena = rs.getString("izena");
+				abizenak = rs.getString("abizena");
+				soldata = rs.getDouble("soldata");
+				alta = rs.getString("alta");
+				depKod = rs.getInt("departamentu_kodea");
+				arduraMota = rs.getString("ardurak_arduraMota");
+				Enplegatua enplegatua = new Enplegatua(zenbaki, izena, abizenak, soldata, alta, depKod, arduraMota);
+				enplegatuak.add(enplegatua);
+
+
+			}
+			System.out.println("Konexioa eginda Enplegatuak Select");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return enplegatuak;
+
+	}
+
+
+
+
+
 
 
 }
