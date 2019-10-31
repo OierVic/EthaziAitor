@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 
 import eredua.Departamentua;
  
-public class WriteJSONExample
+public class WriteJSONnoSeSiHaceFalta
 {
     @SuppressWarnings("unchecked")
     public static void pepe(String json, ArrayList<Departamentua> depArrayList)
