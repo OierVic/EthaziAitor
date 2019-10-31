@@ -13,10 +13,9 @@ import org.json.simple.parser.ParseException;
 import eredua.Departamentua;
 
 
-public class ReadJSON
+public class ReadDepartJSON
 {
 	
-	 ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 	
 	@SuppressWarnings("unchecked")
 	public static ArrayList<Departamentua> read(String json, ArrayList<Departamentua> depArrayList){
