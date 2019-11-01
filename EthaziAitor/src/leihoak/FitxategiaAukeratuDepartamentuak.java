@@ -29,9 +29,9 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 	private JButton btnAtzera = new JButton("Atzera");
 	//Leihoak
 	private Kontroladorea kontroladorea;
-	private final JButton btnHurrengoa = new JButton("Hurrengoa (Igo datu Basera)");
+	private JButton btnHurrengoa = new JButton("Hurrengoa (Igo datu Basera)");
 	private File archivo = new File("");
-	private final JButton btnEzEgin = new JButton("Ez egin");
+	private JButton btnEzEgin = new JButton("Ez egin");
 
 	public FitxategiaAukeratuDepartamentuak() {
 

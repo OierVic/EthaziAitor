@@ -65,6 +65,7 @@ public class Kontroladorea {
 		public void depatamentuMenura() {
 			fitxategiaukeratuDepartamentuak.setVisible(false);
 			departamentuakmenu.setVisible(true);
+			departamentuakmenu.taulaBete(departamentuak);
 		}
 		
 		public void enplegatuMenura() {
@@ -93,6 +94,18 @@ public class Kontroladorea {
 			this.Fitxategia = fitxategia;
 			
 		}
+		
+//		public void JtableSortu() {
+//			
+//			departamentuakmenu.taulaBete(departamentuak);
+//		}
+		
+		
+		
+		
+		
+		
+		
 		
 		public void fitxategiaIgoDepartamentua() {
 			

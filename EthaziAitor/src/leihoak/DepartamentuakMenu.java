@@ -5,13 +5,19 @@ import java.awt.SystemColor;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Point;
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import eredua.Departamentua;
 import kontroladorea.Kontroladorea;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -24,7 +30,7 @@ public class DepartamentuakMenu extends JFrame {
 	
 	private JButton btnAtzera = new JButton("Atzera");
 	private JLabel lblDepartamentuak = new JLabel("Departamentuak");
-	private JTable jtable;
+	private JTable table;
 	
 	public DepartamentuakMenu() {
 		
@@ -32,6 +38,7 @@ public class DepartamentuakMenu extends JFrame {
 		this.setBackground(SystemColor.control);
 		getContentPane().setLayout(null);
 		
+		//kontroladorea.JtableSortu();
 		
 		btnAtzera.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnAtzera.setBounds(55, 470, 155, 51);
@@ -85,6 +92,59 @@ public class DepartamentuakMenu extends JFrame {
 		columnas.add("Kokapena");
 		return columnas;
 	}
+	
+	public void taulaBete(ArrayList<Departamentua> depart) {
+
+		List<String[]> filas = loadtable(depart);
+
+		TableModel tableModel = new DefaultTableModel(filas.toArray(new Object[][] {}), getColumns().toArray()) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+    
+    
+    
+		table = new JTable(tableModel);
+		
+		table.setShowVerticalLines(false);
+		table.setShowHorizontalLines(false);
+		table.setAutoscrolls(true);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				//Informazioa eskuratu
+				final int row = table.rowAtPoint(new Point(e.getX(), e.getY()));
+				table.setRowSelectionInterval(row, row);
+				int row2 = table.rowAtPoint(e.getPoint());
+				/*String prezioa = table.getValueAt(row2, 2).toString();
+				String izena = table.getValueAt(row2, 0).toString();
+				String Plazak = table.getValueAt(row2, 5).toString();*/
+				//Betebehar dena
+
+			}
+		});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//Para que las ventanas aparezcan
