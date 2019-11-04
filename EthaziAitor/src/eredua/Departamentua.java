@@ -496,6 +496,39 @@ public class Departamentua {
 		}
 
 	}
+	
+	public static void DepartamentuBatBakarrikIgo(Departamentua departamentua) { //Departamentu objetua sartu bd
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+				s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
+						+ " (" + departamentua.getKodea() + ", '" + departamentua.getIzena() + "', '" + departamentua.getKokapena() + "')");	
+			
+			s.close();
+
+			System.out.println("Konexioa Eginda Insert Departamentu BAT bakarrik");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	
+	public static void DepartamentuBatBakarrikEzabatu(int EzabatuNahidenKodea) { //Departamentu objetua DELETE bd
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+				s.executeUpdate("DELETE FROM departamentu WHERE kodea ="+EzabatuNahidenKodea);	
+			
+			s.close();
+
+			System.out.println("Konexioa Eginda DELETE Departamentua");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
 
 
 

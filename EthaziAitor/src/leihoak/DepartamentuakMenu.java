@@ -49,6 +49,7 @@ public class DepartamentuakMenu extends JFrame {
     protected String[] cabecera;    //Cabecera de la tabla
     protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
     protected JTable tabla; //Tabla propiamente dicha
+    private JButton btnAtzera;
  
     /**************** MÉTODOS ***************************/
     //CONSTRUCTOR
@@ -141,6 +142,8 @@ public class DepartamentuakMenu extends JFrame {
         /**************** BOF BOTONES vvvvvvvvvvvvvvvvvv **/
         //BOTÓN AÑADIR
         btnAdd = new JButton("Añadir");
+        sp.putConstraint(SpringLayout.WEST, btnAdd,   246,
+                        SpringLayout.WEST, contenedor);
         btnAdd.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -148,34 +151,49 @@ public class DepartamentuakMenu extends JFrame {
         		añadir[1] = txtIzena.getText();
         		añadir[2] = txtKokapena.getText();
         		((DefaultTableModel)tabla.getModel()).addRow(añadir);
-
-
+        		
+        		//Departamentua departamentua = new Departamentua(Integer.parseInt(añadir[0]), añadir[1], añadir[2]);
+        		//Departamentua.DepartamentuBatBakarrikIgo(departamentua);
         	}
         });
-        sp.putConstraint(SpringLayout.EAST, btnAdd, 161, SpringLayout.WEST, contenedor);
         contenedor.add(btnAdd);
-        sp.putConstraint(SpringLayout.SOUTH, btnAdd, -10,
-                        SpringLayout.SOUTH, contenedor);//colocarlo
-        sp.putConstraint(SpringLayout.WEST, btnAdd,   60,
-                        SpringLayout.WEST, contenedor);
         //BOTÓN BORRAR
         btnDel          = new JButton("Borrar");
+        sp.putConstraint(SpringLayout.WEST, btnDel, 395, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.SOUTH, btnDel, -10, SpringLayout.SOUTH, contenedor);
+        sp.putConstraint(SpringLayout.NORTH, btnAdd, 0, SpringLayout.NORTH, btnDel);
+        sp.putConstraint(SpringLayout.EAST, btnAdd, -48, SpringLayout.WEST, btnDel);
         btnDel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		lerroAukeratu = tabla.getSelectedRow();
         		((DefaultTableModel)tabla.getModel()).removeRow(lerroAukeratu);
+        		
+        		//Departamentua.DepartamentuBatBakarrikEzabatu((lerroAukeratu+1));//lerro aukeraketa empieza en el 0 por eso el plus 1
         	}
         });
-        sp.putConstraint(SpringLayout.WEST, btnDel, 151, SpringLayout.EAST, btnAdd);
-        sp.putConstraint(SpringLayout.SOUTH, btnDel, -10, SpringLayout.SOUTH, contenedor);
         contenedor.add(btnDel);
         //BOTÓN MODIFICAR
         btnUpd          = new JButton("Editar");
-        sp.putConstraint(SpringLayout.EAST, btnDel, -133, SpringLayout.WEST, btnUpd);
+        sp.putConstraint(SpringLayout.EAST, btnDel, -50, SpringLayout.WEST, btnUpd);
         sp.putConstraint(SpringLayout.WEST, btnUpd, -138, SpringLayout.EAST, contenedor);
         sp.putConstraint(SpringLayout.SOUTH, btnUpd, -10, SpringLayout.SOUTH, contenedor);
         sp.putConstraint(SpringLayout.EAST, btnUpd, -37, SpringLayout.EAST, contenedor);
         contenedor.add(btnUpd);
+        
+        btnAtzera = new JButton("Atzera");
+        btnAtzera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		dispose();
+        		kontroladorea.AtzeraFitxategiakDepart();
+        		
+        		
+        	}
+        });
+        sp.putConstraint(SpringLayout.WEST, btnAtzera, 21, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.SOUTH, btnAtzera, -10, SpringLayout.SOUTH, contenedor);
+        sp.putConstraint(SpringLayout.EAST, btnAtzera, 122, SpringLayout.WEST, contenedor);
+        contenedor.add(btnAtzera);
         /**************** EOF BOTONES ^^^^^^^^^^^^^^^^^^^^ **/
  
         //Se hace visible la ventana
