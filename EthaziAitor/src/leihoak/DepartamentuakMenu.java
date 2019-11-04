@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class DepartamentuakMenu extends JFrame {
 	private Kontroladorea kontroladorea;
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
+	int count=0;
     /**************** ATRIBUTOS ***************************/
     //CONTENEDOR PRINCIPAL
     private JPanel contenedor;
@@ -76,6 +78,7 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblKodea,  10,
                         SpringLayout.WEST, contenedor);
+        lblKodea.setVisible(false);
         //ETIQUETA APELLIDOS
         lblIzena = new JLabel("Izena:");
         contenedor.add(lblIzena);
@@ -83,6 +86,7 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblIzena,  10,
                         SpringLayout.WEST, contenedor);
+        lblIzena.setVisible(false);
         //ETIQUETA NIF
         lblKokapena = new JLabel("Kokapena:");
         contenedor.add(lblKokapena);
@@ -90,6 +94,7 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblKokapena,  10,
                         SpringLayout.WEST, contenedor);
+        lblKokapena.setVisible(false);
         /**************** EOF ETIQUETAS  ^^^^^^^^^^^^^^^^ **/
  
         /**************** BOF CUADROS DE  TEXTO vvvvvvvvv **/
@@ -102,6 +107,7 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtKodea, 300,
                         SpringLayout.WEST, contenedor);
+        txtKodea.setVisible(false);
         //CUADRO DE TEXTO PARA EL NIF
         txtIzena = new JTextField();
         contenedor.add(txtIzena);    //añadir al contenedor
@@ -111,12 +117,14 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtIzena, 300,
                         SpringLayout.WEST, contenedor);
+        txtIzena.setVisible(false);
         //CUADRO DE TEXTO PARA LOS APELLIDOS
         txtKokapena = new JTextField();
         contenedor.add(txtKokapena);
         sp.putConstraint(SpringLayout.NORTH, txtKokapena, 90, SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, txtKokapena, 100, SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtKokapena, 300, SpringLayout.WEST, contenedor);
+        txtKokapena.setVisible(false);
         /**************** EOF CUADROS DE  TEXTO ^^^^^^^^^ **/
  
         /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
@@ -146,14 +154,41 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         btnAdd.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		if (count==0) {
+        			lblKodea.setVisible(true);
+            		lblIzena.setVisible(true);
+            		lblKokapena.setVisible(true);
+            		txtKodea.setVisible(true);
+            		txtIzena.setVisible(true);
+            		txtKokapena.setVisible(true);
+            		
+            		btnDel.setEnabled(false);
+            		btnUpd.setEnabled(false);
+            		
+    				JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun datuak");
+    				count=1;
+				}else if (count==1) {
+					añadir[0] = txtKodea.getText();
+	        		añadir[1] = txtIzena.getText();
+	        		añadir[2] = txtKokapena.getText();
+	        		((DefaultTableModel)tabla.getModel()).addRow(añadir);
+	        		
+	        		Departamentua departamentua = new Departamentua(Integer.parseInt(añadir[0]), añadir[1], añadir[2]);
+	        		Departamentua.DepartamentuBatBakarrikIgo(departamentua);
+	        		
+	        		lblKodea.setVisible(false);
+            		lblIzena.setVisible(false);
+            		lblKokapena.setVisible(false);
+            		txtKodea.setVisible(false);
+            		txtIzena.setVisible(false);
+            		txtKokapena.setVisible(false);
+            		
+            		btnDel.setEnabled(true);
+            		btnUpd.setEnabled(true);
+	        		
+	        		count=0;
+				}
         		
-        		añadir[0] = txtKodea.getText();
-        		añadir[1] = txtIzena.getText();
-        		añadir[2] = txtKokapena.getText();
-        		((DefaultTableModel)tabla.getModel()).addRow(añadir);
-        		
-        		//Departamentua departamentua = new Departamentua(Integer.parseInt(añadir[0]), añadir[1], añadir[2]);
-        		//Departamentua.DepartamentuBatBakarrikIgo(departamentua);
         	}
         });
         contenedor.add(btnAdd);
@@ -165,10 +200,17 @@ public class DepartamentuakMenu extends JFrame {
         sp.putConstraint(SpringLayout.EAST, btnAdd, -48, SpringLayout.WEST, btnDel);
         btnDel.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		
+
+
+
         		lerroAukeratu = tabla.getSelectedRow();
         		((DefaultTableModel)tabla.getModel()).removeRow(lerroAukeratu);
         		
-        		//Departamentua.DepartamentuBatBakarrikEzabatu((lerroAukeratu+1));//lerro aukeraketa empieza en el 0 por eso el plus 1
+        		//va mal
+        		Departamentua.DepartamentuBatBakarrikEzabatu(lerroAukeratu+1);//lerro aukeraketa empieza en el 0 por eso el plus 1
+				JOptionPane.showMessageDialog(null, "Datuak ondo atxindu dira");
+
         	}
         });
         contenedor.add(btnDel);
@@ -219,7 +261,10 @@ public class DepartamentuakMenu extends JFrame {
 	    	return datos;
 	    }
     
-    
+    public boolean isCellEditable(int row, int column) {
+       //all cells false
+       return false;
+    }
     
   //Para que las ventanas aparezcan
 
