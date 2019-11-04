@@ -65,7 +65,8 @@ public class Kontroladorea {
 		public void depatamentuMenura() {
 			fitxategiaukeratuDepartamentuak.setVisible(false);
 			departamentuakmenu.setVisible(true);
-			departamentuakmenu.taulaBete(departamentuak);
+			this.departamentuak = Departamentua.DepartamentuakSelect();
+			departamentuakmenu.taulaBete(this.departamentuak);
 		}
 		
 		public void enplegatuMenura() {
@@ -127,17 +128,26 @@ public class Kontroladorea {
 				
 				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
 				Departamentua.DepartamentuakIgo(this.departamentuak);
+				this.departamentuak = Departamentua.DepartamentuakSelect();
+				departamentuakmenu.taulaBete(this.departamentuak);
+
 			}
 			else if (extension.equals("xml")) {
 				
 				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
 				Departamentua.DepartamentuakIgo(this.departamentuak);
+				this.departamentuak = Departamentua.DepartamentuakSelect();
+				departamentuakmenu.taulaBete(this.departamentuak);
+
 
 			}
 			else if (extension.equals("json")) {
 				
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
 				//Departamentua.DepartamentuakIgo(this.departamentuak);
+				//this.departamentuak = Departamentua.DepartamentuakSelect();
+				//departamentuakmenu.taulaBete(departamentuak);
+
 
 			}
 			

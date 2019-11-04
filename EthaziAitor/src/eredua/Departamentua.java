@@ -461,9 +461,9 @@ public class Departamentua {
 
 			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT kodea,izena,kokapena FROM departamentu");
 			while (rs.next()) {
-				kodea = rs.getInt("zenbaki");
+				kodea = rs.getInt("kodea");
 				izena = rs.getString("izena");
-				kokapena = rs.getString("abizena");
+				kokapena = rs.getString("kokapena");
 
 				Departamentua departamentua = new Departamentua(kodea, izena, kokapena);
 				departamentuak.add(departamentua);

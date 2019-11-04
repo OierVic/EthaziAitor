@@ -4,6 +4,8 @@ import java.awt.SystemColor;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+
+import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Point;
 
@@ -21,6 +23,8 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class DepartamentuakMenu extends JFrame {
 	
@@ -31,7 +35,8 @@ public class DepartamentuakMenu extends JFrame {
 	private JButton btnAtzera = new JButton("Atzera");
 	private JLabel lblDepartamentuak = new JLabel("Departamentuak");
 	private JTable table;
-	
+	private JPanel panel;
+
 	public DepartamentuakMenu() {
 		
 		this.setBounds(525,200,700,600);
@@ -39,6 +44,7 @@ public class DepartamentuakMenu extends JFrame {
 		getContentPane().setLayout(null);
 		
 		//kontroladorea.JtableSortu();
+		
 		
 		btnAtzera.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnAtzera.setBounds(55, 470, 155, 51);
@@ -56,6 +62,11 @@ public class DepartamentuakMenu extends JFrame {
 		lblDepartamentuak.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblDepartamentuak.setBounds(215, 27, 229, 51);
 		getContentPane().add(lblDepartamentuak);
+		
+		panel = new JPanel();
+		panel.setBounds(39, 89, 601, 348);
+		getContentPane().add(panel);
+		
 		
 		
 		
@@ -125,6 +136,11 @@ public class DepartamentuakMenu extends JFrame {
 
 			}
 		});
+		
+		panel.add(new JScrollPane(table), BorderLayout.CENTER);
+		panel.add(table.getTableHeader(), BorderLayout.NORTH);
+
+		panel.setVisible(true);
 	}
 	
 	

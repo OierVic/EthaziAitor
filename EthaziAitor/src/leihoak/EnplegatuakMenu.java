@@ -11,6 +11,7 @@ import kontroladorea.Kontroladorea;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
 public class EnplegatuakMenu extends JFrame {
 	
@@ -20,7 +21,7 @@ public class EnplegatuakMenu extends JFrame {
 	
 	private JButton btnAtzera = new JButton("Atzera");
 	private JLabel lblEnplegatuak = new JLabel("Enplegatuak");
-	
+	private JPanel panel;
 	
 	public EnplegatuakMenu() {
 		
@@ -44,6 +45,10 @@ public class EnplegatuakMenu extends JFrame {
 		lblEnplegatuak.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblEnplegatuak.setBounds(204, 21, 206, 56);
 		getContentPane().add(lblEnplegatuak);
+		
+		panel = new JPanel();
+		panel.setBounds(39, 89, 601, 300);
+		getContentPane().add(panel);
 		
 		
 		
