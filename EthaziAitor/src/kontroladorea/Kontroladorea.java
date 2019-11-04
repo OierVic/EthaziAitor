@@ -1,9 +1,15 @@
 package kontroladorea;
 
+import java.awt.event.ActionEvent; 
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.lang.reflect.Array;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Vector;
 
 import Oier.Kudeaketa;
 import eredua.Departamentua;
@@ -65,8 +71,7 @@ public class Kontroladorea {
 		public void depatamentuMenura() {
 			fitxategiaukeratuDepartamentuak.setVisible(false);
 			departamentuakmenu.setVisible(true);
-			this.departamentuak = Departamentua.DepartamentuakSelect();
-			departamentuakmenu.taulaBete(this.departamentuak);
+			//departamentuakmenu.taulaBete(this.departamentuak);
 		}
 		
 		public void enplegatuMenura() {
@@ -101,8 +106,16 @@ public class Kontroladorea {
 //			departamentuakmenu.taulaBete(departamentuak);
 //		}
 		
+		//Esto en una ventana de una ventana
+//		public ArrayList<Departamentua> returnDepartamentu(){
+//			this.departamentuak = Departamentua.DepartamentuakSelect();
+//			return this.departamentuak;
+//		}
 		
-		
+//		public Object[][] datuakSartu(){
+//			this.departamentuak = Departamentua.DepartamentuakSelect();
+//			return departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
+//		}
 		
 		
 		
@@ -128,16 +141,16 @@ public class Kontroladorea {
 				
 				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
 				Departamentua.DepartamentuakIgo(this.departamentuak);
-				this.departamentuak = Departamentua.DepartamentuakSelect();
-				departamentuakmenu.taulaBete(this.departamentuak);
+				//this.departamentuak = Departamentua.DepartamentuakSelect();
+				//departamentuakmenu.taulaBete(this.departamentuak);
 
 			}
 			else if (extension.equals("xml")) {
 				
 				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
 				Departamentua.DepartamentuakIgo(this.departamentuak);
-				this.departamentuak = Departamentua.DepartamentuakSelect();
-				departamentuakmenu.taulaBete(this.departamentuak);
+				//this.departamentuak = Departamentua.DepartamentuakSelect();
+				//departamentuakmenu.taulaBete(this.departamentuak);
 
 
 			}
@@ -180,10 +193,6 @@ public class Kontroladorea {
 			}
 			
 		}
-		
-		
-		
-		
 		
 		
 }
