@@ -194,6 +194,8 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				
+				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak);
+				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 				//this.enplegatuak = Enplegatua.JSONDepartamentuakIrakurri();
 				//Enplegatua.EnplegatuakIgo(this.enplegatuak);
 
