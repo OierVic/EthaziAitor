@@ -529,6 +529,29 @@ public class Departamentua {
 		}
 
 	}
+	
+	public static int KodeAltuenaAtera() {
+		int Kodea=0; 
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			//Conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/"+"bidaion","root","");
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT max(kodea) FROM departamentu");
+			while (rs.next()) {
+				Kodea = rs.getInt("max(kodea)");
+
+			}
+			System.out.println();
+			System.out.println("Konexioa eginda Kode Altuena");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return Kodea;
+	}
 
 
 

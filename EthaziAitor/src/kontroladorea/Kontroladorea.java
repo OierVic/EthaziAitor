@@ -36,6 +36,8 @@ public class Kontroladorea {
 	private ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
 	private ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
 	
+	
+	protected Object[][] datos;
 	//Para que las ventanas aparezcan
 	
 		public void ateraOngietorria(OngiEtorria ongietorria) {
@@ -71,6 +73,10 @@ public class Kontroladorea {
 		public void depatamentuMenura() {
 			fitxategiaukeratuDepartamentuak.setVisible(false);
 			departamentuakmenu.setVisible(true);
+			departamentuak = Departamentua.DepartamentuakSelect();
+			departamentuakmenu.arrayDepartamentuaArtu(this.departamentuak);
+			
+			//departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
 			//departamentuakmenu.taulaBete(this.departamentuak);
 		}
 		
@@ -116,7 +122,6 @@ public class Kontroladorea {
 //			this.departamentuak = Departamentua.DepartamentuakSelect();
 //			return departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
 //		}
-		
 		
 		
 		

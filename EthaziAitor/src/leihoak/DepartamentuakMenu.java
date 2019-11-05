@@ -18,14 +18,25 @@ import kontroladorea.Kontroladorea;
 
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
  
 public class DepartamentuakMenu extends JFrame {
-	
+	private ArrayList<Departamentua > arrayDepartamentuak = new ArrayList<Departamentua>();
+
 	private Kontroladorea kontroladorea;
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
+	String kodea=null;
+	String izena=null;
+	String kokapena=null;
     /**************** ATRIBUTOS ***************************/
     //CONTENEDOR PRINCIPAL
     private JPanel contenedor;
@@ -48,11 +59,17 @@ public class DepartamentuakMenu extends JFrame {
     //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
     protected Object[][] datos; //Cuerpo de la tabla
+	//protected Object[][] datos = new Object[arrayDepartamentuak.size()][3] ;
+	//protected Object[][] datos = new Object[10][3] ;
+
+
     protected String[] cabecera;    //Cabecera de la tabla
     protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
     protected JTable tabla; //Tabla propiamente dicha
     private JButton btnAtzera;
- 
+    private JButton btnGehitu;
+    private JButton btnAldatu;
+
     /**************** MÉTODOS ***************************/
     //CONSTRUCTOR
     public DepartamentuakMenu(){
@@ -64,7 +81,7 @@ public class DepartamentuakMenu extends JFrame {
         //CREAR EL CONTENEDOR PRINCIPAL Y AÑADIRLO A LA VENTANA
         contenedor = new JPanel();
         getContentPane().add(contenedor);
- 
+        
         //INDICAR QUE SE QUIERE USAR SPRINGLAYOUT
         SpringLayout sp = new SpringLayout();
         contenedor.setLayout(sp);
@@ -78,7 +95,6 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblKodea,  10,
                         SpringLayout.WEST, contenedor);
-        lblKodea.setVisible(false);
         //ETIQUETA APELLIDOS
         lblIzena = new JLabel("Izena:");
         contenedor.add(lblIzena);
@@ -86,7 +102,6 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblIzena,  10,
                         SpringLayout.WEST, contenedor);
-        lblIzena.setVisible(false);
         //ETIQUETA NIF
         lblKokapena = new JLabel("Kokapena:");
         contenedor.add(lblKokapena);
@@ -94,12 +109,22 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, lblKokapena,  10,
                         SpringLayout.WEST, contenedor);
-        lblKokapena.setVisible(false);
         /**************** EOF ETIQUETAS  ^^^^^^^^^^^^^^^^ **/
  
         /**************** BOF CUADROS DE  TEXTO vvvvvvvvv **/
         //CUADRO DE TEXTO PARA EL NOMBRE
         txtKodea       = new JTextField();
+        txtKodea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				char validar =evt.getKeyChar();
+				if(Character.isLetter(validar)) {
+					getToolkit().beep();
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Kodea zenbaki oso bat izan behar du");
+				}
+			}
+		});
         contenedor.add(txtKodea);
         sp.putConstraint(SpringLayout.NORTH, txtKodea, 10,
                         SpringLayout.NORTH, contenedor);
@@ -107,9 +132,28 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtKodea, 300,
                         SpringLayout.WEST, contenedor);
-        txtKodea.setVisible(false);
+        txtKodea.setEditable(false);
         //CUADRO DE TEXTO PARA EL NIF
         txtIzena = new JTextField();
+        txtIzena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				char validar =evt.getKeyChar();
+				char c=evt.getKeyChar();
+				if(Character.isDigit(validar) ) {
+					getToolkit().beep();
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Izena kate oso bat izan behar du");
+					
+				}
+				if(Character.isUpperCase(c)) {
+					String cad=(""+c).toLowerCase();
+					c=cad.charAt(0);
+					evt.setKeyChar(c);
+				}
+
+			}
+		});
         contenedor.add(txtIzena);    //añadir al contenedor
         sp.putConstraint(SpringLayout.NORTH, txtIzena, 50,
                         SpringLayout.NORTH, contenedor);
@@ -117,24 +161,44 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtIzena, 300,
                         SpringLayout.WEST, contenedor);
-        txtIzena.setVisible(false);
+        txtIzena.setEditable(false);
         //CUADRO DE TEXTO PARA LOS APELLIDOS
         txtKokapena = new JTextField();
+        txtKokapena.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				char validar =evt.getKeyChar();
+				char c=evt.getKeyChar();
+				if(Character.isDigit(validar) ) {
+					getToolkit().beep();
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Kokapena kate oso bat izan behar du");
+					
+				}
+				if(Character.isUpperCase(c)) {
+					String cad=(""+c).toLowerCase();
+					c=cad.charAt(0);
+					evt.setKeyChar(c);
+				}
+
+			}
+		});
         contenedor.add(txtKokapena);
         sp.putConstraint(SpringLayout.NORTH, txtKokapena, 90, SpringLayout.NORTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, txtKokapena, 100, SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.EAST, txtKokapena, 300, SpringLayout.WEST, contenedor);
-        txtKokapena.setVisible(false);
+        txtKokapena.setEditable(false);
         /**************** EOF CUADROS DE  TEXTO ^^^^^^^^^ **/
  
         /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
         datos = objectBidimensionaToDepartamentuak();
-        //datos = objectBidimensionaToDepartamentuak(null);
+
         scroll      = new JScrollPane();
         cabecera    = new String[] {"Kodea","Izena","Kokapena"};
         dtm         = new DefaultTableModel(datos,cabecera);
         tabla       = new JTable(dtm);
         scroll.setViewportView(tabla);
+        //tabla.setCellEditor(true);
         //y ahora se coloca el scrollpane...
         contenedor.add(scroll); //añadir al contenedor
         sp.putConstraint(SpringLayout.NORTH, scroll, 120,
@@ -149,73 +213,84 @@ public class DepartamentuakMenu extends JFrame {
  
         /**************** BOF BOTONES vvvvvvvvvvvvvvvvvv **/
         //BOTÓN AÑADIR
-        btnAdd = new JButton("Añadir");
+        btnAdd = new JButton("Gehitu");
         sp.putConstraint(SpringLayout.WEST, btnAdd,   246,
                         SpringLayout.WEST, contenedor);
         btnAdd.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		if (count==0) {
-        			lblKodea.setVisible(true);
-            		lblIzena.setVisible(true);
-            		lblKokapena.setVisible(true);
-            		txtKodea.setVisible(true);
-            		txtIzena.setVisible(true);
-            		txtKokapena.setVisible(true);
+        			
+            		txtKodea.setEditable(true);
+            		txtIzena.setEditable(true);
+            		txtKokapena.setEditable(true);
+            		btnGehitu.setEnabled(true);
             		
             		btnDel.setEnabled(false);
             		btnUpd.setEnabled(false);
+            		btnAdd.setEnabled(false);
             		
     				JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun datuak");
     				count=1;
-				}else if (count==1) {
-					añadir[0] = txtKodea.getText();
-	        		añadir[1] = txtIzena.getText();
-	        		añadir[2] = txtKokapena.getText();
-	        		((DefaultTableModel)tabla.getModel()).addRow(añadir);
-	        		
-	        		Departamentua departamentua = new Departamentua(Integer.parseInt(añadir[0]), añadir[1], añadir[2]);
-	        		Departamentua.DepartamentuBatBakarrikIgo(departamentua);
-	        		
-	        		lblKodea.setVisible(false);
-            		lblIzena.setVisible(false);
-            		lblKokapena.setVisible(false);
-            		txtKodea.setVisible(false);
-            		txtIzena.setVisible(false);
-            		txtKokapena.setVisible(false);
-            		
-            		btnDel.setEnabled(true);
-            		btnUpd.setEnabled(true);
-	        		
-	        		count=0;
 				}
+					
+	        		
+				
         		
         	}
         });
         contenedor.add(btnAdd);
         //BOTÓN BORRAR
-        btnDel          = new JButton("Borrar");
+        btnDel = new JButton("Kendu");
+        btnDel.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		int lerroAukeratu = tabla.getSelectedRow();
+        		((DefaultTableModel)tabla.getModel()).removeRow(lerroAukeratu);
+        		
+        		
+        		Departamentua.DepartamentuBatBakarrikEzabatu(Integer.parseInt(kodea));
+				JOptionPane.showMessageDialog(null, "Datuak ondo atxindu dira");
+        		
+        	}
+        });
         sp.putConstraint(SpringLayout.WEST, btnDel, 395, SpringLayout.WEST, contenedor);
         sp.putConstraint(SpringLayout.SOUTH, btnDel, -10, SpringLayout.SOUTH, contenedor);
         sp.putConstraint(SpringLayout.NORTH, btnAdd, 0, SpringLayout.NORTH, btnDel);
         sp.putConstraint(SpringLayout.EAST, btnAdd, -48, SpringLayout.WEST, btnDel);
-        btnDel.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		
-
-
-
-        		lerroAukeratu = tabla.getSelectedRow();
-        		((DefaultTableModel)tabla.getModel()).removeRow(lerroAukeratu);
-        		
-        		//va mal
-        		Departamentua.DepartamentuBatBakarrikEzabatu(lerroAukeratu+1);//lerro aukeraketa empieza en el 0 por eso el plus 1
-				JOptionPane.showMessageDialog(null, "Datuak ondo atxindu dira");
-
-        	}
-        });
+        tabla.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+				tabla.setRowSelectionInterval(row, row);
+				int row2 = tabla.rowAtPoint(e.getPoint());
+				kodea = tabla.getValueAt(row2, 0).toString();
+				izena = tabla.getValueAt(row2, 1).toString();
+				kokapena = tabla.getValueAt(row2, 2).toString();
+				System.out.println(kodea+" "+izena+" "+kokapena);
+				
+				
+			}
+		});
         contenedor.add(btnDel);
         //BOTÓN MODIFICAR
-        btnUpd          = new JButton("Editar");
+        btnUpd          = new JButton("Editatu");
+        btnUpd.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		txtKodea.setEditable(true);
+        		txtIzena.setEditable(true);
+        		txtKokapena.setEditable(true);
+        		btnAldatu.setEnabled(true);
+        		
+        		btnDel.setEnabled(false);
+        		btnUpd.setEnabled(false);
+        		
+        		
+        		
+        		
+        		
+        	}
+        });
         sp.putConstraint(SpringLayout.EAST, btnDel, -50, SpringLayout.WEST, btnUpd);
         sp.putConstraint(SpringLayout.WEST, btnUpd, -138, SpringLayout.EAST, contenedor);
         sp.putConstraint(SpringLayout.SOUTH, btnUpd, -10, SpringLayout.SOUTH, contenedor);
@@ -236,19 +311,86 @@ public class DepartamentuakMenu extends JFrame {
         sp.putConstraint(SpringLayout.SOUTH, btnAtzera, -10, SpringLayout.SOUTH, contenedor);
         sp.putConstraint(SpringLayout.EAST, btnAtzera, 122, SpringLayout.WEST, contenedor);
         contenedor.add(btnAtzera);
+        
+        btnGehitu = new JButton("gehitu");
+        sp.putConstraint(SpringLayout.NORTH, btnGehitu, 21, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.WEST, btnGehitu, -203, SpringLayout.EAST, contenedor);
+        sp.putConstraint(SpringLayout.SOUTH, btnGehitu, 54, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.EAST, btnGehitu, -78, SpringLayout.EAST, contenedor);
+        btnGehitu.setEnabled(false);
+        btnGehitu.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		añadir[0] = txtKodea.getText();
+        		añadir[1] = txtIzena.getText();
+        		añadir[2] = txtKokapena.getText();
+        		
+        		if (zenbakiaDa(añadir[0])==true && Integer.parseInt(añadir[0])>Departamentua.KodeAltuenaAtera() && zenbakiaDa(añadir[1])==false && zenbakiaDa(añadir[2])==false) {
+        			((DefaultTableModel)tabla.getModel()).addRow(añadir);
+            		
+            		Departamentua departamentua = new Departamentua(Integer.parseInt(añadir[0]), añadir[1], añadir[2]);
+            		Departamentua.DepartamentuBatBakarrikIgo(departamentua);
+            		
+            		txtKodea.setEditable(false);
+            		txtIzena.setEditable(false);
+            		txtKokapena.setEditable(false);
+            		btnGehitu.setEnabled(false);
+            		
+            		btnDel.setEnabled(true);
+            		btnUpd.setEnabled(true);
+            		btnAdd.setEnabled(true);
+            		
+    				JOptionPane.showMessageDialog(null, "Ondo gehitu da ");
+
+				}else if (zenbakiaDa(añadir[0])==false || Integer.parseInt(añadir[0])<=Departamentua.KodeAltuenaAtera()) {
+    				JOptionPane.showMessageDialog(null, "Kodea zenbaki oso bat izan behar du eta kodea "+Departamentua.KodeAltuenaAtera()+" baino altuago izan behar du");
+				}else if (zenbakiaDa(añadir[1])==true) {
+    				JOptionPane.showMessageDialog(null, "Izena kate bat izan behar du");
+				}else if (zenbakiaDa(añadir[2])==true) {
+    				JOptionPane.showMessageDialog(null, "Kokapena kate bat izan behar du");
+				}
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        	}
+        });
+        btnGehitu.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        contenedor.add(btnGehitu);
+        
+        btnAldatu = new JButton("Aldatu");
+        btnAldatu.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		
+        		
+        		
+        		
+        		
+        	}
+        });
+        sp.putConstraint(SpringLayout.NORTH, btnAldatu, 17, SpringLayout.SOUTH, btnGehitu);
+        sp.putConstraint(SpringLayout.WEST, btnAldatu, 0, SpringLayout.WEST, btnGehitu);
+        sp.putConstraint(SpringLayout.SOUTH, btnAldatu, -16, SpringLayout.NORTH, scroll);
+        sp.putConstraint(SpringLayout.EAST, btnAldatu, 0, SpringLayout.EAST, btnGehitu);
+        btnAldatu.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        btnAldatu.setEnabled(false);
+        contenedor.add(btnAldatu);
         /**************** EOF BOTONES ^^^^^^^^^^^^^^^^^^^^ **/
- 
+
         //Se hace visible la ventana
         //setVisible(true);
  
     }
     
-    
-    public Object[][] objectBidimensionaToDepartamentuak (){
-    	ArrayList<Departamentua > arrayDepartamentuak = new ArrayList<Departamentua>();
+    public Object[][] objectBidimensionaToDepartamentuak () {
 		 arrayDepartamentuak = Departamentua.DepartamentuakSelect();
-		 Object[][] datos = new Object[arrayDepartamentuak.size()][3] ;
-		 
+
+    	Object[][] datos = new Object[arrayDepartamentuak.size()][3] ;
+    	
 	    	for (int i = 0; i < arrayDepartamentuak.size(); i++) {
 				datos[i][0]= Integer.toString(arrayDepartamentuak.get(i).getKodea());
 				datos[i][1]= arrayDepartamentuak.get(i).getIzena();
@@ -257,14 +399,43 @@ public class DepartamentuakMenu extends JFrame {
 //				datos[i][1]= "pepito";
 //				datos[i][2]= "pedro";
 			}
+	    	for (int i = 0; i < datos.length; i++) {
+				System.out.println(datos[i][1].toString());
+			}
 	    	
 	    	return datos;
 	    }
+//    public void añadirFilas() {
+//    	String [] arrayañadir = new String [3];
+//    	for (int i = 0; i < arrayDepartamentuak.size(); i++) {
+//    		arrayañadir[0] = Integer.toString(arrayDepartamentuak.get(i).getKodea());
+//    		arrayañadir[1] = arrayDepartamentuak.get(i).getIzena();
+//    		arrayañadir[2] = arrayDepartamentuak.get(i).getKokapena();
+//			((DefaultTableModel)tabla.getModel()).addRow(arrayañadir);
+//		}
+//    }
+    
+    public void arrayDepartamentuaArtu(ArrayList<Departamentua> arrayqueseiguala) {
+    	arrayDepartamentuak = arrayqueseiguala;
+    	
+	}
     
     public boolean isCellEditable(int row, int column) {
        //all cells false
        return false;
     }
+    
+    public boolean zenbakiaDa(String Katea) {
+    	boolean zenbakiaDa=false;
+    	try {
+    		Integer.parseInt(Katea);
+    		zenbakiaDa=true;
+		} catch (Exception e) {
+			zenbakiaDa=false;
+		}
+    	return zenbakiaDa;
+    }
+    
     
   //Para que las ventanas aparezcan
 
