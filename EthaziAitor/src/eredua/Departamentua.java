@@ -221,111 +221,175 @@ public class Departamentua {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(ArrayList<Departamentua> depArrayList){
+		
+		//JSON parser object to parse read file
+		JSONParser jsonParser = new JSONParser();
+		
+		try (FileReader reader = new FileReader("C:\\Users\\admin1\\git\\EthaziAitor2\\EthaziAitor\\src\\Departamentuak.json"))
+		{
+			//Read JSON file
+            Object obj = jsonParser.parse(reader);
+
+            JSONArray employeeList = (JSONArray) obj;
+           
+            
+            //Iterate over employee array
+            
+            
+            
+            employeeList.forEach( emp -> {
+				try {
+					parsedepartObject( (JSONObject) emp, depArrayList );
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+			} );
+            
+          
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+			
+		
+		return depArrayList;
+	}
+
+	
+	private static void parsedepartObject(JSONObject employee, ArrayList<Departamentua> depArrayList) throws IOException{
+		
+		Departamentua dep = new Departamentua(0, null, null); // creamos objeto 
+		//Get employee object within list
+		JSONObject departamentua = (JSONObject) employee.get("departamentua");
+	
+		
+		
+		int Kodea = Integer.parseInt((String) departamentua.get("kodea"));
+		String Izena = (String) departamentua.get("izena");	
+		 String Kokapena = (String) departamentua.get("kokapena");
+		
+		
+		
+		dep.setKodea(Kodea);
+		dep.setIzena(Izena);
+		dep.setKokapena(Kokapena);
+		
+		depArrayList.add(dep);
+	
+	
+	}
 
 
 	//Departamentua JSONetik irakurtzeko
 
 
 
-	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri () {
-
-		ArrayList<Departamentua> arrayDepartamentuaJSON = new ArrayList<Departamentua>();
-
-		JSONParser parser = new JSONParser();
-
-		int count=0;
-		String kodea_string=null;
-		int kodea_int=0;
-		String izena=null;
-		String kokapena=null;
-
-		try {
-
-			Object obj = parser.parse(new FileReader(".\\src\\Departamentuak.json"));
-
-			JSONObject jsonObject = (JSONObject) obj;
-
-			// loop array
-			JSONArray departamentu = (JSONArray) jsonObject.get("departamentubat");
-			Iterator<String> iterator = departamentu.iterator();
-			while (iterator.hasNext()) {
-				if ((count==0)==true) {
-					kodea_string = iterator.next();
-					kodea_int = Integer.parseInt(kodea_string);
-					count++;
-				}if ((count==1)==true) {
-					izena = iterator.next();
-					count++;
-				} 
-				if (count==2) {
-					kokapena = iterator.next();
-					count++;
-				}if (count==3) {
-					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
-					arrayDepartamentuaJSON.add(departamentua);
-					count=0;
-				}
-
-
-
-			}
-
-			departamentu = (JSONArray) jsonObject.get("departamentubi");
-			iterator = departamentu.iterator();
-			while (iterator.hasNext()) {
-				if ((count==0)==true) {
-					kodea_string = iterator.next();
-					kodea_int = Integer.parseInt(kodea_string);
-					count++;
-				}if ((count==1)==true) {
-					izena = iterator.next();
-					count++;
-				} 
-				if (count==2) {
-					kokapena = iterator.next();
-					count++;
-				}if (count==3) {
-					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
-					arrayDepartamentuaJSON.add(departamentua);
-					count=0;
-				}
-			}
-
-			departamentu = (JSONArray) jsonObject.get("departamentuhiru");
-			iterator = departamentu.iterator();
-			while (iterator.hasNext()) {
-				if ((count==0)==true) {
-					kodea_string = iterator.next();
-					kodea_int = Integer.parseInt(kodea_string);
-					count++;
-				}if ((count==1)==true) {
-					izena = iterator.next();
-					count++;
-				} 
-				if (count==2) {
-					kokapena = iterator.next();
-					count++;
-				}if (count==3) {
-					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
-					arrayDepartamentuaJSON.add(departamentua);
-					count=0;
-				}
-
-			}
-
-
-		} catch (FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} catch (ParseException e) {
-			System.out.println(e.getMessage());
-		}
-
-
-
-		return arrayDepartamentuaJSON;
-	}
+//	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri () {
+//
+//		ArrayList<Departamentua> arrayDepartamentuaJSON = new ArrayList<Departamentua>();
+//
+//		JSONParser parser = new JSONParser();
+//
+//		int count=0;
+//		String kodea_string=null;
+//		int kodea_int=0;
+//		String izena=null;
+//		String kokapena=null;
+//
+//		try {
+//
+//			Object obj = parser.parse(new FileReader(".\\src\\Departamentuak.json"));
+//
+//			JSONObject jsonObject = (JSONObject) obj;
+//
+//			// loop array
+//			JSONArray departamentu = (JSONArray) jsonObject.get("departamentubat");
+//			Iterator<String> iterator = departamentu.iterator();
+//			while (iterator.hasNext()) {
+//				if ((count==0)==true) {
+//					kodea_string = iterator.next();
+//					kodea_int = Integer.parseInt(kodea_string);
+//					count++;
+//				}if ((count==1)==true) {
+//					izena = iterator.next();
+//					count++;
+//				} 
+//				if (count==2) {
+//					kokapena = iterator.next();
+//					count++;
+//				}if (count==3) {
+//					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
+//					arrayDepartamentuaJSON.add(departamentua);
+//					count=0;
+//				}
+//
+//
+//
+//			}
+//
+//			departamentu = (JSONArray) jsonObject.get("departamentubi");
+//			iterator = departamentu.iterator();
+//			while (iterator.hasNext()) {
+//				if ((count==0)==true) {
+//					kodea_string = iterator.next();
+//					kodea_int = Integer.parseInt(kodea_string);
+//					count++;
+//				}if ((count==1)==true) {
+//					izena = iterator.next();
+//					count++;
+//				} 
+//				if (count==2) {
+//					kokapena = iterator.next();
+//					count++;
+//				}if (count==3) {
+//					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
+//					arrayDepartamentuaJSON.add(departamentua);
+//					count=0;
+//				}
+//			}
+//
+//			departamentu = (JSONArray) jsonObject.get("departamentuhiru");
+//			iterator = departamentu.iterator();
+//			while (iterator.hasNext()) {
+//				if ((count==0)==true) {
+//					kodea_string = iterator.next();
+//					kodea_int = Integer.parseInt(kodea_string);
+//					count++;
+//				}if ((count==1)==true) {
+//					izena = iterator.next();
+//					count++;
+//				} 
+//				if (count==2) {
+//					kokapena = iterator.next();
+//					count++;
+//				}if (count==3) {
+//					Departamentua departamentua = new Departamentua(kodea_int, izena, kokapena);
+//					arrayDepartamentuaJSON.add(departamentua);
+//					count=0;
+//				}
+//
+//			}
+//
+//
+//		} catch (FileNotFoundException e) {
+//			System.out.println(e.getMessage());
+//		} catch (IOException e) {
+//			System.out.println(e.getMessage());
+//		} catch (ParseException e) {
+//			System.out.println(e.getMessage());
+//		}
+//
+//
+//
+//		return arrayDepartamentuaJSON;
+//	}
 
 
 

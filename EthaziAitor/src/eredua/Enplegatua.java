@@ -273,56 +273,129 @@ public class Enplegatua {
 
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(ArrayList<Enplegatua> depArrayList){
+		
+		//JSON parser object to parse read file
+		JSONParser jsonParser = new JSONParser();
+		
+		try (FileReader reader = new FileReader("C:\\Users\\admin1\\git\\EthaziAitor2\\EthaziAitor\\src\\Enplegatuak.json"))
+		{
+			//Read JSON file
+            Object obj = jsonParser.parse(reader);
+
+            JSONArray employeeList = (JSONArray) obj;
+           
+            
+            //Iterate over employee array
+            
+            
+            
+            employeeList.forEach( emp -> {
+				try {
+					parsedepartObject( (JSONObject) emp, depArrayList );
+				} catch (IOException e) {
+				
+					e.printStackTrace();
+				}
+			} );
+            
+          
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+			
+		
+		return depArrayList;
+	}
+
+	
+	private static void parsedepartObject(JSONObject employee, ArrayList<Enplegatua> enpArrayList) throws IOException{
+		
+		Enplegatua enp = new Enplegatua(); // creamos objeto 
+		//Get employee object within list
+		JSONObject departamentua = (JSONObject) employee.get("enplegatu");
+	
+		
+		int Zenbaki = Integer.parseInt((String) departamentua.get("zenbaki"));
+		String Izena = (String) departamentua.get("izena");	
+		 String Abizenak = (String) departamentua.get("abizenak");
+		 double Soldata = Double.parseDouble((String) departamentua.get("soldata"));
+		 String Alta = (String) departamentua.get("alta");
+		 int DepKod = Integer.parseInt((String) departamentua.get("depKod"));
+		 String ArduraMota = (String) departamentua.get("arduraMota");
+		
+		
+		
+		
+		 enp.setZenbaki(Zenbaki);
+		 enp.setIzena(Izena);
+		 enp.setAbizenak(Abizenak);
+		 enp.setSoldata(Soldata);
+		 enp.setAlta(Alta);
+		 enp.setDepKod(DepKod);
+		 enp.setArduraMota(ArduraMota);
+		
+		 enpArrayList.add(enp);
+	
+	
+	}
 
 
 
 	//Enplegatua JSONtik irakurtzeko
 
-	public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri() {
-		ArrayList<Enplegatua> arrayEnplegatuakJSON = new ArrayList<Enplegatua>();
-
-		JSONParser jsonParser = new JSONParser();
-
-		try (FileReader reader = new FileReader(".\\src\\Enplegatuak.json")) {
-			Object obj = jsonParser.parse(reader);
-			JSONArray employeeList = (JSONArray) obj;
-			employeeList.forEach(emp -> parseEnplegatuakObject((JSONObject) emp,arrayEnplegatuakJSON));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		return arrayEnplegatuakJSON;
-
-
-	}
-
-	private static void parseEnplegatuakObject(JSONObject employee,ArrayList<Enplegatua> arraylist) {
-
-		JSONObject departamentuaObject = (JSONObject) employee.get("enplegatua");
-
-		String zenbaki_string = (String) departamentuaObject.get("zenbaki");
-		String izena = (String) departamentuaObject.get("izena");
-		String abizenak = (String) departamentuaObject.get("abizenak");
-		String soldata_string = (String) departamentuaObject.get("soldata");
-		String alta = (String) departamentuaObject.get("alta");
-		String depKod_string = (String) departamentuaObject.get("depKod");
-		String ardura = (String) departamentuaObject.get("ardura");
-
-		int zenbaki_int = Integer.parseInt(zenbaki_string);
-		double soldata_double = Double.parseDouble(soldata_string);
-		int depKod_int = Integer.parseInt(depKod_string);
-
-		//Oharra oharra = new Oharra(data, ordua, nori, nork, titulua, edukia);
-		Enplegatua enplegatu = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
-		arraylist.add(enplegatu);
-
-
-	}
-
+//	public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri() {
+//		ArrayList<Enplegatua> arrayEnplegatuakJSON = new ArrayList<Enplegatua>();
+//
+//		JSONParser jsonParser = new JSONParser();
+//
+//		try (FileReader reader = new FileReader(".\\src\\Enplegatuak.json")) {
+//			Object obj = jsonParser.parse(reader);
+//			JSONArray employeeList = (JSONArray) obj;
+//			employeeList.forEach(emp -> parseEnplegatuakObject((JSONObject) emp,arrayEnplegatuakJSON));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return arrayEnplegatuakJSON;
+//
+//
+//	}
+//
+//	private static void parseEnplegatuakObject(JSONObject employee,ArrayList<Enplegatua> arraylist) {
+//
+//		JSONObject departamentuaObject = (JSONObject) employee.get("enplegatua");
+//
+//		String zenbaki_string = (String) departamentuaObject.get("zenbaki");
+//		String izena = (String) departamentuaObject.get("izena");
+//		String abizenak = (String) departamentuaObject.get("abizenak");
+//		String soldata_string = (String) departamentuaObject.get("soldata");
+//		String alta = (String) departamentuaObject.get("alta");
+//		String depKod_string = (String) departamentuaObject.get("depKod");
+//		String ardura = (String) departamentuaObject.get("ardura");
+//
+//		int zenbaki_int = Integer.parseInt(zenbaki_string);
+//		double soldata_double = Double.parseDouble(soldata_string);
+//		int depKod_int = Integer.parseInt(depKod_string);
+//
+//		//Oharra oharra = new Oharra(data, ordua, nori, nork, titulua, edukia);
+//		Enplegatua enplegatu = new Enplegatua(zenbaki_int, izena, abizenak, soldata_double, alta, depKod_int, ardura);
+//		arraylist.add(enplegatu);
+//
+//
+//	}
+//
 
 
 	public static void EnplegatuakIgo (ArrayList<Enplegatua> arraylistEnplegatua) {

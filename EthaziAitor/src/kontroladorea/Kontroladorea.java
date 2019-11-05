@@ -161,6 +161,8 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				
+				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak);
+				Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
 				//Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
