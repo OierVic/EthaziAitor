@@ -1,20 +1,36 @@
 [
- {
-   "zenbaki": 1,
-   "izena": "Aitor",
-   "abizena": "Etxebarria",
-   "soldata": 1500,
-   "alta": "2019-10-1",
-   "departamentu_kodea": 1,
-   "ardurak_arduraMota": "z_ikasketaBurua"
- },
- {
-   "zenbaki": 2,
-   "izena": "Txema",
-   "abizena": "Chamero",
-   "soldata": 1200,
-   "alta": "2019-09-1",
-   "departamentu_kodea": 1,
-   "ardurak_arduraMota": "atezaina"
- }
+    {
+        "enplegatu": {
+            "zenbaki": "3",
+            "izena": "Diego",
+            "abizenak": "Perez",
+            "soldata": "1212",
+            "alta": "2018-10-20",
+            "depKod": "0",
+            "arduraMota": "idazkariEnplegatua"
+            
+        }
+    },
+    {
+        "enplegatu": {
+           "zenbaki": "4",
+            "izena": "Julen",
+            "abizenak": "Gomez",
+            "soldata": "2432",
+            "alta": "2018-09-02",
+            "depKod": "0",
+            "arduraMota": "idazkariEnplegatua"
+        }
+    },
+    {
+        "enplegatu": {
+             "zenbaki": "5",
+            "izena": "Mario",
+            "abizenak": "Uri",
+            "soldata": "1190",
+            "alta": "2019-03-02",
+            "depKod": "0",
+            "arduraMota": "idazkariEnplegatua"
+        }
+    }
 ]

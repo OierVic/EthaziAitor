@@ -24,10 +24,10 @@ public class prueba {
 	
 	public static void main(String[] args) throws IOException {
 		
-		ArrayList<Departamentua> arrayDep = new ArrayList<Departamentua>();
-		arrayDep = Departamentua.JSONDepartamentuakIrakurri();
-		for (int i = 0; i < Departamentua.JSONDepartamentuakIrakurri().size(); i++) {
-			System.out.println(arrayDep.get(i).toString());
+		//ArrayList<Departamentua> arrayDep = new ArrayList<Departamentua>();
+		// = Departamentua.JSONDepartamentuakIrakurri();
+		//for (int i = 0; i < Departamentua.JSONDepartamentuakIrakurri().size(); i++) {
+			//System.out.println(arrayDep.get(i).toString());
 		}
 		
 //		JSONParser parser = new JSONParser();
@@ -68,4 +68,4 @@ public class prueba {
 	    
 		
 	}
-}
+

@@ -163,6 +163,8 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				
+				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak);
+				Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
 				//Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
@@ -194,6 +196,8 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				
+				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak);
+				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 				//this.enplegatuak = Enplegatua.JSONDepartamentuakIrakurri();
 				//Enplegatua.EnplegatuakIgo(this.enplegatuak);
 
