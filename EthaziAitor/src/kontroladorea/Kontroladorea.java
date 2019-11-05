@@ -74,8 +74,9 @@ public class Kontroladorea {
 			fitxategiaukeratuDepartamentuak.setVisible(false);
 			departamentuakmenu.setVisible(true);
 			departamentuak = Departamentua.DepartamentuakSelect();
-			departamentuakmenu.arrayDepartamentuaArtu(this.departamentuak);
+			//departamentuakmenu.arrayDepartamentuaArtu(this.departamentuak);
 			
+			departamentuakmenu.sortuTaula(this.departamentuak);
 			//departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
 			//departamentuakmenu.taulaBete(this.departamentuak);
 		}
@@ -126,9 +127,10 @@ public class Kontroladorea {
 		
 		
 		
-		public void fitxategiaIgoDepartamentua() {
+		public void fitxategiaIgoDepartamentua(File fitxategiaLehioa) {
 			
-			File fitxategia = this.Fitxategia;
+			//File fitxategia = this.Fitxategia;
+			File fitxategia = fitxategiaLehioa;
 			String nombreArchivo = fitxategia.getName();
 			System.out.println(nombreArchivo);
 			

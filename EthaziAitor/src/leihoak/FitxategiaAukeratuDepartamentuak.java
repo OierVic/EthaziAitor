@@ -102,7 +102,7 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 				
 				
 				kontroladorea.fitxategiaGorde(archivo);
-				kontroladorea.fitxategiaIgoDepartamentua();
+				kontroladorea.fitxategiaIgoDepartamentua(archivo);
 				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 				kontroladorea.depatamentuMenura();
 				
