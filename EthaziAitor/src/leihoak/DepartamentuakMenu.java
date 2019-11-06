@@ -236,6 +236,7 @@ public class DepartamentuakMenu extends JFrame {
 								txtIzena.setText("");
 								txtKokapena.setText("");
 								
+
 				  				
 							}else {
 								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.kodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
@@ -268,6 +269,7 @@ public class DepartamentuakMenu extends JFrame {
 					//kontrol.departamentuBatEzabatu(Integer.parseInt(kodea));
 					((DefaultTableModel)tabla.getModel()).removeRow(tabla.getSelectedRow());
 					kontroladorea.DepartamentuaKendu(Integer.parseInt(kodea));
+
 				}else if (tabla.getSelectedRow()==-1) {
 					JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
 				} 
@@ -324,7 +326,7 @@ public class DepartamentuakMenu extends JFrame {
 //				btnDel.setEnabled(true);
 //				btnUpd.setEnabled(true);
 				
-//				dispose();
+				dispose();
 				kontroladorea.fitxategiakaukeratuDepartLeihoa();
 				
 			}
@@ -619,7 +621,8 @@ public class DepartamentuakMenu extends JFrame {
 				//Informazioa eskuratu
 				//ikusiBotoiak();
 				//ikusiDatuakSartu();
-				final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+				//final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+				int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
 				tabla.setRowSelectionInterval(row, row);
 				int row2 = tabla.rowAtPoint(e.getPoint());
 				kodea = tabla.getValueAt(row2, 0).toString();

@@ -72,7 +72,7 @@ public class Kontroladorea {
 		
 		public void depatamentuMenura() {
 			this.departamentuak = Departamentua.DepartamentuakSelect();
-			this.departamentuakmenu.sortuTaula(this.departamentuak);
+			this.departamentuakmenu.sortuTaula(Departamentua.DepartamentuakSelect());
 			
 			this.fitxategiaukeratuDepartamentuak.setVisible(false);
 			this.departamentuakmenu.setVisible(true);
