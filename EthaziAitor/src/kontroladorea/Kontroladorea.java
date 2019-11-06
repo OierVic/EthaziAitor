@@ -33,7 +33,7 @@ public class Kontroladorea {
 	
 	
 	private File Fitxategia;
-	private ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
+	public static ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
 	private ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
 	
 	

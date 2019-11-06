@@ -61,7 +61,7 @@ public class DepartamentuakMenu extends JFrame {
  
     //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
-    protected Object[][] datos; //Cuerpo de la tabla
+    public static Object[][] datos; //Cuerpo de la tabla
 	//protected Object[][] datos = new Object[arrayDepartamentuak.size()][3] ;
 	//protected Object[][] datos = new Object[10][3] ;
 
