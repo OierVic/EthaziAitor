@@ -71,34 +71,37 @@ public class Kontroladorea {
 		}
 		
 		public void depatamentuMenura() {
-			fitxategiaukeratuDepartamentuak.setVisible(false);
-			departamentuakmenu.setVisible(true);
-			departamentuak = Departamentua.DepartamentuakSelect();
+			this.departamentuak = Departamentua.DepartamentuakSelect();
+			this.departamentuakmenu.sortuTaula(this.departamentuak);
+			
+			this.fitxategiaukeratuDepartamentuak.setVisible(false);
+			this.departamentuakmenu.setVisible(true);
+			
 			//departamentuakmenu.arrayDepartamentuaArtu(this.departamentuak);
 			
-			departamentuakmenu.sortuTaula(this.departamentuak);
+			
 			//departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
 			//departamentuakmenu.taulaBete(this.departamentuak);
 		}
 		
 		public void enplegatuMenura() {
-			fitxategiaukeratuEnplegatuak.setVisible(false);
-			enplegatuakmenu.setVisible(true);
+			this.fitxategiaukeratuEnplegatuak.setVisible(false);
+			this.enplegatuakmenu.setVisible(true);
 		}
 		
 		
 		
 		public void AteraOngietorria() {
 
-			ongietorria.setVisible(true);
+			this.ongietorria.setVisible(true);
 			
 		}
 		
 		public void AtzeraFitxategiakDepart() {
-			fitxategiaukeratuDepartamentuak.setVisible(true);
+			this.fitxategiaukeratuDepartamentuak.setVisible(true);
 		}
 		public void AtzeraFitxategiakEnpleg() {
-			fitxategiaukeratuEnplegatuak.setVisible(true);
+			this.fitxategiaukeratuEnplegatuak.setVisible(true);
 		}
 		
 //------------------------------------------------------------------------------------------------
@@ -203,6 +206,17 @@ public class Kontroladorea {
 
 			}
 			
+		}
+		
+		//Kontsultak
+		public void DepartamentuaKendu(int kodea) {
+			Departamentua.DepartamentuBatBakarrikEzabatu(kodea);
+		}
+		public void DepartamentuaIgo(Departamentua departamentua) {
+			Departamentua.DepartamentuBatBakarrikIgo(departamentua);
+		}
+		public int kodeaAltuena() {
+			return Departamentua.KodeAltuenaAtera();
 		}
 		
 		

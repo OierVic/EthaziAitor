@@ -102,8 +102,13 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 				
 				
 				kontroladorea.fitxategiaGorde(archivo);
-				kontroladorea.fitxategiaIgoDepartamentua(archivo);
-				JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+				try {
+					kontroladorea.fitxategiaIgoDepartamentua(archivo);
+					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+				}
+				
 				kontroladorea.depatamentuMenura();
 				
 			}
