@@ -439,6 +439,22 @@ public class Enplegatua {
 
 
 	}
+	
+	public static void EnplegatuBatBakarrikEzabatu(int EzabatuNahidenZenbakia) { //Departamentu objetua DELETE bd
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+				s.executeUpdate("DELETE FROM enplegatu WHERE zenbaki ="+EzabatuNahidenZenbakia);	
+			
+			s.close();
+
+			System.out.println("Konexioa Eginda DELETE Enplegatu");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
 
 
 	public static ArrayList <Enplegatua> EnplegatuakSelect() {

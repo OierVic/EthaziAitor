@@ -247,7 +247,9 @@ public class Kontroladorea {
 			
 		}
 		
-		//Kontsultak
+		//KONTSULTAK
+		
+		//DEPARTAMENTUAK
 		public ArrayList<Departamentua> DepartamentuakSelect() {
 			return Departamentua.DepartamentuakSelect();
 		}
@@ -260,11 +262,17 @@ public class Kontroladorea {
 		public int DepartamentuKodeaAltuena() {
 			return Departamentua.KodeAltuenaAtera();
 		}
+		
+		//ENPLEGATUAK
+		
 		public void EnplegatuaIgo(Enplegatua enplegatua) {
 			Enplegatua.EnplegatuBatIgo(enplegatua);
 		}
 		public int EnplegatuKodeaAltuena() {
 			return Enplegatua.KodeAltuenaAtera();
+		}
+		public void EnplegatuEzabatu(int Zenbaki) {
+			Enplegatua.EnplegatuBatBakarrikEzabatu(Zenbaki);
 		}
 //		public ArrayList<String> ArdurakLista() {
 //			ardurak = Enplegatua.ardurakSelect();

@@ -289,9 +289,8 @@ public class EnplegatuakMenu extends JFrame {
         btnDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (tabla.getSelectedRow()!=-1) {
-					//kontrol.departamentuBatEzabatu(Integer.parseInt(kodea));
 					((DefaultTableModel)tabla.getModel()).removeRow(tabla.getSelectedRow());
-					//kontroladorea.DepartamentuaKendu(Integer.parseInt(kodea));
+					kontroladorea.EnplegatuEzabatu(Integer.parseInt(zenbaki));
 
 				}else if (tabla.getSelectedRow()==-1) {
 					JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
@@ -310,17 +309,51 @@ public class EnplegatuakMenu extends JFrame {
         btnUpd          = new JButton("Aldatu");
         btnUpd.addActionListener(new ActionListener() {
   			public void actionPerformed(ActionEvent arg0) {
-  				//kontrol.updateDepart(txtKodea.getText() ,txtIzena.getText() , txtKokapena.getText());
   				DefaultTableModel model = (DefaultTableModel) tabla.getModel();
   				int i = tabla.getSelectedRow();
-                if(i >= 0) 
-                {
-                   model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
-                   model.setValueAt(txtIzena.getText(), i, 1);
-                   model.setValueAt(txtAbizena.getText(), i, 2);
-                }
-                else{
-                    System.out.println("Update Error");
+  				if (count==0) {
+					
+  					btnAdd.setEnabled(false);
+					btnDel.setEnabled(false);
+					btnUpd.setEnabled(true);
+					txtZenbakia.setEditable(false);
+					txtIzena.setEditable(true);
+					txtSoldata.setEditable(true);
+					txtZenbakia.setText(zenbaki);
+					
+					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
+					
+					count=1;
+				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && zenbaki.equals(txtZenbakia.getText())) {
+					model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
+					model.setValueAt(txtIzena.getText(), i, 1);
+					model.setValueAt(txtAbizena.getText(), i, 2);
+					model.setValueAt(txtSoldata.getText(), i, 3);
+					model.setValueAt(txtDepartamentuKodea.getText(), i, 5);
+					model.setValueAt((String) comboBoxArdurak.getSelectedItem(), i, 6);
+					
+					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+					//Enplegatua.EnplegatuBatBakarrikAldatu(enplegatua);
+					
+                   	txtZenbakia.setEditable(false);
+					txtIzena.setEditable(false);
+					txtAbizena.setEditable(false);
+					txtSoldata.setEditable(false);
+					txtDepartamentuKodea.setEditable(false);
+					
+					btnAdd.setEnabled(true);
+					btnDel.setEnabled(true);
+					btnUpd.setEnabled(true);
+					
+					txtZenbakia.setText("");
+					txtIzena.setText("");
+					txtAbizena.setText("");
+					txtSoldata.setText("");
+					txtDepartamentuKodea.setText("");
+                   
+                   count=0;
+                }else{
+					JOptionPane.showMessageDialog(null, "Ezin izan da aldatu. Mesedez datuak berraztetu ");
                 }
   			}
   		});
