@@ -106,7 +106,7 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 					kontroladorea.fitxategiaIgoEnplegatuak();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					e2.printStackTrace();
 				}
 				
 				kontroladorea.enplegatuMenura();

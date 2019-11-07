@@ -1,6 +1,6 @@
 package eredua;
 
-import java.io.BufferedReader;  
+import java.io.BufferedReader;   
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -48,6 +48,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import eredua.*;
+import leihoak.*;
+import kontroladorea.*;
 
 public class Departamentua {
 
@@ -198,7 +202,7 @@ public class Departamentua {
 					Kodea_int = Integer.parseInt(Kodea_string);
 
 					Departamentua departamentua = new Departamentua(Kodea_int, Izena, Kokapena);
-					System.out.println(departamentua.toString());
+
 					arrayDepartamentuaXML.add(departamentua);
 					//count++;
 
@@ -594,6 +598,23 @@ public class Departamentua {
 
 	}
 	
+	public static void DepartamentuBatBakarrikAldatu(Departamentua departamentua) { //Departamentu objetua UPDATE bd
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+				s.executeUpdate("UPDATE `departamentu` SET `izena` = '"+departamentua.getIzena() +"' WHERE `kodea` = "+departamentua.getKodea());	
+				s.executeUpdate("UPDATE `departamentu` SET `kokapena` = '"+departamentua.getKokapena() +"' WHERE `kodea` = "+departamentua.getKodea());	
+				
+			s.close();
+
+			System.out.println("Konexioa Eginda UPDATE Departamentua kodea "+departamentua.getKodea());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+	
 	public static int KodeAltuenaAtera() {
 		int Kodea=0; 
 
@@ -610,7 +631,7 @@ public class Departamentua {
 
 			}
 			System.out.println();
-			System.out.println("Konexioa eginda Kode Altuena");
+			System.out.println("Konexioa eginda Kode Altuena Departamentu");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}

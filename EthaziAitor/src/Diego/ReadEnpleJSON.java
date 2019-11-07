@@ -62,7 +62,7 @@ public class ReadEnpleJSON
 	
 	private static void parsedepartObject(JSONObject employee, ArrayList<Enplegatua> enpArrayList) throws IOException{
 		
-		Enplegatua enp = new Enplegatua(); // creamos objeto 
+		Enplegatua enp = new Enplegatua(0, null, null, 0.00, null, 0, null); // creamos objeto 
 		//Get employee object within list
 		JSONObject departamentua = (JSONObject) employee.get("enplegatu");
 	

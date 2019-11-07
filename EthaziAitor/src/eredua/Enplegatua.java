@@ -1,6 +1,6 @@
 package eredua;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,12 +23,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import eredua.*;
+import leihoak.*;
+import kontroladorea.*;
+
 public class Enplegatua {
-
-	public Enplegatua() {
-		super();
-	}
-
 
 
 	private int zenbaki;
@@ -235,13 +234,13 @@ public class Enplegatua {
 
 
 
-					zenbaki_string = document.getElementsByTagName("kodea").item(temp).getTextContent();
+					zenbaki_string = document.getElementsByTagName("zenbaki").item(temp).getTextContent();
 					izena = document.getElementsByTagName("izena").item(temp).getTextContent();
 					abizenak = document.getElementsByTagName("abizena").item(temp).getTextContent();
 					soldata_string = document.getElementsByTagName("soldata").item(temp).getTextContent();
 					alta = document.getElementsByTagName("alta").item(temp).getTextContent();
-					depKod_string = document.getElementsByTagName("depKod").item(temp).getTextContent();
-					ardura = document.getElementsByTagName("ardura").item(temp).getTextContent();
+					depKod_string = document.getElementsByTagName("departamentu_kodea").item(temp).getTextContent();
+					ardura = document.getElementsByTagName("ardurak_arduraMota").item(temp).getTextContent();
 
 
 					zenbaki_int = Integer.parseInt(zenbaki_string);
@@ -318,7 +317,7 @@ public class Enplegatua {
 	
 	private static void parsedepartObject(JSONObject employee, ArrayList<Enplegatua> enpArrayList) throws IOException{
 		
-		Enplegatua enp = new Enplegatua(); // creamos objeto 
+		Enplegatua enp = new Enplegatua(0, null, null, 0.00, null, 0, null); // creamos objeto 
 		//Get employee object within list
 		JSONObject departamentua = (JSONObject) employee.get("enplegatu");
 	
@@ -419,6 +418,27 @@ public class Enplegatua {
 
 
 	}
+	
+	public static void EnplegatuBatIgo (Enplegatua enplegatua) {
+
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+
+
+				s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `ardurak_arduraMota`) VALUES"
+						+ " ("+ enplegatua.getZenbaki() +", '"+ enplegatua.getIzena() +"', '"+ enplegatua.getAbizenak() +"', "+ enplegatua.getSoldata() +",'"+ enplegatua.getAlta() +"','"+ enplegatua.getDepKod() +"', '"+ enplegatua.getArduraMota() +"')");
+
+			
+			s.close();
+
+			System.out.println("Konexioa Eginda Enplegatuak Igo");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+
+	}
 
 
 	public static ArrayList <Enplegatua> EnplegatuakSelect() {
@@ -476,10 +496,9 @@ public class Enplegatua {
 			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT arduraMota FROM ardurak");
 			while (rs.next()) {
 				ardurakString = rs.getString("arduraMota");
-				
 				ardurak.add(ardurakString);
-
-
+				
+				
 			}
 			System.out.println("Konexioa eginda ardurak Select");
 		}catch(Exception e) {
@@ -487,6 +506,29 @@ public class Enplegatua {
 		}
 		return ardurak;
 
+	}
+	
+	public static int KodeAltuenaAtera() {
+		int Kodea=0; 
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			//Conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/"+"bidaion","root","");
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT max(zenbaki) FROM enplegatu");
+			while (rs.next()) {
+				Kodea = rs.getInt("max(zenbaki)");
+
+			}
+			System.out.println();
+			System.out.println("Konexioa eginda Kode Altuena Enplegatu");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return Kodea;
 	}
 
 

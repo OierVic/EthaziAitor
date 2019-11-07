@@ -1,6 +1,6 @@
 package leihoak;
 
-import javax.swing.JFrame;
+import javax.swing.JFrame; 
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
@@ -8,15 +8,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
-import eredua.Departamentua;
-import eredua.Enplegatua;
-import kontroladorea.Kontroladorea;
+import eredua.*;
+import leihoak.*;
+import kontroladorea.*;
+
 
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -37,6 +39,7 @@ public class EnplegatuakMenu extends JFrame {
 	private ArrayList<String> ardurak = new ArrayList<String>();
 	
 	private Kontroladorea kontroladorea;
+	private Departamentua departamentua;
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
@@ -54,7 +57,7 @@ public class EnplegatuakMenu extends JFrame {
     //DEFINICIÓN DE LOS CUADROS DE TEXTO
     protected JTextField txtZenbakia;
     protected JTextField txtIzena;
-    protected JTextField txtKokapena;
+    protected JTextField txtAbizena;
  
     //DEFINICIÓN DE LOS BOTONES
     protected JButton btnAdd;
@@ -74,12 +77,13 @@ public class EnplegatuakMenu extends JFrame {
     protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
     protected JTable tabla; //Tabla propiamente dicha
     protected SpringLayout sp;
-    private JTextField txtSoldata;
-    private JTextField txtDepartamentuKodea;
-    private JLabel lblArdurak;
-    private JLabel lblSoldata = new JLabel("Soldata:");
-    private JLabel lblDepartkodea = new JLabel("DepartKodea:");
-    private JComboBox comboBoxArdurak = new JComboBox();
+    protected JTextField txtSoldata;
+    protected JTextField txtDepartamentuKodea;
+    protected JLabel lblArdurak;
+    protected JLabel lblSoldata = new JLabel("Soldata:");
+    protected JLabel lblDepartkodea = new JLabel("Departamentu Kodea:");
+    protected JComboBox comboBoxArdurak = new JComboBox();
+    protected JLabel lblMax ;
 
 
     /**************** MÉTODOS ***************************/
@@ -97,6 +101,11 @@ public class EnplegatuakMenu extends JFrame {
         //INDICAR QUE SE QUIERE USAR SPRINGLAYOUT
         sp = new SpringLayout();
         contenedor.setLayout(sp);
+        
+      DateFormat hourformat = new SimpleDateFormat("HH:mm");
+      DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+      String data = getDia();
+      String ordua = getHora();
  
         //Vamos al lío
         /**************** BOF ETIQUETAS  vvvvvvvvvvvvvvvv **/
@@ -175,8 +184,8 @@ public class EnplegatuakMenu extends JFrame {
                         SpringLayout.WEST, contenedor);
         txtIzena.setEditable(false);
         //CUADRO DE TEXTO PARA LOS APELLIDOS
-        txtKokapena = new JTextField();
-        txtKokapena.addKeyListener(new KeyAdapter() {
+        txtAbizena = new JTextField();
+        txtAbizena.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(java.awt.event.KeyEvent evt) {
 				char validar =evt.getKeyChar();
@@ -195,11 +204,11 @@ public class EnplegatuakMenu extends JFrame {
 
 			}
 		});
-        contenedor.add(txtKokapena);
-        sp.putConstraint(SpringLayout.NORTH, txtKokapena, 90, SpringLayout.NORTH, contenedor);
-        sp.putConstraint(SpringLayout.WEST, txtKokapena, 100, SpringLayout.WEST, contenedor);
-        sp.putConstraint(SpringLayout.EAST, txtKokapena, 300, SpringLayout.WEST, contenedor);
-        txtKokapena.setEditable(false);
+        contenedor.add(txtAbizena);
+        sp.putConstraint(SpringLayout.NORTH, txtAbizena, 90, SpringLayout.NORTH, contenedor);
+        sp.putConstraint(SpringLayout.WEST, txtAbizena, 100, SpringLayout.WEST, contenedor);
+        sp.putConstraint(SpringLayout.EAST, txtAbizena, 300, SpringLayout.WEST, contenedor);
+        txtAbizena.setEditable(false);
         
         /**************** BOF BOTONES vvvvvvvvvvvvvvvvvv **/
         //BOTÓN AÑADIR
@@ -213,8 +222,11 @@ public class EnplegatuakMenu extends JFrame {
 					btnUpd.setEnabled(false);
 					txtZenbakia.setEditable(false);
 					txtIzena.setEditable(true);
-					txtKokapena.setEditable(true);
-					txtZenbakia.setText(Integer.toString((kontroladorea.kodeaAltuena()+1)));
+					txtAbizena.setEditable(true);
+					txtSoldata.setEditable(true);
+					txtDepartamentuKodea.setEditable(true);
+					
+					txtZenbakia.setText(Integer.toString((kontroladorea.EnplegatuKodeaAltuena()+1)));
 					
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
 					
@@ -222,19 +234,22 @@ public class EnplegatuakMenu extends JFrame {
 				}else if (count==1) {
 					//boolean denaOndo=false;
 					
-						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtKokapena.getText())==false) {
-							if (Integer.parseInt(txtZenbakia.getText()) > kontroladorea.kodeaAltuena()) {
-								//kodea = Integer.toString(kontroladorea.zbkRamdomDepart());
-				  				Departamentua departamentua = new Departamentua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtKokapena.getText());
-				  				//kontrol.DepartamentuBatSartu(dep);
-				  				kontroladorea.DepartamentuaIgo(departamentua);
+						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true) {
+							if (Integer.parseInt(txtZenbakia.getText()) > kontroladorea.EnplegatuKodeaAltuena()) {
+								
+								
+								Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+										
+				  				kontroladorea.EnplegatuaIgo(enplegatua);
 								DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtKokapena.getText()});
+				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(),Integer.parseInt(txtSoldata.getText()),getDia(),Integer.parseInt(txtDepartamentuKodea.getText()) ,(String) comboBoxArdurak.getSelectedItem()});
 				  				count=0;
 				  				
 				  				txtZenbakia.setEditable(false);
 								txtIzena.setEditable(false);
-								txtKokapena.setEditable(false);
+								txtAbizena.setEditable(false);
+								txtSoldata.setEditable(false);
+								txtDepartamentuKodea.setEditable(false);
 								
 								btnAdd.setEnabled(true);
 								btnDel.setEnabled(true);
@@ -242,12 +257,12 @@ public class EnplegatuakMenu extends JFrame {
 								
 								txtZenbakia.setText("");
 								txtIzena.setText("");
-								txtKokapena.setText("");
+								txtAbizena.setText("");
 								
 
 				  				
 							}else {
-								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.kodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.EnplegatuKodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
 							}
 							
 						}else {
@@ -302,7 +317,7 @@ public class EnplegatuakMenu extends JFrame {
                 {
                    model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
                    model.setValueAt(txtIzena.getText(), i, 1);
-                   model.setValueAt(txtKokapena.getText(), i, 2);
+                   model.setValueAt(txtAbizena.getText(), i, 2);
                 }
                 else{
                     System.out.println("Update Error");
@@ -326,16 +341,19 @@ public class EnplegatuakMenu extends JFrame {
 
 
 				
-//				txtKodea.setEditable(false);
-//				txtIzena.setEditable(false);
-//				txtKokapena.setEditable(false);
-//				
-//				btnAdd.setEnabled(true);
-//				btnDel.setEnabled(true);
-//				btnUpd.setEnabled(true);
+				txtZenbakia.setEditable(false);
+				txtIzena.setEditable(false);
+				txtAbizena.setEditable(false);
+				txtSoldata.setEditable(false);
+				txtDepartamentuKodea.setEditable(false);
+				
+				
+				btnAdd.setEnabled(true);
+				btnDel.setEnabled(true);
+				btnUpd.setEnabled(true);
 				
 				dispose();
-				kontroladorea.fitxategiakaukeratuDepartLeihoa();
+				kontroladorea.fitxategiakaukeratuEnplegLeihoa();
 				
 			}
 		});
@@ -357,14 +375,38 @@ public class EnplegatuakMenu extends JFrame {
         sp.putConstraint(SpringLayout.EAST, txtSoldata, 144, SpringLayout.EAST, lblSoldata);
         contenedor.add(txtSoldata);
         txtSoldata.setColumns(10);
+        txtSoldata.setEditable(false);
+        txtSoldata.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				char validar =evt.getKeyChar();
+				if(Character.isLetter(validar)) {
+					getToolkit().beep();
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Soldata zenbaki oso bat izan behar du");
+				}
+			}
+		});
         
         txtDepartamentuKodea = new JTextField();
+        sp.putConstraint(SpringLayout.NORTH, comboBoxArdurak, 23, SpringLayout.SOUTH, txtDepartamentuKodea);
+        sp.putConstraint(SpringLayout.WEST, txtDepartamentuKodea, 18, SpringLayout.EAST, lblDepartkodea);
         sp.putConstraint(SpringLayout.NORTH, txtDepartamentuKodea, -3, SpringLayout.NORTH, lblIzena);
-        sp.putConstraint(SpringLayout.EAST, txtDepartamentuKodea, -160, SpringLayout.EAST, contenedor);
+        sp.putConstraint(SpringLayout.EAST, txtDepartamentuKodea, 0, SpringLayout.EAST, comboBoxArdurak);
         contenedor.add(txtDepartamentuKodea);
         txtDepartamentuKodea.setColumns(10);
-        
-        sp.putConstraint(SpringLayout.WEST, txtDepartamentuKodea, 6, SpringLayout.EAST, lblDepartkodea);
+        txtDepartamentuKodea.setEditable(false);
+        txtDepartamentuKodea.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(java.awt.event.KeyEvent evt) {
+				char validar =evt.getKeyChar();
+				if(Character.isLetter(validar)) {
+					getToolkit().beep();
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Departamentu Kodea zenbaki oso bat izan behar du");
+				}
+			}
+		});
         sp.putConstraint(SpringLayout.NORTH, lblDepartkodea, 0, SpringLayout.NORTH, lblIzena);
         sp.putConstraint(SpringLayout.WEST, lblDepartkodea, 34, SpringLayout.EAST, txtIzena);
         contenedor.add(lblDepartkodea);
@@ -373,21 +415,86 @@ public class EnplegatuakMenu extends JFrame {
         sp.putConstraint(SpringLayout.NORTH, lblArdurak, 0, SpringLayout.NORTH, lblAbizena);
         sp.putConstraint(SpringLayout.WEST, lblArdurak, 0, SpringLayout.WEST, lblSoldata);
         contenedor.add(lblArdurak);
-        
-        sp.putConstraint(SpringLayout.NORTH, comboBoxArdurak, 23, SpringLayout.SOUTH, txtDepartamentuKodea);
         sp.putConstraint(SpringLayout.WEST, comboBoxArdurak, 33, SpringLayout.EAST, lblArdurak);
         sp.putConstraint(SpringLayout.EAST, comboBoxArdurak, 90, SpringLayout.EAST, txtSoldata);
         contenedor.add(comboBoxArdurak);
         txtSoldata.setEditable(false);
         txtDepartamentuKodea.setEditable(false);
-        comboBoxArdurak.addItem("atezaina");
-        comboBoxArdurak.addItem("idazkariEnplegatua");
-        comboBoxArdurak.addItem("irakaslea");
-        comboBoxArdurak.addItem("tutorea");
-        comboBoxArdurak.addItem("z_ikasketaBurua");
-        comboBoxArdurak.addItem("z_mintegiBurua");
-        comboBoxArdurak.addItem("z_zuzendariOrdea");
-        comboBoxArdurak.addItem("z_zuzendariOrokorra");
+        ardurak = Enplegatua.ardurakSelect();
+        //ardurak = kontroladorea.ardurakLista();
+        for (int i = 0; i < ardurak.size(); i++) {
+			comboBoxArdurak.addItem(ardurak.get(i).toString());
+		}
+        
+        
+        
+        
+        
+        /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
+        scroll      = new JScrollPane();
+        cabecera    = new String[] {"Zenbakia","Izena","Abizena","Soldata","Alta","Departamentu_Kodea","Ardura"};
+        dtm         = new DefaultTableModel(datuakSortu(Enplegatua.EnplegatuakSelect()),cabecera);
+        tabla       = new JTable(dtm);
+        scroll.setViewportView(tabla);
+        
+       
+        /**************** EOF TABLA ^^^^^^^^^^^^^^^^^^^^ **/
+      //Mouse action listener idatzi
+      		tabla.addMouseListener(new MouseAdapter() {
+      			public void mouseClicked(MouseEvent e) {
+      				//Informazioa eskuratu
+      				//ikusiBotoiak();
+      				//ikusiDatuakSartu();
+      				//final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+      				int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+      				tabla.setRowSelectionInterval(row, row);
+      				int row2 = tabla.rowAtPoint(e.getPoint());
+      				zenbaki = tabla.getValueAt(row2, 0).toString();
+      				izena = tabla.getValueAt(row2, 1).toString();
+      				abizena = tabla.getValueAt(row2, 2).toString();
+      				soldata = tabla.getValueAt(row2, 3).toString();
+      				alta = tabla.getValueAt(row2, 4).toString();
+      				departamentu_kodea = tabla.getValueAt(row2, 5).toString();
+      				ardurak_arduraMota = tabla.getValueAt(row2, 6).toString();
+      				
+      				System.out.println(zenbaki+" "+izena+" "+abizena+" "+soldata+" "+alta+" "+departamentu_kodea+" "+ardurak_arduraMota);
+      				//Betebehar dena	
+      			}
+      		});
+      	//y ahora se coloca el scrollpane...
+            contenedor.add(scroll); //añadir al contenedor
+            sp.putConstraint(SpringLayout.NORTH, scroll, 120,
+                            SpringLayout.NORTH, contenedor);
+            sp.putConstraint(SpringLayout.WEST, scroll,   10,
+                            SpringLayout.WEST, contenedor);
+            sp.putConstraint(SpringLayout.EAST, scroll,  -10,
+                            SpringLayout.EAST, contenedor);
+            sp.putConstraint(SpringLayout.SOUTH, scroll, -50,
+                            SpringLayout.SOUTH, contenedor);
+            lblMax = new JLabel("Max :");
+            sp.putConstraint(SpringLayout.WEST, lblMax, 6, SpringLayout.EAST, txtDepartamentuKodea);
+            sp.putConstraint(SpringLayout.SOUTH, lblMax, 0, SpringLayout.SOUTH, lblIzena);
+            contenedor.add(lblMax);
+            lblMax.setText("Max : "+Departamentua.KodeAltuenaAtera());
+            
+ 
+        //Se hace visible la ventana
+        //setVisible(true);
+        
+        
+        
+        
+//        for (int i = 0; i < kontroladorea.ardurakLista().size(); i++) {
+//			comboBoxArdurak.addItem(kontroladorea.ardurakLista().get(i).toString());
+//		}
+//        comboBoxArdurak.addItem("atezaina");
+//        comboBoxArdurak.addItem("idazkariEnplegatua");
+//        comboBoxArdurak.addItem("irakaslea");
+//        comboBoxArdurak.addItem("tutorea");
+//        comboBoxArdurak.addItem("z_ikasketaBurua");
+//        comboBoxArdurak.addItem("z_mintegiBurua");
+//        comboBoxArdurak.addItem("z_zuzendariOrdea");
+//        comboBoxArdurak.addItem("z_zuzendariOrokorra");
 
         
         
@@ -667,50 +774,7 @@ public class EnplegatuakMenu extends JFrame {
     
 
     public void sortuTaulaEnple(ArrayList<Enplegatua> enple) {
-        /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
-        scroll      = new JScrollPane();
-        cabecera    = new String[] {"Zenbakia","Izena","Abizena","Soldata","Alta","Departamentu_Kodea","Ardura"};
-        dtm         = new DefaultTableModel(datuakSortu(enple),cabecera);
-        tabla       = new JTable(dtm);
-        scroll.setViewportView(tabla);
-        
-       
-        /**************** EOF TABLA ^^^^^^^^^^^^^^^^^^^^ **/
-      //Mouse action listener idatzi
-      		tabla.addMouseListener(new MouseAdapter() {
-      			public void mouseClicked(MouseEvent e) {
-      				//Informazioa eskuratu
-      				//ikusiBotoiak();
-      				//ikusiDatuakSartu();
-      				//final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
-      				int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
-      				tabla.setRowSelectionInterval(row, row);
-      				int row2 = tabla.rowAtPoint(e.getPoint());
-      				zenbaki = tabla.getValueAt(row2, 0).toString();
-      				izena = tabla.getValueAt(row2, 1).toString();
-      				abizena = tabla.getValueAt(row2, 2).toString();
-      				soldata = tabla.getValueAt(row2, 3).toString();
-      				alta = tabla.getValueAt(row2, 4).toString();
-      				departamentu_kodea = tabla.getValueAt(row2, 5).toString();
-      				ardurak_arduraMota = tabla.getValueAt(row2, 6).toString();
-      				
-      				System.out.println(zenbaki+" "+izena+" "+abizena+" "+soldata+" "+alta+" "+departamentu_kodea+" "+ardurak_arduraMota);
-      				//Betebehar dena	
-      			}
-      		});
-      	//y ahora se coloca el scrollpane...
-            contenedor.add(scroll); //añadir al contenedor
-            sp.putConstraint(SpringLayout.NORTH, scroll, 120,
-                            SpringLayout.NORTH, contenedor);
-            sp.putConstraint(SpringLayout.WEST, scroll,   10,
-                            SpringLayout.WEST, contenedor);
-            sp.putConstraint(SpringLayout.EAST, scroll,  -10,
-                            SpringLayout.EAST, contenedor);
-            sp.putConstraint(SpringLayout.SOUTH, scroll, -50,
-                            SpringLayout.SOUTH, contenedor);
- 
-        //Se hace visible la ventana
-        //setVisible(true);
+        /////////////////////////////////////////////////////////////////
 	}
 
 
@@ -757,11 +821,18 @@ public class EnplegatuakMenu extends JFrame {
 	
 	}
     
-    
-//    DateFormat hourformat = new SimpleDateFormat("HH:mm");
-//    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//    data = dateFormat.format(date).toString();
-//    ordua = hourformat.format(date).toString();
+	public String getDia() {
+	    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+	    Date now = new Date();
+	    String Dia = sdfDate.format(now);
+	    return Dia;
+	}
+	public String getHora() {
+	    SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss");
+	    Date now = new Date();
+	    String Hora = sdfDate.format(now);
+	    return Hora;
+	}
 
     
     

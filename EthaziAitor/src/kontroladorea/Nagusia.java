@@ -1,14 +1,9 @@
 package kontroladorea;
 
-import Oier.Kudeaketa;
-import eredua.Enplegatua;
-import eredua.KonexioaMariaDB;
-import eredua.konexioa;
-import leihoak.OngiEtorria;
-import leihoak.DepartamentuakMenu;
-import leihoak.EnplegatuakMenu;
-import leihoak.FitxategiaAukeratuDepartamentuak;
-import leihoak.FitxategiaAukeratuEnplegatuak;
+import Oier.Kudeaketa; 
+import eredua.*;
+import leihoak.*;
+import kontroladorea.*;
 
 public class Nagusia {
 
@@ -18,6 +13,7 @@ public class Nagusia {
 		
 		//Ventanas
 		Kontroladorea kontroladorea = new Kontroladorea();
+		
 		OngiEtorria ongietorria = new OngiEtorria();
 		
 		FitxategiaAukeratuDepartamentuak fitxategiaukeratuDepartamentuak = new FitxategiaAukeratuDepartamentuak();

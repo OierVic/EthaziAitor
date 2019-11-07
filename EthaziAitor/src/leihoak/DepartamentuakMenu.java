@@ -30,8 +30,11 @@ import java.awt.event.KeyEvent;
  
 public class DepartamentuakMenu extends JFrame {
 	private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
-
+	private ArrayList<String> ardurakVentana = new ArrayList<String>();
+	
 	private Kontroladorea kontroladorea;
+	private Departamentua departamentua;
+	
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
@@ -57,12 +60,11 @@ public class DepartamentuakMenu extends JFrame {
     protected JButton btnDel;
     protected JButton btnUpd;
     protected JButton btnAtzera;
-    protected JButton btnReload = new JButton("Reload");
 
  
     //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
-    public static Object[][] datos; //Cuerpo de la tabla
+    private Object[][] datos; //Cuerpo de la tabla
 	//protected Object[][] datos = new Object[arrayDepartamentuak.size()][3] ;
 	//protected Object[][] datos = new Object[10][3] ;
 
@@ -207,7 +209,7 @@ public class DepartamentuakMenu extends JFrame {
 					txtKodea.setEditable(false);
 					txtIzena.setEditable(true);
 					txtKokapena.setEditable(true);
-					txtKodea.setText(Integer.toString((kontroladorea.kodeaAltuena()+1)));
+					txtKodea.setText(Integer.toString((kontroladorea.DepartamentuKodeaAltuena()+1)));
 					
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
 					
@@ -216,7 +218,7 @@ public class DepartamentuakMenu extends JFrame {
 					//boolean denaOndo=false;
 					
 						if (zenbakiaDa(txtKodea.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtKokapena.getText())==false) {
-							if (Integer.parseInt(txtKodea.getText()) > kontroladorea.kodeaAltuena()) {
+							if (Integer.parseInt(txtKodea.getText()) > kontroladorea.DepartamentuKodeaAltuena()) {
 								//kodea = Integer.toString(kontroladorea.zbkRamdomDepart());
 				  				Departamentua departamentua = new Departamentua(Integer.parseInt(txtKodea.getText()), txtIzena.getText(), txtKokapena.getText());
 				  				//kontrol.DepartamentuBatSartu(dep);
@@ -240,7 +242,7 @@ public class DepartamentuakMenu extends JFrame {
 
 				  				
 							}else {
-								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.kodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.DepartamentuKodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
 							}
 							
 						}else {
@@ -291,14 +293,42 @@ public class DepartamentuakMenu extends JFrame {
   				//kontrol.updateDepart(txtKodea.getText() ,txtIzena.getText() , txtKokapena.getText());
   				DefaultTableModel model = (DefaultTableModel) tabla.getModel();
   				int i = tabla.getSelectedRow();
-                if(i >= 0) 
-                {
-                   model.setValueAt(Integer.parseInt(txtKodea.getText()), i, 0);
-                   model.setValueAt(txtIzena.getText(), i, 1);
-                   model.setValueAt(txtKokapena.getText(), i, 2);
-                }
-                else{
-                    System.out.println("Update Error");
+  				if (count==0) {
+					
+  					btnAdd.setEnabled(false);
+					btnDel.setEnabled(false);
+					btnUpd.setEnabled(true);
+					txtKodea.setEditable(false);
+					txtIzena.setEditable(true);
+					txtKokapena.setEditable(true);
+					txtKodea.setText(kodea);
+					
+					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
+					
+					count=1;
+				}else if(count == 1 && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtKodea.getText()) && kodea.equals(txtKodea.getText())) {
+					model.setValueAt(Integer.parseInt(txtKodea.getText()), i, 0);
+					model.setValueAt(txtIzena.getText(), i, 1);
+					model.setValueAt(txtKokapena.getText(), i, 2);
+					
+					Departamentua departamentua = new Departamentua(Integer.parseInt(txtKodea.getText()), txtIzena.getText(), txtKokapena.getText());
+					Departamentua.DepartamentuBatBakarrikAldatu(departamentua);
+					
+                   	txtKodea.setEditable(false);
+					txtIzena.setEditable(false);
+					txtKokapena.setEditable(false);
+					
+					btnAdd.setEnabled(true);
+					btnDel.setEnabled(true);
+					btnUpd.setEnabled(true);
+					
+					txtKodea.setText("");
+					txtIzena.setText("");
+					txtKokapena.setText("");
+                   
+                   count=0;
+                }else{
+					JOptionPane.showMessageDialog(null, "Ezin izan da aldatu. Mesedez datuak berraztetu ");
                 }
   			}
   		});
@@ -338,35 +368,6 @@ public class DepartamentuakMenu extends JFrame {
                         SpringLayout.SOUTH, contenedor);
         sp.putConstraint(SpringLayout.WEST, btnAtzera,  520,
                         SpringLayout.WEST, contenedor);
-        
-        btnReload.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		
-        		while (tabla.getRowCount()>0) {
-        			dtm.removeRow(0);				
-        			
-				}
-//        		kontroladorea.departamentuak = kontroladorea.DepartamentuakSelect();
-//        		//datuakSortu(kontroladorea.departamentuak);
-//        		sortuTaulaDepart(kontroladorea.departamentuak);
-        		
-//        		DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-//        		ArrayList<Departamentua> departamentuArray = new ArrayList<Departamentua>();
-//        		departamentuArray = Departamentua.DepartamentuakSelect();
-        		DepartamentuakMenu departamentuakmenu = new DepartamentuakMenu();
-        		dispose();
-        		departamentuakmenu.setVisible(true);
-        		departamentuakmenu.sortuTaulaDepart(Departamentua.DepartamentuakSelect());
-//        		for (int i = 0; i < departamentuArray.size(); i++) {
-//      				model.addRow(new Object[]{departamentuArray.get(i).getKodea(), departamentuArray.get(i).getIzena(), departamentuArray.get(i).getKokapena()});
-//
-//				}
-        		
-        	}
-        });
-        sp.putConstraint(SpringLayout.NORTH, btnReload, 0, SpringLayout.NORTH, btnAdd);
-        sp.putConstraint(SpringLayout.WEST, btnReload, 28, SpringLayout.EAST, btnUpd);
-        contenedor.add(btnReload);
         
         
         
@@ -622,13 +623,13 @@ public class DepartamentuakMenu extends JFrame {
     
     public void objectBidimensionaToDepartamentuak (ArrayList<Departamentua> arrayDepartamentuaKontrolador) {
     	//kontroladorea.departamentuak = arrayDepartamentuaKontrolador;
-    	kontroladorea.departamentuak = kontroladorea.DepartamentuakSelect();
-    	Object[][] datos = new Object[kontroladorea.departamentuak.size()][3] ;
+    	arrayDepartamentuaKontrolador = kontroladorea.DepartamentuakSelect();
+    	Object[][] datos = new Object[arrayDepartamentuaKontrolador.size()][3] ;
     	
-	    	for (int i = 0; i < kontroladorea.departamentuak.size(); i++) {
-				datos[i][0]= Integer.toString(kontroladorea.departamentuak.get(i).getKodea());
-				datos[i][1]= kontroladorea.departamentuak.get(i).getIzena();
-				datos[i][2]= kontroladorea.departamentuak.get(i).getKokapena();
+	    	for (int i = 0; i < arrayDepartamentuaKontrolador.size(); i++) {
+				datos[i][0]= Integer.toString(arrayDepartamentuaKontrolador.get(i).getKodea());
+				datos[i][1]= arrayDepartamentuaKontrolador.get(i).getIzena();
+				datos[i][2]= arrayDepartamentuaKontrolador.get(i).getKokapena();
 //				datos[i][0]= "pepe";
 //				datos[i][1]= "pepito";
 //				datos[i][2]= "pedro";

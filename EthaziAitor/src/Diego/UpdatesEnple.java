@@ -12,7 +12,7 @@ import eredua.konexioa;
 public class UpdatesEnple {
 	
 	public static void gordeDepart(ArrayList<Enplegatua> depArrayList){ //Departamentu arrayList sartu bd
-		Enplegatua p = new Enplegatua();
+		Enplegatua p = new Enplegatua(0, null, null, 0.00, null, 0, null);
 		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();

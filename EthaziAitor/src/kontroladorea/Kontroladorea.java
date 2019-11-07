@@ -1,6 +1,6 @@
 package kontroladorea;
 
-import java.awt.event.ActionEvent; 
+import java.awt.event.ActionEvent;  
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.lang.reflect.Array;
@@ -12,13 +12,10 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 import Oier.Kudeaketa;
-import eredua.Departamentua;
-import eredua.Enplegatua;
-import leihoak.DepartamentuakMenu;
-import leihoak.EnplegatuakMenu;
-import leihoak.FitxategiaAukeratuDepartamentuak;
-import leihoak.FitxategiaAukeratuEnplegatuak;
-import leihoak.OngiEtorria;
+
+import eredua.*;
+import leihoak.*;
+import kontroladorea.*;
 
 public class Kontroladorea {
 	
@@ -33,9 +30,9 @@ public class Kontroladorea {
 	
 	
 	private File Fitxategia;
-	public static ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
-	public static ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
-	
+	private ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
+	private ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
+	private ArrayList<String> ardurak = new ArrayList<String>();
 	
 	protected Object[][] datos;
 	//Para que las ventanas aparezcan
@@ -155,6 +152,11 @@ public class Kontroladorea {
 			if (extension.equals("csv")) {
 				
 				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
+				
+				for (int i = 0; i < this.departamentuak.size()-1; i++) {
+					System.out.println(this.departamentuak.get(i).toString());
+				}
+				
 				Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
 				//departamentuakmenu.taulaBete(this.departamentuak);
@@ -163,6 +165,11 @@ public class Kontroladorea {
 			else if (extension.equals("xml")) {
 				
 				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
+				
+				for (int i = 0; i < this.departamentuak.size()-1; i++) {
+					System.out.println(this.departamentuak.get(i).toString());
+				}
+				
 				Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
 				//departamentuakmenu.taulaBete(this.departamentuak);
@@ -172,6 +179,11 @@ public class Kontroladorea {
 			else if (extension.equals("json")) {
 				
 				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak);
+				
+				for (int i = 0; i < this.departamentuak.size()-1; i++) {
+					System.out.println(this.departamentuak.get(i).toString());
+				}
+				
 				Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
 				//Departamentua.DepartamentuakIgo(this.departamentuak);
@@ -188,23 +200,45 @@ public class Kontroladorea {
 			
 			File fitxategia = this.Fitxategia;
 			String nombreArchivo = fitxategia.getName();
-			String [] array = nombreArchivo.split(".");
-			String extension = array[array.length - 1];
+			
+			StringTokenizer st = new StringTokenizer(nombreArchivo, ".");
+			String [] array = new String[2];
+			array[0] = st.nextToken();
+			array[1] = st.nextToken();
+			System.out.println(array[0]);
+			System.out.println(array[1]);
+
+			String extension = array[1];
 			
 			if (extension.equals("csv")) {
 				
 				this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
+				
+				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
+					System.out.println(this.enplegatuak.get(i).toString());
+				}
+				
 				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 			}
 			else if (extension.equals("xml")) {
 				
 				this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
+				
+				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
+					System.out.println(this.enplegatuak.get(i).toString());
+				}
+				
 				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 
 			}
 			else if (extension.equals("json")) {
 				
 				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak);
+				
+				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
+					System.out.println(this.enplegatuak.get(i).toString());
+				}
+				
 				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 				//this.enplegatuak = Enplegatua.JSONDepartamentuakIrakurri();
 				//Enplegatua.EnplegatuakIgo(this.enplegatuak);
@@ -223,10 +257,27 @@ public class Kontroladorea {
 		public void DepartamentuaIgo(Departamentua departamentua) {
 			Departamentua.DepartamentuBatBakarrikIgo(departamentua);
 		}
-		public int kodeaAltuena() {
+		public int DepartamentuKodeaAltuena() {
 			return Departamentua.KodeAltuenaAtera();
 		}
-		public ArrayList<String> ArdurakLista() {
+		public void EnplegatuaIgo(Enplegatua enplegatua) {
+			Enplegatua.EnplegatuBatIgo(enplegatua);
+		}
+		public int EnplegatuKodeaAltuena() {
+			return Enplegatua.KodeAltuenaAtera();
+		}
+//		public ArrayList<String> ArdurakLista() {
+//			ardurak = Enplegatua.ardurakSelect();
+//			return ardurak;
+//		}
+//		public ArrayList<String> ardurakLista(){
+//			ardurak = Enplegatua.ardurakSelect();
+//			
+//			return ardurak;
+//		}
+		public ArrayList<String> ardurakLista(){
+			//ardurak = Enplegatua.ardurakSelect();
+			
 			return Enplegatua.ardurakSelect();
 		}
 		

@@ -36,7 +36,7 @@ public class DepKonexio {
 
 	
 	public static void gordeEnple(ArrayList<Enplegatua> EnpArrayList){ //Enplegatu arrayList satu bd
-		Enplegatua en = new Enplegatua();
+		Enplegatua en = new Enplegatua(0, null, null, 0.00, null, 0, null);
 		Connection conexion = (Connection) konexioa.getConnection();
 		ArrayList<String> arduraArrayList = kontsulaArdurak();
 		try {
