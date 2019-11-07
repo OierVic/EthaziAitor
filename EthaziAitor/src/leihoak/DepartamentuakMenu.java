@@ -29,7 +29,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
  
 public class DepartamentuakMenu extends JFrame {
-	//private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
+	private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
 
 	private Kontroladorea kontroladorea;
 	int lerroAukeratu;
@@ -575,6 +575,48 @@ public class DepartamentuakMenu extends JFrame {
 //
 //        //Se hace visible la ventana
 //        //setVisible(true);
+        /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
+        
+        scroll      = new JScrollPane();
+        cabecera    = new String[] {"Kodea","Izena","Kokapena"};
+        dtm         = new DefaultTableModel(datuakSortu(Departamentua.DepartamentuakSelect()),cabecera);//Funciona bien
+        //dtm         = new DefaultTableModel(datuakSortu(arrayDepartamentuak),cabecera);
+
+        tabla       = new JTable(dtm);
+        scroll.setViewportView(tabla);
+        
+       
+        /**************** EOF TABLA ^^^^^^^^^^^^^^^^^^^^ **/
+      //Mouse action listener idatzi
+      		tabla.addMouseListener(new MouseAdapter() {
+      			public void mouseClicked(MouseEvent e) {
+      				//Informazioa eskuratu
+      				//ikusiBotoiak();
+      				//ikusiDatuakSartu();
+      				//final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+      				int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
+      				tabla.setRowSelectionInterval(row, row);
+      				int row2 = tabla.rowAtPoint(e.getPoint());
+      				kodea = tabla.getValueAt(row2, 0).toString();
+      				izena = tabla.getValueAt(row2, 1).toString();
+      				kokapena = tabla.getValueAt(row2, 2).toString();
+      				System.out.println(kodea+" "+izena+" "+kokapena);
+      				//Betebehar dena	
+      			}
+      		});
+      	//y ahora se coloca el scrollpane...
+            contenedor.add(scroll); //añadir al contenedor
+            sp.putConstraint(SpringLayout.NORTH, scroll, 120,
+                            SpringLayout.NORTH, contenedor);
+            sp.putConstraint(SpringLayout.WEST, scroll,   10,
+                            SpringLayout.WEST, contenedor);
+            sp.putConstraint(SpringLayout.EAST, scroll,  -10,
+                            SpringLayout.EAST, contenedor);
+            sp.putConstraint(SpringLayout.SOUTH, scroll, -50,
+                            SpringLayout.SOUTH, contenedor);
+ 
+        //Se hace visible la ventana
+        //setVisible(true);
 // 
     }
     
@@ -641,45 +683,8 @@ public class DepartamentuakMenu extends JFrame {
     
 
     public void sortuTaulaDepart(ArrayList<Departamentua> dep) {
-        /**************** BOF TABLA  vvvvvvvvvvvvvvvvvvvv **/
-        scroll      = new JScrollPane();
-        cabecera    = new String[] {"Kodea","Izena","Kokapena"};
-        dtm         = new DefaultTableModel(datuakSortu(Departamentua.DepartamentuakSelect()),cabecera);
-        tabla       = new JTable(dtm);
-        scroll.setViewportView(tabla);
-        
-       
-        /**************** EOF TABLA ^^^^^^^^^^^^^^^^^^^^ **/
-      //Mouse action listener idatzi
-      		tabla.addMouseListener(new MouseAdapter() {
-      			public void mouseClicked(MouseEvent e) {
-      				//Informazioa eskuratu
-      				//ikusiBotoiak();
-      				//ikusiDatuakSartu();
-      				//final int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
-      				int row = tabla.rowAtPoint(new Point(e.getX(), e.getY()));
-      				tabla.setRowSelectionInterval(row, row);
-      				int row2 = tabla.rowAtPoint(e.getPoint());
-      				kodea = tabla.getValueAt(row2, 0).toString();
-      				izena = tabla.getValueAt(row2, 1).toString();
-      				kokapena = tabla.getValueAt(row2, 2).toString();
-      				System.out.println(kodea+" "+izena+" "+kokapena);
-      				//Betebehar dena	
-      			}
-      		});
-      	//y ahora se coloca el scrollpane...
-            contenedor.add(scroll); //añadir al contenedor
-            sp.putConstraint(SpringLayout.NORTH, scroll, 120,
-                            SpringLayout.NORTH, contenedor);
-            sp.putConstraint(SpringLayout.WEST, scroll,   10,
-                            SpringLayout.WEST, contenedor);
-            sp.putConstraint(SpringLayout.EAST, scroll,  -10,
-                            SpringLayout.EAST, contenedor);
-            sp.putConstraint(SpringLayout.SOUTH, scroll, -50,
-                            SpringLayout.SOUTH, contenedor);
- 
-        //Se hace visible la ventana
-        //setVisible(true);
+        ///////////////////////////////////////////////////////////////
+    	arrayDepartamentuak = dep;
 	}
 
 
