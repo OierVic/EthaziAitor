@@ -460,6 +460,34 @@ public class Enplegatua {
 		return enplegatuak;
 
 	}
+	
+	public static ArrayList <String> ardurakSelect() {
+
+		ArrayList <String> ardurak = new ArrayList<String>();
+		String ardurakString=null;
+
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT arduraMota FROM ardurak");
+			while (rs.next()) {
+				ardurakString = rs.getString("arduraMota");
+				
+				ardurak.add(ardurakString);
+
+
+			}
+			System.out.println("Konexioa eginda ardurak Select");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return ardurak;
+
+	}
 
 
 

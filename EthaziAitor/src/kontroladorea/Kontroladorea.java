@@ -34,7 +34,7 @@ public class Kontroladorea {
 	
 	private File Fitxategia;
 	public static ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
-	private ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
+	public static ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
 	
 	
 	protected Object[][] datos;
@@ -70,9 +70,10 @@ public class Kontroladorea {
 			
 		}
 		
+		
 		public void depatamentuMenura() {
 			this.departamentuak = Departamentua.DepartamentuakSelect();
-			this.departamentuakmenu.sortuTaula(Departamentua.DepartamentuakSelect());
+			this.departamentuakmenu.sortuTaulaDepart(departamentuak);
 			
 			this.fitxategiaukeratuDepartamentuak.setVisible(false);
 			this.departamentuakmenu.setVisible(true);
@@ -85,6 +86,10 @@ public class Kontroladorea {
 		}
 		
 		public void enplegatuMenura() {
+			
+			this.enplegatuak = Enplegatua.EnplegatuakSelect();
+			this.enplegatuakmenu.sortuTaulaEnple(enplegatuak);
+			
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
 		}
@@ -209,6 +214,9 @@ public class Kontroladorea {
 		}
 		
 		//Kontsultak
+		public ArrayList<Departamentua> DepartamentuakSelect() {
+			return Departamentua.DepartamentuakSelect();
+		}
 		public void DepartamentuaKendu(int kodea) {
 			Departamentua.DepartamentuBatBakarrikEzabatu(kodea);
 		}
@@ -217,6 +225,9 @@ public class Kontroladorea {
 		}
 		public int kodeaAltuena() {
 			return Departamentua.KodeAltuenaAtera();
+		}
+		public ArrayList<String> ArdurakLista() {
+			return Enplegatua.ardurakSelect();
 		}
 		
 		
