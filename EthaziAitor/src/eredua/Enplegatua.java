@@ -455,6 +455,26 @@ public class Enplegatua {
 		}
 
 	}
+	
+	public static void EnplegatuBatBakarrikAldatu(Enplegatua enplegatu) {
+		Connection conexion = (Connection) konexioa.getConnection();
+		try {
+			Statement s = conexion.createStatement();
+			
+				s.executeUpdate("UPDATE `enplegatu` SET `izena` = '"+enplegatu.getIzena() +"' WHERE `zenbaki` = "+enplegatu.getZenbaki());	
+				s.executeUpdate("UPDATE `enplegatu` SET `abizena` = '"+enplegatu.getAbizenak() +"' WHERE `zenbaki` = "+enplegatu.getZenbaki());	
+				s.executeUpdate("UPDATE `enplegatu` SET `soldata` = '"+enplegatu.getSoldata() +"' WHERE `zenbaki` = "+enplegatu.getZenbaki());	
+				s.executeUpdate("UPDATE `enplegatu` SET `departamentu_kodea` = '"+enplegatu.getDepKod() +"' WHERE `zenbaki` = "+enplegatu.getZenbaki());	
+				s.executeUpdate("UPDATE `enplegatu` SET `ardurak_arduraMota` = '"+enplegatu.getArduraMota() +"' WHERE `zenbaki` = "+enplegatu.getZenbaki());
+
+				
+			s.close();
+
+			System.out.println("Konexioa Eginda UPDATE Departamentua kodea "+enplegatu.getZenbaki());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 
 	public static ArrayList <Enplegatua> EnplegatuakSelect() {

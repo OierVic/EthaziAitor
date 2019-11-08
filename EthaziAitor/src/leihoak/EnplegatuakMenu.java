@@ -234,7 +234,7 @@ public class EnplegatuakMenu extends JFrame {
 				}else if (count==1) {
 					//boolean denaOndo=false;
 					
-						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true) {
+						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
 							if (Integer.parseInt(txtZenbakia.getText()) > kontroladorea.EnplegatuKodeaAltuena()) {
 								
 								
@@ -258,6 +258,8 @@ public class EnplegatuakMenu extends JFrame {
 								txtZenbakia.setText("");
 								txtIzena.setText("");
 								txtAbizena.setText("");
+								txtSoldata.setText("");
+								txtDepartamentuKodea.setText("");
 								
 
 				  				
@@ -318,13 +320,20 @@ public class EnplegatuakMenu extends JFrame {
 					btnUpd.setEnabled(true);
 					txtZenbakia.setEditable(false);
 					txtIzena.setEditable(true);
+					txtAbizena.setEditable(true);
 					txtSoldata.setEditable(true);
+					txtDepartamentuKodea.setEditable(true);
 					txtZenbakia.setText(zenbaki);
 					
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
 					
 					count=1;
-				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && zenbaki.equals(txtZenbakia.getText())) {
+				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtDepartamentuKodea.getText()) && zenbaki.equals(txtZenbakia.getText()) && zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
+					
+					
+					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+					Enplegatua.EnplegatuBatBakarrikAldatu(enplegatua);
+					
 					model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
 					model.setValueAt(txtIzena.getText(), i, 1);
 					model.setValueAt(txtAbizena.getText(), i, 2);
@@ -332,8 +341,6 @@ public class EnplegatuakMenu extends JFrame {
 					model.setValueAt(txtDepartamentuKodea.getText(), i, 5);
 					model.setValueAt((String) comboBoxArdurak.getSelectedItem(), i, 6);
 					
-					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
-					//Enplegatua.EnplegatuBatBakarrikAldatu(enplegatua);
 					
                    	txtZenbakia.setEditable(false);
 					txtIzena.setEditable(false);
