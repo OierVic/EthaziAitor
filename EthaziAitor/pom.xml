@@ -60,7 +60,15 @@
 		</dependency>
 		
 		<!-- jasperreports Para Imprimir -->
+			
+		<dependency>
+    		<groupId>net.sf.jasperreports</groupId>
+    		<artifactId>jasperreports</artifactId>
+    		<version>6.0.0</version>
+		</dependency>
 		
+		
+		<!-- Logs (para controlar los errores) -->
   <dependency>
     	<groupId>log4j</groupId>
    	 <artifactId>log4j</artifactId>

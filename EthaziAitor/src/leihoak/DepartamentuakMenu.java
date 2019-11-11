@@ -678,6 +678,17 @@ public class DepartamentuakMenu extends JFrame {
     	return zenbakiaDa;
     }
     
+    public void FitxategikoaJTableraGehituDepartamentuak() {
+    	
+    		for (int i = 0; i < kontroladorea.departamentuakFitxero.size() - 1; i++) {
+    			kontroladorea.DepartamentuaIgo(kontroladorea.departamentuakFitxero.get(i));
+    			DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+    			model.addRow(new Object[]{kontroladorea.departamentuakFitxero.get(i).getKodea(), kontroladorea.departamentuakFitxero.get(i).getIzena(), kontroladorea.departamentuakFitxero.get(i).getKokapena()});
+			}
+			
+    	
+    }
+    
     
     
     

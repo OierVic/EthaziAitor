@@ -275,7 +275,8 @@ public class Enplegatua {
 	}
 
 	
-public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia, ArrayList<Enplegatua> depArrayList){
+public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia){
+		ArrayList<Enplegatua> depArrayList = new ArrayList<Enplegatua>();
 		
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();

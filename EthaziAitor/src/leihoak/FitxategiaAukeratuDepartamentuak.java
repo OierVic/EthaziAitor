@@ -109,7 +109,7 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 				}
 				
-				kontroladorea.depatamentuMenura();
+				kontroladorea.depatamentuMenuraHurrengoBotoia();
 				
 			}
 		});
@@ -121,7 +121,7 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 		btnEzEgin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				kontroladorea.depatamentuMenura();
+				kontroladorea.depatamentuMenuraEzEginBotoia();
 				
 				
 			}

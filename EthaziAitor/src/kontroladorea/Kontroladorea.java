@@ -33,6 +33,10 @@ public class Kontroladorea {
 	private ArrayList<Departamentua> departamentuak = new ArrayList<Departamentua>();
 	private ArrayList<Enplegatua> enplegatuak = new ArrayList<Enplegatua>();
 	private ArrayList<String> ardurak = new ArrayList<String>();
+	// Fitxategiko
+	public static ArrayList<Departamentua> departamentuakFitxero = new ArrayList<Departamentua>();
+	public static ArrayList<Enplegatua> enplegatuakFitxero = new ArrayList<Enplegatua>();
+	
 	
 	protected Object[][] datos;
 	//Para que las ventanas aparezcan
@@ -67,10 +71,9 @@ public class Kontroladorea {
 			
 		}
 		
-		
-		public void depatamentuMenura() {
+		public void depatamentuMenuraEzEginBotoia() {
 			this.departamentuak = Departamentua.DepartamentuakSelect();
-			this.departamentuakmenu.sortuTaulaDepart(departamentuak);
+			this.departamentuakmenu.sortuTaulaDepart(departamentuak);			
 			
 			this.fitxategiaukeratuDepartamentuak.setVisible(false);
 			this.departamentuakmenu.setVisible(true);
@@ -82,10 +85,36 @@ public class Kontroladorea {
 			//departamentuakmenu.taulaBete(this.departamentuak);
 		}
 		
-		public void enplegatuMenura() {
+		public void depatamentuMenuraHurrengoBotoia() {
+			this.departamentuak = Departamentua.DepartamentuakSelect();
+			this.departamentuakmenu.sortuTaulaDepart(departamentuak);
+			departamentuakmenu.FitxategikoaJTableraGehituDepartamentuak();
+			
+			
+			this.fitxategiaukeratuDepartamentuak.setVisible(false);
+			this.departamentuakmenu.setVisible(true);
+			
+			//departamentuakmenu.arrayDepartamentuaArtu(this.departamentuak);
+			
+			
+			//departamentuakmenu.objectBidimensionaToDepartamentuak(this.departamentuak);
+			//departamentuakmenu.taulaBete(this.departamentuak);
+		}
+		
+		public void enplegatuMenuraEzEginBotoia() {
 			
 			this.enplegatuak = Enplegatua.EnplegatuakSelect();
 			this.enplegatuakmenu.sortuTaulaEnple(enplegatuak);
+			
+			this.fitxategiaukeratuEnplegatuak.setVisible(false);
+			this.enplegatuakmenu.setVisible(true);
+		}
+		
+		public void enplegatuMenuraHurrengoBotoia() {
+			
+			this.enplegatuak = Enplegatua.EnplegatuakSelect();
+			this.enplegatuakmenu.sortuTaulaEnple(enplegatuak);
+			enplegatuakmenu.FitxategikoaJTableraGehituEnplegatuak();
 			
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
@@ -152,6 +181,7 @@ public class Kontroladorea {
 			if (extension.equals("csv")) {
 				System.out.println(fitxategia);
 				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
+				this.departamentuakFitxero = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
 					System.out.println(this.departamentuak.get(i).toString());
@@ -165,6 +195,7 @@ public class Kontroladorea {
 			else if (extension.equals("xml")) {
 				System.out.println(fitxategia);
 				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
+				this.departamentuakFitxero = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
 					System.out.println(this.departamentuak.get(i).toString());
@@ -178,7 +209,9 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				System.out.println(fitxategia);
-				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak,fitxategia);
+				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak,fitxategia);
+				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
+				this.departamentuakFitxero = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
 					System.out.println(this.departamentuak.get(i).toString());
@@ -213,6 +246,7 @@ public class Kontroladorea {
 			if (extension.equals("csv")) {
 				System.out.println(fitxategia);
 				this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
+				this.enplegatuakFitxero = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
@@ -223,6 +257,7 @@ public class Kontroladorea {
 			else if (extension.equals("xml")) {
 				System.out.println(fitxategia);
 				this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
+				this.enplegatuakFitxero = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
@@ -233,7 +268,9 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				System.out.println(fitxategia);
-				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia,enplegatuak);
+				//this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia,enplegatuak);
+				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
+				this.enplegatuakFitxero = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());

@@ -6,7 +6,7 @@
             "abizenak": "Perez",
             "soldata": "1212",
             "alta": "2018-10-20",
-            "depKod": "0",
+            "depKod": "1",
             "arduraMota": "idazkariEnplegatua"
             
         }
@@ -18,7 +18,7 @@
             "abizenak": "Gomez",
             "soldata": "2432",
             "alta": "2018-09-02",
-            "depKod": "0",
+            "depKod": "1",
             "arduraMota": "idazkariEnplegatua"
         }
     },
@@ -29,8 +29,19 @@
             "abizenak": "Uri",
             "soldata": "1190",
             "alta": "2019-03-02",
-            "depKod": "0",
+            "depKod": "1",
             "arduraMota": "idazkariEnplegatua"
+        }
+    },
+    {
+        "enplegatu": {
+           "zenbaki": "0",
+            "izena": "No lo va a leer",
+            "abizenak": "",
+            "soldata": "0",
+            "alta": "",
+            "depKod": "0",
+            "arduraMota": ""
         }
     }
 ]

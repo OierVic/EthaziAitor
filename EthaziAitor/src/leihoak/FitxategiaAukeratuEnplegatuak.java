@@ -109,7 +109,7 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 					e2.printStackTrace();
 				}
 				
-				kontroladorea.enplegatuMenura();
+				kontroladorea.enplegatuMenuraHurrengoBotoia();
 				
 			}
 		});
@@ -122,7 +122,7 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				kontroladorea.enplegatuMenura();
+				kontroladorea.enplegatuMenuraEzEginBotoia();
 				
 				
 				

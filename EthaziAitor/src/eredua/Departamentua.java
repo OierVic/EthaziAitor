@@ -226,8 +226,8 @@ public class Departamentua {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(ArrayList<Departamentua> depArrayList,File fitxategia){
-		
+	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(File fitxategia){
+		ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
 		
