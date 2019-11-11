@@ -234,15 +234,15 @@ public class EnplegatuakMenu extends JFrame {
 				}else if (count==1) {
 					//boolean denaOndo=false;
 					
-						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
+						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
 							if (Integer.parseInt(txtZenbakia.getText()) > kontroladorea.EnplegatuKodeaAltuena()) {
 								
 								
-								Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+								Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
 										
 				  				kontroladorea.EnplegatuaIgo(enplegatua);
 								DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(),Integer.parseInt(txtSoldata.getText()),getDia(),Integer.parseInt(txtDepartamentuKodea.getText()) ,(String) comboBoxArdurak.getSelectedItem()});
+				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(),Double.parseDouble(txtSoldata.getText()),getDia(),Integer.parseInt(txtDepartamentuKodea.getText()) ,(String) comboBoxArdurak.getSelectedItem()});
 				  				count=0;
 				  				
 				  				txtZenbakia.setEditable(false);
@@ -328,10 +328,10 @@ public class EnplegatuakMenu extends JFrame {
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
 					
 					count=1;
-				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtDepartamentuKodea.getText()) && zenbaki.equals(txtZenbakia.getText()) && zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && zenbakiaDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
+				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtDepartamentuKodea.getText()) && zenbaki.equals(txtZenbakia.getText()) && zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
 					
 					
-					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), Integer.parseInt(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
 					Enplegatua.EnplegatuBatBakarrikAldatu(enplegatua);
 					
 					model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
@@ -806,6 +806,17 @@ public class EnplegatuakMenu extends JFrame {
 			zenbakiaDa=false;
 		}
     	return zenbakiaDa;
+    }
+    
+    public boolean doubleDa(String Katea) {
+    	boolean doubleDa=false;
+    	try {
+    		Double.parseDouble(Katea);
+    		doubleDa=true;
+		} catch (Exception e) {
+			doubleDa=false;
+		}
+    	return doubleDa;
     }
     
     
