@@ -1,7 +1,7 @@
 [
     {
         "enplegatu": {
-            "zenbaki": "3",
+            "zenbaki": "30",
             "izena": "Diego",
             "abizenak": "Perez",
             "soldata": "1212",
@@ -13,7 +13,7 @@
     },
     {
         "enplegatu": {
-           "zenbaki": "4",
+           "zenbaki": "40",
             "izena": "Julen",
             "abizenak": "Gomez",
             "soldata": "2432",
@@ -24,7 +24,7 @@
     },
     {
         "enplegatu": {
-             "zenbaki": "5",
+             "zenbaki": "50",
             "izena": "Mario",
             "abizenak": "Uri",
             "soldata": "1190",

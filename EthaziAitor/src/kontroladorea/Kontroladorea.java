@@ -150,7 +150,7 @@ public class Kontroladorea {
 			String extension = array[1];
 			
 			if (extension.equals("csv")) {
-				
+				System.out.println(fitxategia);
 				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
@@ -163,7 +163,7 @@ public class Kontroladorea {
 
 			}
 			else if (extension.equals("xml")) {
-				
+				System.out.println(fitxategia);
 				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
@@ -177,8 +177,8 @@ public class Kontroladorea {
 
 			}
 			else if (extension.equals("json")) {
-				
-				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak);
+				System.out.println(fitxategia);
+				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak,fitxategia);
 				
 				for (int i = 0; i < this.departamentuak.size()-1; i++) {
 					System.out.println(this.departamentuak.get(i).toString());
@@ -211,7 +211,7 @@ public class Kontroladorea {
 			String extension = array[1];
 			
 			if (extension.equals("csv")) {
-				
+				System.out.println(fitxategia);
 				this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
@@ -221,7 +221,7 @@ public class Kontroladorea {
 				Enplegatua.EnplegatuakIgo(this.enplegatuak);
 			}
 			else if (extension.equals("xml")) {
-				
+				System.out.println(fitxategia);
 				this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
@@ -232,8 +232,8 @@ public class Kontroladorea {
 
 			}
 			else if (extension.equals("json")) {
-				
-				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak);
+				System.out.println(fitxategia);
+				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak,fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());

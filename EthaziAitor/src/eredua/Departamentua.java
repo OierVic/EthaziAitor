@@ -226,12 +226,12 @@ public class Departamentua {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(ArrayList<Departamentua> depArrayList){
+	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(ArrayList<Departamentua> depArrayList,File fitxategia){
 		
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
 		
-		try (FileReader reader = new FileReader("C:\\Users\\admin1\\git\\EthaziAitor2\\EthaziAitor\\src\\Departamentuak.json"))
+		try (FileReader reader = new FileReader(fitxategia.getAbsolutePath()))
 		{
 			//Read JSON file
             Object obj = jsonParser.parse(reader);
