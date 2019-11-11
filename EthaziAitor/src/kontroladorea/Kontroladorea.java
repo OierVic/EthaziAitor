@@ -233,7 +233,7 @@ public class Kontroladorea {
 			}
 			else if (extension.equals("json")) {
 				System.out.println(fitxategia);
-				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(enplegatuak,fitxategia);
+				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia,enplegatuak);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
