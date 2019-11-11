@@ -35,6 +35,9 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import com.jayway.jsonpath.JsonPath;
+
+import Diego.prueba;
+
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.JsonObject;
@@ -44,6 +47,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -58,6 +63,7 @@ public class Departamentua {
 	private int Kodea;
 	private String Izena;
 	private String Kokapena;
+	final static Logger logger = Logger.getLogger(prueba.class);  
 
 	public Departamentua(int kodea, String izena, String kokapena) {
 		this.Kodea = kodea;
@@ -262,7 +268,7 @@ public class Departamentua {
             e.printStackTrace();
         }
 			
-		
+		  if(logger.isDebugEnabled()) logger.debug(("Departamentu fitxategia base datura igota..."));
 		return depArrayList;
 	}
 

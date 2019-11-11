@@ -1,15 +1,29 @@
 package kontroladorea;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+import Diego.prueba;
 import Oier.Kudeaketa; 
 import eredua.*;
 import leihoak.*;
 import kontroladorea.*;
 
 public class Nagusia {
-
+	final static Logger logger = Logger.getLogger(prueba.class);  
 	public static void main(String[] args) {
 		
-		konexioa konexioa = new konexioa("ethazi");
+		PropertyConfigurator.configure("C:\\Users\\admin1\\git\\EthaziAitor2\\EthaziAitor\\src\\log4j.properties");   
+		  if(logger.isInfoEnabled()) logger.info("Aplikazioa abiarazi da...");  
+		
+		  
+			 konexioa konexioa = new konexioa("ethazi");  
+			 if(logger.isDebugEnabled()) logger.debug(("Datu basearekin konexioa egunda..."));  
+	
+			 
+			    
+		
+		
 		
 		//Ventanas
 		Kontroladorea kontroladorea = new Kontroladorea();
