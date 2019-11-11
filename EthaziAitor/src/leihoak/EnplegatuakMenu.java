@@ -15,6 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.log4j.Logger;
+
+import Diego.prueba;
 import eredua.*;
 import leihoak.*;
 import kontroladorea.*;
@@ -40,6 +43,7 @@ public class EnplegatuakMenu extends JFrame {
 	
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
+	final static Logger logger = Logger.getLogger(prueba.class); 
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
@@ -278,7 +282,7 @@ public class EnplegatuakMenu extends JFrame {
 					
 					
 				}
-				
+				if(logger.isDebugEnabled()) logger.debug(("Enplegatua gehituta...")); 
 			}
 		});
         btnAdd.setEnabled(true);

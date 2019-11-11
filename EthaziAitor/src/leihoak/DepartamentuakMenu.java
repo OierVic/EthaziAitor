@@ -14,6 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.log4j.Logger;
+
+import Diego.prueba;
 import eredua.Departamentua;
 import kontroladorea.Kontroladorea;
 
@@ -34,6 +37,8 @@ public class DepartamentuakMenu extends JFrame {
 	
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
+	
+	final static Logger logger = Logger.getLogger(prueba.class); 
 	
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
@@ -256,7 +261,7 @@ public class DepartamentuakMenu extends JFrame {
 					
 					
 				}
-				
+				if(logger.isDebugEnabled()) logger.debug(("Departamentua gehituta..."));  
 			}
 		});
         btnAdd.setEnabled(true);
