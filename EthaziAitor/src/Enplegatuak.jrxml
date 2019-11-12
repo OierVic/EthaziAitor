@@ -51,7 +51,9 @@
 		<band height="136" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="290" y="0" width="320" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Snap ITC" size="40"/>
+				</textElement>
 				<text><![CDATA[Enplegatuak]]></text>
 			</staticText>
 			<image>

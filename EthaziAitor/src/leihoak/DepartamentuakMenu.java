@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 import Diego.prueba;
 import eredua.Departamentua;
 import kontroladorea.Kontroladorea;
+import kontroladorea.Nagusia;
  
 public class DepartamentuakMenu extends JFrame {
 	private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
@@ -32,7 +33,7 @@ public class DepartamentuakMenu extends JFrame {
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
 	
-	final static Logger logger = Logger.getLogger(prueba.class); 
+	//final static Logger logger = Logger.getLogger(prueba.class); 
 	
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
@@ -238,10 +239,11 @@ public class DepartamentuakMenu extends JFrame {
 								txtIzena.setText("");
 								txtKokapena.setText("");
 								
-
+								Nagusia.logger.info((departamentua.getKodea()+" departamentua ondo gehitu da"));  
 				  				
 							}else {
 								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.DepartamentuKodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
+								Nagusia.logger.info(("Sartutako kode zenbakia "+kontroladorea.DepartamentuKodeaAltuena()+" baino txikiagoa sartu du(handiagoa izan behar du."));  
 							}
 							
 						}else {
@@ -255,7 +257,7 @@ public class DepartamentuakMenu extends JFrame {
 					
 					
 				}
-				if(logger.isDebugEnabled()) logger.debug(("Departamentua gehituta..."));  
+				
 			}
 		});
         btnAdd.setEnabled(true);
@@ -271,9 +273,13 @@ public class DepartamentuakMenu extends JFrame {
 					//kontrol.departamentuBatEzabatu(Integer.parseInt(kodea));
 					((DefaultTableModel)tabla.getModel()).removeRow(tabla.getSelectedRow());
 					kontroladorea.DepartamentuaKendu(Integer.parseInt(kodea));
-
+					
+					Nagusia.logger.info((kodea+" departamentua ondo ezabatu da"));  
+					
 				}else if (tabla.getSelectedRow()==-1) {
 					JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Errorea. Ez duzu errekadarik aukeratu eta ezin izan da datu basetik kendu."));  
+
 				} 
 				
 				
@@ -303,7 +309,7 @@ public class DepartamentuakMenu extends JFrame {
 					txtKodea.setText(kodea);
 					
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
-					
+
 					count=1;
 				}else if(count == 1 && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtKodea.getText()) && kodea.equals(txtKodea.getText())) {
 					model.setValueAt(Integer.parseInt(txtKodea.getText()), i, 0);
@@ -324,6 +330,8 @@ public class DepartamentuakMenu extends JFrame {
 					txtKodea.setText("");
 					txtIzena.setText("");
 					txtKokapena.setText("");
+					
+					Nagusia.logger.info(("Departamentua aldatuta. Kodea: "+departamentua.getKodea()));  
                    
                    count=0;
                 }else{
@@ -358,6 +366,8 @@ public class DepartamentuakMenu extends JFrame {
 				
 				dispose();
 				kontroladorea.fitxategiakaukeratuDepartLeihoa();
+				
+
 				
 			}
 		});

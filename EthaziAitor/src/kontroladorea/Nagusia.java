@@ -12,15 +12,15 @@ import leihoak.FitxategiaAukeratuEnplegatuak;
 import leihoak.OngiEtorria;
 
 public class Nagusia {
-	final static Logger logger = Logger.getLogger(prueba.class);  
+	public final static Logger logger = Logger.getLogger(Nagusia.class);  
 	public static void main(String[] args) {
 		
 		PropertyConfigurator.configure(".\\src\\log4j.properties");   
-		  if(logger.isInfoEnabled()) logger.info("Aplikazioa abiarazi da...");  
+		logger.info("Aplikazioa abiarazi da...");  
 		
 		  
-			 konexioa konexioa = new konexioa("ethazi");  
-			 if(logger.isDebugEnabled()) logger.debug(("Datu basearekin konexioa egunda..."));  
+		konexioa konexioa = new konexioa("ethazi");  
+		logger.info(("Datu basearekin konexioa eginda..."));  
 	
 			 
 			    

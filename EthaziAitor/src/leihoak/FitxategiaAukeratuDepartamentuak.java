@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kontroladorea.Kontroladorea;
+import kontroladorea.Nagusia;
 
 public class FitxategiaAukeratuDepartamentuak extends JFrame {
 	
@@ -100,8 +101,10 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 				try {
 					kontroladorea.fitxategiaIgoDepartamentua(archivo);
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));  
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));  
 				}
 				
 				kontroladorea.depatamentuMenuraHurrengoBotoia();

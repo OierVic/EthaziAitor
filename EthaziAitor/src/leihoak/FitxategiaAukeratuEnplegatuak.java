@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import kontroladorea.Kontroladorea;
+import kontroladorea.Nagusia;
 
 public class FitxategiaAukeratuEnplegatuak extends JFrame {
 	
@@ -100,8 +101,10 @@ public class FitxategiaAukeratuEnplegatuak extends JFrame {
 				try {
 					kontroladorea.fitxategiaIgoEnplegatuak();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));  
 				} catch (Exception e2) {
 					e2.printStackTrace();
+					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));  
 				}
 				
 				kontroladorea.enplegatuMenuraHurrengoBotoia();

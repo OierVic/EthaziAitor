@@ -31,6 +31,7 @@ import Diego.prueba;
 import eredua.Departamentua;
 import eredua.Enplegatua;
 import kontroladorea.Kontroladorea;
+import kontroladorea.Nagusia;
  
 public class EnplegatuakMenu extends JFrame {
 	//private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
@@ -38,7 +39,7 @@ public class EnplegatuakMenu extends JFrame {
 	
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
-	final static Logger logger = Logger.getLogger(prueba.class); 
+
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
@@ -260,14 +261,15 @@ public class EnplegatuakMenu extends JFrame {
 								txtSoldata.setText("");
 								txtDepartamentuKodea.setText("");
 								
-
+								Nagusia.logger.info((enplegatua.getZenbaki()+"Enplegatua ondo igo da")); 
 				  				
 							}else {
 								JOptionPane.showMessageDialog(null, "Sartutako kode zenbakia "+kontroladorea.EnplegatuKodeaAltuena()+" baino altuagoa izan behar du", "ERROR!", JOptionPane.WARNING_MESSAGE);
+								Nagusia.logger.info(("Sartutako kode zenbakia "+kontroladorea.EnplegatuKodeaAltuena()+" baino txikiagoa izan behar da (handiago izan behar du)")); 
+								
 							}
 							
 						}else {
-
 							JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 						}
 						
@@ -277,7 +279,7 @@ public class EnplegatuakMenu extends JFrame {
 					
 					
 				}
-				if(logger.isDebugEnabled()) logger.debug(("Enplegatua gehituta...")); 
+				
 			}
 		});
         btnAdd.setEnabled(true);
@@ -292,7 +294,9 @@ public class EnplegatuakMenu extends JFrame {
 				if (tabla.getSelectedRow()!=-1) {
 					((DefaultTableModel)tabla.getModel()).removeRow(tabla.getSelectedRow());
 					kontroladorea.EnplegatuEzabatu(Integer.parseInt(zenbaki));
-
+					
+					Nagusia.logger.info((zenbaki+" enplegatua ondo kendu da")); 
+					
 				}else if (tabla.getSelectedRow()==-1) {
 					JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
 				} 

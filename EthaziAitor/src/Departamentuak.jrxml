@@ -34,8 +34,10 @@
 	<title>
 		<band height="137" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="230" y="0" width="380" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement style="Title" x="230" y="0" width="410" height="62" uuid="bc1ce1da-8232-46ea-be55-cec4abb986dd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Stencil" size="40"/>
+				</textElement>
 				<text><![CDATA[Departamentuak]]></text>
 			</staticText>
 			<image>
