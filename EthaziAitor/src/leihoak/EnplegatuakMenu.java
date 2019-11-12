@@ -1,5 +1,6 @@
 package leihoak;
 
+
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.log4j.Logger;
+
+import Diego.prueba;
 import eredua.Departamentua;
 import eredua.Enplegatua;
 import kontroladorea.Kontroladorea;
@@ -34,6 +38,7 @@ public class EnplegatuakMenu extends JFrame {
 	
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
+	final static Logger logger = Logger.getLogger(prueba.class); 
 	int lerroAukeratu;
 	String[] añadir = {null, null, null}; // Cantidad de columnas de la tabla
 	int count=0;
@@ -272,7 +277,7 @@ public class EnplegatuakMenu extends JFrame {
 					
 					
 				}
-				
+				if(logger.isDebugEnabled()) logger.debug(("Enplegatua gehituta...")); 
 			}
 		});
         btnAdd.setEnabled(true);
