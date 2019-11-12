@@ -1,25 +1,20 @@
 package leihoak;
 
-import java.awt.SystemColor;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import kontroladorea.Kontroladorea;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.awt.event.ActionEvent;
+import kontroladorea.Kontroladorea;
 
 public class FitxategiaAukeratuEnplegatuak extends JFrame {
 	

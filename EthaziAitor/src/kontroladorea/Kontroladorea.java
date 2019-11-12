@@ -1,21 +1,16 @@
 package kontroladorea;
 
-import java.awt.event.ActionEvent;  
-import java.awt.event.MouseEvent;
 import java.io.File;
-import java.lang.reflect.Array;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
-import Oier.Kudeaketa;
-
-import eredua.*;
-import leihoak.*;
-import kontroladorea.*;
+import eredua.Departamentua;
+import eredua.Enplegatua;
+import leihoak.DepartamentuakMenu;
+import leihoak.EnplegatuakMenu;
+import leihoak.FitxategiaAukeratuDepartamentuak;
+import leihoak.FitxategiaAukeratuEnplegatuak;
+import leihoak.OngiEtorria;
 
 public class Kontroladorea {
 	

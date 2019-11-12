@@ -1,6 +1,6 @@
 package eredua;
 
-import java.io.BufferedReader;   
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,48 +10,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import java.io.FileReader;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonPrimitive;
-import java.util.Map.Entry;
-
-import java.io.FileReader; 
-import java.io.IOException;
-import java.util.Iterator;
-
-import com.jayway.jsonpath.JsonPath;
-import org.json.simple.parser.JSONParser;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import eredua.*;
-import leihoak.*;
-import kontroladorea.*;
 
 public class Departamentua {
 

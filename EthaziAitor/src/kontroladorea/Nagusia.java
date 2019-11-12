@@ -1,9 +1,11 @@
 package kontroladorea;
 
-import Oier.Kudeaketa; 
-import eredua.*;
-import leihoak.*;
-import kontroladorea.*;
+import eredua.konexioa;
+import leihoak.DepartamentuakMenu;
+import leihoak.EnplegatuakMenu;
+import leihoak.FitxategiaAukeratuDepartamentuak;
+import leihoak.FitxategiaAukeratuEnplegatuak;
+import leihoak.OngiEtorria;
 
 public class Nagusia {
 
