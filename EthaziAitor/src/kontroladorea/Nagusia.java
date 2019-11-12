@@ -15,7 +15,7 @@ public class Nagusia {
 	final static Logger logger = Logger.getLogger(prueba.class);  
 	public static void main(String[] args) {
 		
-		PropertyConfigurator.configure("C:\\Users\\admin1\\git\\EthaziAitor2\\EthaziAitor\\src\\log4j.properties");   
+		PropertyConfigurator.configure(".\\src\\log4j.properties");   
 		  if(logger.isInfoEnabled()) logger.info("Aplikazioa abiarazi da...");  
 		
 		  
