@@ -64,8 +64,8 @@ public class Departamentua {
 	private int Kodea;
 	private String Izena;
 	private String Kokapena;
-	final static Logger logger = Logger.getLogger(prueba.class);  
 
+	
 	public Departamentua(int kodea, String izena, String kokapena) {
 		this.Kodea = kodea;
 		this.Izena = izena;
@@ -269,7 +269,7 @@ public class Departamentua {
             e.printStackTrace();
         }
 			
-		  if(logger.isDebugEnabled()) logger.debug(("Departamentu fitxategia base datura igota..."));
+		  //if(logger.isDebugEnabled()) logger.debug(("Departamentu fitxategia base datura igota..."));
 		return depArrayList;
 	}
 
