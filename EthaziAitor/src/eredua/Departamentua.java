@@ -594,6 +594,7 @@ public class Departamentua {
 		Connection conexion = (Connection) konexioa.getConnection();
 		try {
 			Statement s = conexion.createStatement();
+				s.executeUpdate("DELETE FROM enplegatu WHERE departamentu_kodea ="+EzabatuNahidenKodea);	
 				s.executeUpdate("DELETE FROM departamentu WHERE kodea ="+EzabatuNahidenKodea);	
 			
 			s.close();

@@ -1,13 +1,13 @@
 package leihoak;
 
-import java.awt.Font; 
+import java.awt.Font;  
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,21 +15,21 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
-import com.itextpdf.text.log.Level;
+//import com.itextpdf.text.log.Level;
 
 import kontroladorea.Kontroladorea;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JREmptyDataSource;
+//import net.sf.jasperreports.engine.JRDataSource;
+//import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
+//import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
+//import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import net.sf.jasperreports.swing.JRViewer;
+//import net.sf.jasperreports.swing.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class OngiEtorria extends JFrame {
@@ -86,6 +86,7 @@ public class OngiEtorria extends JFrame {
 				} catch (JRException | SQLException e1) {
 					e1.printStackTrace();
 				}
+
 //				JRDataSource dataSource = new JREmptyDataSource(1000);
 //				
 //				Map parameters = new HashMap();
@@ -167,6 +168,7 @@ public class OngiEtorria extends JFrame {
 		DriverManager.getConnection("jdbc:mysql://localhost/ethazi", "root", ""));
 		JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2);
 		jasperViewer2.setVisible(true);
+		
 	}
 
 	

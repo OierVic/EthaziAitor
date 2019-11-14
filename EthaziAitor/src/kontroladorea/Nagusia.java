@@ -14,13 +14,15 @@ import leihoak.OngiEtorria;
 public class Nagusia {
 	public final static Logger logger = Logger.getLogger(Nagusia.class);  
 	public static void main(String[] args) {
-		
-		PropertyConfigurator.configure(".\\src\\log4j.properties");   
-		logger.info("Aplikazioa abiarazi da...");  
-		
+
+			PropertyConfigurator.configure(".\\src\\log4j.properties");   
+			logger.info("Aplikazioa abiarazi da...");  
+			
+
+			konexioa konexioa = new konexioa("ethazi");  
+			logger.info(("Datu basearekin konexioa eginda..."));
+
 		  
-		konexioa konexioa = new konexioa("ethazi");  
-		logger.info(("Datu basearekin konexioa eginda..."));  
 	
 			 
 			    
