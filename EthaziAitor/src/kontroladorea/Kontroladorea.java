@@ -279,6 +279,20 @@ public class Kontroladorea {
 			
 		}
 		
+		public boolean FitxategiaErrepikatuta(ArrayList<Departamentua> arrayDepartamentua, ArrayList<Integer> arrayKopFitxero) {
+			boolean errepikatuta=false;	
+			for (int i = 0; i < arrayDepartamentua.size() - 1; i++) {
+				for (int j = 0; j < arrayKopFitxero.size() - 1; j++) {
+					if (arrayKopFitxero.get(j).equals(arrayDepartamentua.get(i).getKodea())) {
+						errepikatuta=true;
+					}
+				}
+			}
+			
+			
+			return errepikatuta;
+		}
+		
 		//KONTSULTAK
 		
 		//DEPARTAMENTUAK
