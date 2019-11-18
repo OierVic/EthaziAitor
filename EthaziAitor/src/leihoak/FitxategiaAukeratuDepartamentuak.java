@@ -100,14 +100,14 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 				kontroladorea.fitxategiaGorde(archivo);
 				try {
 					kontroladorea.fitxategiaIgoDepartamentua(archivo);
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));  
+					  
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));  
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
+					e2.printStackTrace();
 				}
 				
-				kontroladorea.depatamentuMenuraHurrengoBotoia();
+				//kontroladorea.depatamentuMenuraHurrengoBotoia();
 				
 			}
 		});
