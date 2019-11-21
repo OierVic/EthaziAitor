@@ -1,30 +1,30 @@
 [
     {
         "departamentua": {
-            "kodea": "34",
-            "izena": "Gupta",
-            "kokapena": "howtodoinjava.com"
+            "kodea": "1",
+            "izena": "Lehengo Departamentua",
+            "kokapena": "Madrid"
         }
     },
     {
         "departamentua": {
-            "kodea": "44",
-            "izena": "MMMpofavo",
-            "kokapena": "example.com"
+            "kodea": "2",
+            "izena": "Bigarren Departamentua",
+            "kokapena": "Barcelona"
         }
     },
      {
         "departamentua": {
-            "kodea": "45",
-            "izena": "MMMpofavo",
-            "kokapena": "example.com"
+            "kodea": "3",
+            "izena": "Hirugarren Departamentua",
+            "kokapena": "Bilbo"
         }
     },
     {
         "departamentua": {
-            "kodea": "66",
-            "izena": "Schultz",
-            "kokapena": "example.com"
+            "kodea": "4",
+            "izena": "Laugarren Departamentua",
+            "kokapena": "Bilbo"
         }
     }
 ]

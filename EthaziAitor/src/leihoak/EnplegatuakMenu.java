@@ -824,7 +824,7 @@ public class EnplegatuakMenu extends JFrame {
     
     public void FitxategikoaJTableraGehituEnplegatuak() {
     	
-		for (int i = 0; i < kontroladorea.enplegatuakFitxero.size() - 1; i++) {
+		for (int i = 0; i < kontroladorea.enplegatuakFitxero.size(); i++) {
 			kontroladorea.EnplegatuaIgo(kontroladorea.enplegatuakFitxero.get(i));
 			DefaultTableModel model = (DefaultTableModel) tabla.getModel();
 			model.addRow(new Object[]{kontroladorea.enplegatuakFitxero.get(i).getZenbaki(), kontroladorea.enplegatuakFitxero.get(i).getIzena(), kontroladorea.enplegatuakFitxero.get(i).getAbizenak(), kontroladorea.enplegatuakFitxero.get(i).getSoldata(),kontroladorea.enplegatuakFitxero.get(i).getAlta(),kontroladorea.enplegatuakFitxero.get(i).getDepKod(),kontroladorea.enplegatuakFitxero.get(i).getArduraMota()});

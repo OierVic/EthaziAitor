@@ -102,8 +102,7 @@ public class FitxategiaAukeratuDepartamentuak extends JFrame {
 					kontroladorea.fitxategiaIgoDepartamentua(archivo);
 					  
 				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
+					
 					e2.printStackTrace();
 				}
 				

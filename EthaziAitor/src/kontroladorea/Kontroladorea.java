@@ -178,52 +178,33 @@ public class Kontroladorea {
 			if (extension.equals("csv")) {
 				System.out.println(fitxategia);
 				//ArrayList<Departamentua> arrayDepart = new ArrayList<Departamentua>();
-				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
-				
-				this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
-				this.departamentuakFitxero = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
-				
-				for (int i = 0; i < this.departamentuakFitxero.size(); i++) {
-					numerosDepartFitxero.add(this.departamentuakFitxero.get(i).getKodea());
+//				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
+				try {
+					this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
+					this.departamentuakFitxero = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
-				System.out.println("Longitud numeros array:"+numerosDepartFitxero.size());
-				for (int i = 0; i < numerosDepartFitxero.size(); i++) {
-					System.out.println(numerosDepartFitxero.get(i).toString());
-				}
+				
 				
 				for (int i = 0; i < this.departamentuak.size(); i++) {
 					System.out.println(this.departamentuak.get(i).toString());
 				}
 				
 				
-				
-				
-				
-				for (int i = 0; i < departamentuak.size(); i++) {
-					for (int j = 0; j < numerosDepartFitxero.size(); j++) {
-						
-						if (numerosDepartFitxero.get(j).equals(departamentuak.get(i).getKodea())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
-				
-				if (errepikatuta==false) {
+				try {
 					Departamentua.DepartamentuakIgo(this.departamentuak);
 					depatamentuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-					
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
 				}
+					
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
 				//departamentuakmenu.taulaBete(this.departamentuak);
 
@@ -231,51 +212,35 @@ public class Kontroladorea {
 			else if (extension.equals("xml")) {
 				System.out.println(fitxategia);
 				
-				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
-				
-				this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
-				this.departamentuakFitxero = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
-				
-				for (int i = 0; i < this.departamentuakFitxero.size(); i++) {
-					numerosDepartFitxero.add(this.departamentuakFitxero.get(i).getKodea());
+//				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
+				try {
+					this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
+					this.departamentuakFitxero = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
-				System.out.println("Longitud numeros array:"+numerosDepartFitxero.size());
-				for (int i = 0; i < numerosDepartFitxero.size(); i++) {
-					System.out.println(numerosDepartFitxero.get(i).toString());
-				}
+				
 				
 				for (int i = 0; i < this.departamentuak.size(); i++) {
 					System.out.println(this.departamentuak.get(i).toString());
 				}
 				int kodea=0;
-				ArrayList<Departamentua> arrayConsulta = new ArrayList<Departamentua>();
-				arrayConsulta = Departamentua.DepartamentuakSelect();
-				for (int i = 0; i < arrayConsulta.size(); i++) {
-					for (int j = 0; j < numerosDepartFitxero.size(); j++) {
-						kodea=arrayConsulta.get(i).getKodea();
-						
-						if (Integer.toString(kodea).equals(numerosDepartFitxero.get(j).toString())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
 				
 				
-				if (errepikatuta==false && departamentuakFitxero.get(0).getIzena()!=null) {
+				try {
 					Departamentua.DepartamentuakIgo(this.departamentuak);
 					depatamentuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
+					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
 				}
+					
+				
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
 				//departamentuakmenu.taulaBete(this.departamentuak);
 
@@ -284,50 +249,38 @@ public class Kontroladorea {
 			else if (extension.equals("json")) {
 				System.out.println(fitxategia);
 				
-				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
+//				ArrayList<Integer> numerosDepartFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
 				
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(departamentuak,fitxategia);
-				this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
-				this.departamentuakFitxero = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
-				
-				for (int i = 0; i < this.departamentuakFitxero.size(); i++) {
-					numerosDepartFitxero.add(this.departamentuakFitxero.get(i).getKodea());
+				try {
+					this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
+					this.departamentuakFitxero = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
-				System.out.println("Longitud numeros array:"+numerosDepartFitxero.size());
-				for (int i = 0; i < numerosDepartFitxero.size(); i++) {
-					System.out.println(numerosDepartFitxero.get(i).toString());
-				}
+				
 				
 				for (int i = 0; i < this.departamentuak.size(); i++) {
 					System.out.println(this.departamentuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < departamentuak.size(); i++) {
-					for (int j = 0; j < numerosDepartFitxero.size(); j++) {
-						
-						if (numerosDepartFitxero.get(j).equals(departamentuak.get(i).getKodea())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
 				
 				
-				if (errepikatuta==false) {
+				
+				try {
 					Departamentua.DepartamentuakIgo(this.departamentuak);
 					depatamentuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-					
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
+					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
 				}
+					
+					
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
 				//Departamentua.DepartamentuakIgo(this.departamentuak);
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
@@ -360,157 +313,120 @@ public class Kontroladorea {
 			if (extension.equals("csv")) {
 				System.out.println(fitxategia);
 				
-				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
+//				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
+				try {
+					this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
+					this.enplegatuakFitxero = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
+				}
 				
-				this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
-				this.enplegatuakFitxero = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size(); i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < this.enplegatuakFitxero.size(); i++) {
-					numerosEnplegaFitxero.add(this.enplegatuakFitxero.get(i).getZenbaki());
-				}
-				
-				System.out.println("Longitud numeros array:"+numerosEnplegaFitxero.size());
-				for (int i = 0; i < numerosEnplegaFitxero.size(); i++) {
-					System.out.println(numerosEnplegaFitxero.get(i).toString());
-				}
 				
 				for (int i = 0; i < this.enplegatuak.size(); i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < enplegatuak.size(); i++) {
-					for (int j = 0; j < numerosEnplegaFitxero.size(); j++) {
-						
-						if (numerosEnplegaFitxero.get(j).equals(enplegatuak.get(i).getZenbaki())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
 				
 				
-				if (errepikatuta==false) {
+				try {
 					Enplegatua.EnplegatuakIgo(this.enplegatuak);
 					enplegatuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-					
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
 				}
+					
+				
 			}
 			else if (extension.equals("xml")) {
 				System.out.println(fitxategia);
 				
-				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
+//				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
+				try {
+					this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
+					this.enplegatuakFitxero = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
+				}
 				
-				this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
-				this.enplegatuakFitxero = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < this.enplegatuakFitxero.size(); i++) {
-					numerosEnplegaFitxero.add(this.enplegatuakFitxero.get(i).getZenbaki());
-				}
 				
-				System.out.println("Longitud numeros array:"+numerosEnplegaFitxero.size());
-				for (int i = 0; i < numerosEnplegaFitxero.size(); i++) {
-					System.out.println(numerosEnplegaFitxero.get(i).toString());
-				}
 				
 				for (int i = 0; i < this.enplegatuak.size(); i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < enplegatuak.size(); i++) {
-					for (int j = 0; j < numerosEnplegaFitxero.size(); j++) {
-						
-						if (numerosEnplegaFitxero.get(j).equals(enplegatuak.get(i).getZenbaki())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
 				
 				
-				if (errepikatuta==false) {
+				
+				try {
 					Enplegatua.EnplegatuakIgo(this.enplegatuak);
 					enplegatuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-					
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
+					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
 				}
+					
+			
 
 			}
 			else if (extension.equals("json")) {
 				System.out.println(fitxategia);
 				
-				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
-				boolean errepikatuta=false;
+//				ArrayList<Integer> numerosEnplegaFitxero = new ArrayList<Integer>();
+//				boolean errepikatuta=false;
 				
 				//this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia,enplegatuak);
-				this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
-				this.enplegatuakFitxero = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
+				try {
+					this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
+					this.enplegatuakFitxero = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
+				}
+				
 				
 				for (int i = 0; i < this.enplegatuak.size()-1; i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < this.enplegatuakFitxero.size(); i++) {
-					numerosEnplegaFitxero.add(this.enplegatuakFitxero.get(i).getZenbaki());
-				}
-				
-				System.out.println("Longitud numeros array:"+numerosEnplegaFitxero.size());
-				for (int i = 0; i < numerosEnplegaFitxero.size(); i++) {
-					System.out.println(numerosEnplegaFitxero.get(i).toString());
-				}
+
 				
 				for (int i = 0; i < this.enplegatuak.size(); i++) {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				for (int i = 0; i < enplegatuak.size(); i++) {
-					for (int j = 0; j < numerosEnplegaFitxero.size(); j++) {
-						
-						if (numerosEnplegaFitxero.get(j).equals(enplegatuak.get(i).getZenbaki())) {
-							errepikatuta=true;
-						}
-						
-					}
-				}
 				
 				
-				if (errepikatuta==false) {
+				
+				try {
 					Enplegatua.EnplegatuakIgo(this.enplegatuak);
 					enplegatuMenuraHurrengoBotoia();
 					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
 					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-					
-				}
-				
-				if (errepikatuta==true) {
+				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-
+					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
 				}
+					
+				
 				//this.enplegatuak = Enplegatua.JSONDepartamentuakIrakurri();
 				//Enplegatua.EnplegatuakIgo(this.enplegatuak);
 
