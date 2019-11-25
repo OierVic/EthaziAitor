@@ -102,7 +102,11 @@ public class Kontroladorea {
 			
 			this.enplegatuak = Enplegatua.EnplegatuakSelect();
 			this.enplegatuakmenu.sortuTaulaEnple(enplegatuak);
-			
+			this.enplegatuakmenu.SetMaxDepart();
+			this.enplegatuakmenu.MaxEnple();
+			this.enplegatuakmenu.ComboboxForArdura();
+			this.enplegatuakmenu.ComboboxForDepartamentuZenbakia();
+
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
 		}
@@ -112,7 +116,11 @@ public class Kontroladorea {
 			this.enplegatuak = Enplegatua.EnplegatuakSelect();
 			this.enplegatuakmenu.sortuTaulaEnple(enplegatuak);
 			enplegatuakmenu.FitxategikoaJTableraGehituEnplegatuak();
-			
+			this.enplegatuakmenu.SetMaxDepart();
+			this.enplegatuakmenu.MaxEnple();
+			this.enplegatuakmenu.ComboboxForArdura();
+			this.enplegatuakmenu.ComboboxForDepartamentuZenbakia();
+
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
 		}
@@ -183,8 +191,21 @@ public class Kontroladorea {
 				try {
 					this.departamentuak = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
 					this.departamentuakFitxero = Departamentua.CSVDepartamentuakIrakurri(this.Fitxategia);
+					
+					
+					try {
+						Departamentua.DepartamentuakIgo(this.departamentuak);
+						depatamentuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
+					}
+					
+					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.ERROR_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
@@ -195,15 +216,7 @@ public class Kontroladorea {
 				}
 				
 				
-				try {
-					Departamentua.DepartamentuakIgo(this.departamentuak);
-					depatamentuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-				}
+				
 					
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
 				//departamentuakmenu.taulaBete(this.departamentuak);
@@ -217,8 +230,20 @@ public class Kontroladorea {
 				try {
 					this.departamentuak = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
 					this.departamentuakFitxero = Departamentua.XMLDepartamentuakIrakurri(this.Fitxategia);
+					
+					try {
+						Departamentua.DepartamentuakIgo(this.departamentuak);
+						depatamentuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
+					}
+					
+					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.ERROR_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
@@ -230,15 +255,7 @@ public class Kontroladorea {
 				int kodea=0;
 				
 				
-				try {
-					Departamentua.DepartamentuakIgo(this.departamentuak);
-					depatamentuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
-				}
+				
 					
 				
 				//this.departamentuak = Departamentua.DepartamentuakSelect();
@@ -256,8 +273,20 @@ public class Kontroladorea {
 				try {
 					this.departamentuak = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
 					this.departamentuakFitxero = Departamentua.JSONDepartamentuakIrakurri(this.Fitxategia);
+					
+					try {
+						Departamentua.DepartamentuakIgo(this.departamentuak);
+						depatamentuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
+					}
+					
+					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.ERROR_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
@@ -270,15 +299,7 @@ public class Kontroladorea {
 				
 				
 				
-				try {
-					Departamentua.DepartamentuakIgo(this.departamentuak);
-					depatamentuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
-				}
+				
 					
 					
 				//this.departamentuak = Departamentua.JSONDepartamentuakIrakurri();
@@ -318,8 +339,19 @@ public class Kontroladorea {
 				try {
 					this.enplegatuak = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
 					this.enplegatuakFitxero = Enplegatua.CSVEnplegatuakIrakurri(fitxategia);
+					
+					try {
+						Enplegatua.EnplegatuakIgo(this.enplegatuak);
+						enplegatuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
+					}
+					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.ERROR_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
 				}
 				
@@ -335,15 +367,7 @@ public class Kontroladorea {
 				
 				
 				
-				try {
-					Enplegatua.EnplegatuakIgo(this.enplegatuak);
-					enplegatuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));  
-				}
+				
 					
 				
 			}
@@ -355,6 +379,19 @@ public class Kontroladorea {
 				try {
 					this.enplegatuak = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
 					this.enplegatuakFitxero = Enplegatua.XMLEnplegatuakIrakurri(fitxategia);
+					
+					
+					try {
+						Enplegatua.EnplegatuakIgo(this.enplegatuak);
+						enplegatuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
+					}
+					
+					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
@@ -371,18 +408,6 @@ public class Kontroladorea {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				
-				
-				
-				try {
-					Enplegatua.EnplegatuakIgo(this.enplegatuak);
-					enplegatuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago"));
-				}
 					
 			
 
@@ -397,6 +422,19 @@ public class Kontroladorea {
 				try {
 					this.enplegatuak = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
 					this.enplegatuakFitxero = Enplegatua.JSONEnplegatuakIrakurri(fitxategia);
+					
+					
+					try {
+						Enplegatua.EnplegatuakIgo(this.enplegatuak);
+						enplegatuMenuraHurrengoBotoia();
+						JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
+						Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
+						Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
+					}
+					
+					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, "Sartutako daturen bat txarto dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
 					Nagusia.logger.info(("Fitxategia Gordetzean sartutako daturen bat txarto dago"));
@@ -413,18 +451,6 @@ public class Kontroladorea {
 					System.out.println(this.enplegatuak.get(i).toString());
 				}
 				
-				
-				
-				
-				try {
-					Enplegatua.EnplegatuakIgo(this.enplegatuak);
-					enplegatuMenuraHurrengoBotoia();
-					JOptionPane.showMessageDialog(null, "Fitxategia Gorde da eta datu basera igo da ");
-					Nagusia.logger.info(("Fitxategia Gorde da eta datu basera igo da"));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Ezin izan da igo zeren fitxategikoa errepikatuta dago", "ERROR!", JOptionPane.WARNING_MESSAGE);
-					Nagusia.logger.info(("Ezin izan da igo zeren fitxategikoa errepikatuta dago")); 
-				}
 					
 				
 				//this.enplegatuak = Enplegatua.JSONDepartamentuakIrakurri();

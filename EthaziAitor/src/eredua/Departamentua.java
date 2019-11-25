@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.FileReader;
 import com.google.gson.JsonParser;
@@ -111,7 +113,7 @@ public class Departamentua {
 
 	//Departamentua CSVtik irakurtzeko
 
-	public static ArrayList<Departamentua> CSVDepartamentuakIrakurri (File fitxategiaDepartamentuak){
+	public static ArrayList<Departamentua> CSVDepartamentuakIrakurri (File fitxategiaDepartamentuak) throws IOException{
 
 		//Bariableak
 		ArrayList<Departamentua> arrayDepartamentuakCSV = new ArrayList<Departamentua>();
@@ -125,7 +127,7 @@ public class Departamentua {
 		String line = "";
 		//Se define separador ","
 		String cvsSplitBy = ",";
-		try {
+		//try {
 			br = new BufferedReader(new FileReader(csvFile));
 			//Lehengo linea ez irakurtzeko
 			br.readLine();
@@ -149,19 +151,19 @@ public class Departamentua {
 
 
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (br != null) {
+//				try {
+//					br.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 
 
 		return arrayDepartamentuakCSV;
@@ -173,7 +175,7 @@ public class Departamentua {
 
 	//Departamentua XMLtik irakurtzeko
 
-	public static ArrayList<Departamentua> XMLDepartamentuakIrakurri(File fitxategiaDepartamentuak) {
+	public static ArrayList<Departamentua> XMLDepartamentuakIrakurri(File fitxategiaDepartamentuak) throws ParserConfigurationException, SAXException, IOException {
 
 		//Bariableak
 		ArrayList<Departamentua> arrayDepartamentuaXML = new ArrayList<Departamentua>();
@@ -184,7 +186,7 @@ public class Departamentua {
 		//String xmlFile = ".\\src\\Oharrak.xml";
 		int count = 0;
 
-		try {
+		//try {
 
 			File archivo = new File(fitxategiaDepartamentuak.getAbsolutePath());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -223,9 +225,9 @@ public class Departamentua {
 				//if (nodo.getNodeName().equals("oharra")) break;
 
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		return arrayDepartamentuaXML;
 
@@ -233,13 +235,13 @@ public class Departamentua {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(File fitxategia){
+	public static ArrayList<Departamentua> JSONDepartamentuakIrakurri(File fitxategia) throws IOException, ParseException{
 		ArrayList<Departamentua> depArrayList = new ArrayList<Departamentua>();
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
 		
-		try (FileReader reader = new FileReader(fitxategia.getAbsolutePath()))
-		{
+		//try {
+			FileReader reader = new FileReader(fitxategia.getAbsolutePath());
 			//Read JSON file
             Object obj = jsonParser.parse(reader);
 
@@ -261,13 +263,13 @@ public class Departamentua {
             
           
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 			
 		  //if(logger.isDebugEnabled()) logger.debug(("Departamentu fitxategia base datura igota..."));
 		return depArrayList;
@@ -553,10 +555,10 @@ public class Departamentua {
 
 	}
 
-	public static void DepartamentuakIgo(ArrayList<Departamentua> depArrayList){ //Departamentu arrayList sartu bd
+	public static void DepartamentuakIgo(ArrayList<Departamentua> depArrayList) throws SQLException{ //Departamentu arrayList sartu bd
 		Departamentua p = new Departamentua(0, null, null);
 		Connection conexion = (Connection) konexioa.getConnection();
-		try {
+		//try {
 			Statement s = conexion.createStatement();
 			for(int x=0;x<depArrayList.size();x++) {
 				p = depArrayList.get(x);
@@ -566,9 +568,9 @@ public class Departamentua {
 			s.close();
 
 			System.out.println("Konexioa Eginda Insert Departamentua");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
 
 	}
 	
@@ -620,6 +622,34 @@ public class Departamentua {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+
+	}
+	
+	public static ArrayList <Integer> DepartamentuenZenbakiak() {
+
+		ArrayList <Integer> departamentuZenbaki = new ArrayList<Integer>();
+		int kodea=0;
+
+
+		Connection Conexion = (Connection) konexioa.getConnection();
+		Statement s =null;
+
+		try {
+			s =(Statement) Conexion.createStatement();
+
+			ResultSet rs = ((java.sql.Statement) s).executeQuery("SELECT kodea FROM departamentu");
+			while (rs.next()) {
+				kodea = rs.getInt("kodea");
+
+				departamentuZenbaki.add(kodea);
+
+
+			}
+			System.out.println("Conexioa eginda Departamentuak Select Zenbaki");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return departamentuZenbaki;
 
 	}
 	

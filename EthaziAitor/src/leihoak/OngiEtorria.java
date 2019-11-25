@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.log4j.Logger;
 
+import eredua.konexioa;
+
 //import com.itextpdf.text.log.Level;
 
 import kontroladorea.Kontroladorea;
@@ -81,11 +83,13 @@ public class OngiEtorria extends JFrame {
 //					//hay que poner el log
 //				}
 				
-				try {
+//				try {
+					
 					sortuPdf();
-				} catch (JRException | SQLException e1) {
-					e1.printStackTrace();
-				}
+					
+//				} catch (JRException | SQLException e1) {
+//					JOptionPane.showMessageDialog(null, "Datu basearen taularen bat hutsik dago eta ezin izan da reporta erakutsi", "ERROR!", JOptionPane.WARNING_MESSAGE);
+//				}
 
 //				JRDataSource dataSource = new JREmptyDataSource(1000);
 //				
@@ -134,40 +138,51 @@ public class OngiEtorria extends JFrame {
 
 	}
 	
-	public void sortuPdf() throws JRException, SQLException{
+	public void sortuPdf(){
 		// DEPARTAMENTUA
+		try {
+			JasperPrint jasperPrint = JasperFillManager.fillReport(".\\src\\Departamentuak.jasper", null,konexioa.getConnection());
+			JRPdfExporter exp = new JRPdfExporter();
+			exp.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exp.setExporterOutput(new SimpleOutputStreamExporterOutput("departamentuak.pdf"));
+			SimplePdfExporterConfiguration conf = new SimplePdfExporterConfiguration();
+			exp.setConfiguration(conf);
+			exp.exportReport();
 
-		JasperPrint jasperPrint = JasperFillManager.fillReport(".\\src\\Departamentuak.jasper", null,DriverManager.getConnection("jdbc:mysql://localhost/ethazi", "root", ""));
-		JRPdfExporter exp = new JRPdfExporter();
-		exp.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exp.setExporterOutput(new SimpleOutputStreamExporterOutput("departamentuak.pdf"));
-		SimplePdfExporterConfiguration conf = new SimplePdfExporterConfiguration();
-		exp.setConfiguration(conf);
-		exp.exportReport();
-
-		// se muestra en una ventana aparte para su descarga
-		JasperPrint jasperPrintWindow = JasperFillManager.fillReport(
-		".\\src\\Departamentuak.jasper", null,
-		DriverManager.getConnection("jdbc:mysql://localhost/ethazi", "root", ""));
-		JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow);
-		jasperViewer.setVisible(true);
+			// se muestra en una ventana aparte para su descarga
+			JasperPrint jasperPrintWindow = JasperFillManager.fillReport(".\\src\\Departamentuak.jasper", null,konexioa.getConnection());
+			JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow,false);
+			jasperViewer.setVisible(true);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Datu basean, Departamentu taula hutsik dago eta ezin izan da reporta erakutsi", "ERROR!", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		//ENPLEGATUA
-		
-		JasperPrint jasperPrint2 = JasperFillManager.fillReport(".\\src\\Enplegatuak.jasper", null,DriverManager.getConnection("jdbc:mysql://localhost/ethazi", "root", ""));
-		JRPdfExporter exp2 = new JRPdfExporter();
-		exp2.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exp2.setExporterOutput(new SimpleOutputStreamExporterOutput("enplegatuak.pdf"));
-		SimplePdfExporterConfiguration conf2 = new SimplePdfExporterConfiguration();
-		exp2.setConfiguration(conf2);
-		exp2.exportReport();
+		try {
+			JasperPrint jasperPrint2 = JasperFillManager.fillReport(".\\src\\Enplegatuak.jasper", null,konexioa.getConnection());
+			JRPdfExporter exp2 = new JRPdfExporter();
+			exp2.setExporterInput(new SimpleExporterInput(jasperPrint2));
+			exp2.setExporterOutput(new SimpleOutputStreamExporterOutput("enplegatuak.pdf"));
+			SimplePdfExporterConfiguration conf2 = new SimplePdfExporterConfiguration();
+			exp2.setConfiguration(conf2);
+			exp2.exportReport();
 
-		// se muestra en una ventana aparte para su descarga
-		JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport(
-		".\\src\\Enplegatuak.jasper", null,
-		DriverManager.getConnection("jdbc:mysql://localhost/ethazi", "root", ""));
-		JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2);
-		jasperViewer2.setVisible(true);
+			// se muestra en una ventana aparte para su descarga
+			JasperPrint jasperPrintWindow2 = JasperFillManager.fillReport(".\\src\\Enplegatuak.jasper", null,konexioa.getConnection());
+			JasperViewer jasperViewer2 = new JasperViewer(jasperPrintWindow2,false);
+			jasperViewer2.setVisible(true);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Datu basean, Enplegatu taula hutsik dago eta ezin izan da reporta erakutsi", "ERROR!", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		
 	}
 

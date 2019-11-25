@@ -36,6 +36,7 @@ import kontroladorea.Nagusia;
 public class EnplegatuakMenu extends JFrame {
 	//private ArrayList<Departamentua> arrayDepartamentuak = new ArrayList<Departamentua>();
 	private ArrayList<String> ardurak = new ArrayList<String>();
+	private ArrayList<Integer> DepartamentuZenbakia = new ArrayList<Integer>(); 
 	
 	private Kontroladorea kontroladorea;
 	private Departamentua departamentua;
@@ -78,12 +79,13 @@ public class EnplegatuakMenu extends JFrame {
     protected JTable tabla; //Tabla propiamente dicha
     protected SpringLayout sp;
     protected JTextField txtSoldata;
-    protected JTextField txtDepartamentuKodea;
     protected JLabel lblArdurak;
     protected JLabel lblSoldata = new JLabel("Soldata:");
     protected JLabel lblDepartkodea = new JLabel("Departamentu Kodea:");
     protected JComboBox comboBoxArdurak = new JComboBox();
-    protected JLabel lblMax ;
+    protected JComboBox comboBoxDepartamentuZenbakiak = new JComboBox();
+    protected JLabel lblMax = new JLabel("Max :");
+    protected int MaxEnple ;
 
 
     /**************** MÉTODOS ***************************/
@@ -100,6 +102,8 @@ public class EnplegatuakMenu extends JFrame {
         
         //INDICAR QUE SE QUIERE USAR SPRINGLAYOUT
         sp = new SpringLayout();
+        sp.putConstraint(SpringLayout.WEST, lblMax, 173, SpringLayout.EAST, lblDepartkodea);
+        sp.putConstraint(SpringLayout.NORTH, comboBoxArdurak, 26, SpringLayout.SOUTH, lblDepartkodea);
         contenedor.setLayout(sp);
         
       DateFormat hourformat = new SimpleDateFormat("HH:mm");
@@ -167,11 +171,11 @@ public class EnplegatuakMenu extends JFrame {
 					JOptionPane.showMessageDialog(null, "Izena kate oso bat izan behar du");
 					
 				}
-				if(Character.isUpperCase(c)) {
-					String cad=(""+c).toLowerCase();
-					c=cad.charAt(0);
-					evt.setKeyChar(c);
-				}
+//				if(Character.isUpperCase(c)) {
+//					String cad=(""+c).toLowerCase();
+//					c=cad.charAt(0);
+//					evt.setKeyChar(c);
+//				}
 
 			}
 		});
@@ -196,11 +200,11 @@ public class EnplegatuakMenu extends JFrame {
 					JOptionPane.showMessageDialog(null, "Kokapena kate oso bat izan behar du");
 					
 				}
-				if(Character.isUpperCase(c)) {
-					String cad=(""+c).toLowerCase();
-					c=cad.charAt(0);
-					evt.setKeyChar(c);
-				}
+//				if(Character.isUpperCase(c)) {
+//					String cad=(""+c).toLowerCase();
+//					c=cad.charAt(0);
+//					evt.setKeyChar(c);
+//				}
 
 			}
 		});
@@ -224,7 +228,7 @@ public class EnplegatuakMenu extends JFrame {
 					txtIzena.setEditable(true);
 					txtAbizena.setEditable(true);
 					txtSoldata.setEditable(true);
-					txtDepartamentuKodea.setEditable(true);
+					//txtDepartamentuKodea.setEditable(true);
 					
 					txtZenbakia.setText(Integer.toString((kontroladorea.EnplegatuKodeaAltuena()+1)));
 					
@@ -234,22 +238,22 @@ public class EnplegatuakMenu extends JFrame {
 				}else if (count==1) {
 					//boolean denaOndo=false;
 					
-						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
+						if (zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("")) {
 							if (Integer.parseInt(txtZenbakia.getText()) > kontroladorea.EnplegatuKodeaAltuena()) {
 								
 								
-								Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+								Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt((String) comboBoxDepartamentuZenbakiak.getSelectedItem()), (String) comboBoxArdurak.getSelectedItem());
 										
 				  				kontroladorea.EnplegatuaIgo(enplegatua);
 								DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(),Double.parseDouble(txtSoldata.getText()),getDia(),Integer.parseInt(txtDepartamentuKodea.getText()) ,(String) comboBoxArdurak.getSelectedItem()});
+				  				model.addRow(new Object[]{Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(),Double.parseDouble(txtSoldata.getText()),getDia(),Integer.parseInt((String) comboBoxDepartamentuZenbakiak.getSelectedItem()) ,(String) comboBoxArdurak.getSelectedItem()});
 				  				count=0;
 				  				
 				  				txtZenbakia.setEditable(false);
 								txtIzena.setEditable(false);
 								txtAbizena.setEditable(false);
 								txtSoldata.setEditable(false);
-								txtDepartamentuKodea.setEditable(false);
+								
 								
 								btnAdd.setEnabled(true);
 								btnDel.setEnabled(true);
@@ -259,7 +263,7 @@ public class EnplegatuakMenu extends JFrame {
 								txtIzena.setText("");
 								txtAbizena.setText("");
 								txtSoldata.setText("");
-								txtDepartamentuKodea.setText("");
+								//txtDepartamentuKodea.setText("");
 								
 								Nagusia.logger.info((enplegatua.getZenbaki()+"Enplegatua ondo igo da")); 
 				  				
@@ -325,23 +329,23 @@ public class EnplegatuakMenu extends JFrame {
 					txtIzena.setEditable(true);
 					txtAbizena.setEditable(true);
 					txtSoldata.setEditable(true);
-					txtDepartamentuKodea.setEditable(true);
+					//txtDepartamentuKodea.setEditable(true);
 					txtZenbakia.setText(zenbaki);
 					
 					JOptionPane.showMessageDialog(null, "Sartu gehitu nahi dituzun balioak ");
 					
 					count=1;
-				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && Departamentua.KodeAltuenaAtera()>=Integer.parseInt(txtDepartamentuKodea.getText()) && zenbaki.equals(txtZenbakia.getText()) && zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && zenbakiaDa(txtDepartamentuKodea.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("") && !txtDepartamentuKodea.getText().equals("")) {
+				}else if(count == 1 && Enplegatua.KodeAltuenaAtera()>=Integer.parseInt(txtZenbakia.getText()) && Departamentua.KodeAltuenaAtera()>=Integer.parseInt((String) comboBoxDepartamentuZenbakiak.getSelectedItem()) && zenbaki.equals(txtZenbakia.getText()) && zenbakiaDa(txtZenbakia.getText())==true && zenbakiaDa(txtIzena.getText())==false && zenbakiaDa(txtAbizena.getText())==false && doubleDa(txtSoldata.getText())==true && !txtIzena.getText().equals("") && !txtAbizena.getText().equals("") && !txtSoldata.getText().equals("")) {
 					
 					
-					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt(txtDepartamentuKodea.getText()), (String) comboBoxArdurak.getSelectedItem());
+					Enplegatua enplegatua = new Enplegatua(Integer.parseInt(txtZenbakia.getText()), txtIzena.getText(), txtAbizena.getText(), /* Integer.parseInt(txtSoldata.getText()) */ Double.parseDouble(txtSoldata.getText()), getDia(), Integer.parseInt((String) comboBoxDepartamentuZenbakiak.getSelectedItem()), (String) comboBoxArdurak.getSelectedItem());
 					Enplegatua.EnplegatuBatBakarrikAldatu(enplegatua);
 					
 					model.setValueAt(Integer.parseInt(txtZenbakia.getText()), i, 0);
 					model.setValueAt(txtIzena.getText(), i, 1);
 					model.setValueAt(txtAbizena.getText(), i, 2);
 					model.setValueAt(txtSoldata.getText(), i, 3);
-					model.setValueAt(txtDepartamentuKodea.getText(), i, 5);
+					model.setValueAt(Integer.parseInt((String) comboBoxDepartamentuZenbakiak.getSelectedItem()), i, 5);
 					model.setValueAt((String) comboBoxArdurak.getSelectedItem(), i, 6);
 					
 					
@@ -349,7 +353,7 @@ public class EnplegatuakMenu extends JFrame {
 					txtIzena.setEditable(false);
 					txtAbizena.setEditable(false);
 					txtSoldata.setEditable(false);
-					txtDepartamentuKodea.setEditable(false);
+					//txtDepartamentuKodea.setEditable(false);
 					
 					btnAdd.setEnabled(true);
 					btnDel.setEnabled(true);
@@ -359,7 +363,7 @@ public class EnplegatuakMenu extends JFrame {
 					txtIzena.setText("");
 					txtAbizena.setText("");
 					txtSoldata.setText("");
-					txtDepartamentuKodea.setText("");
+					//txtDepartamentuKodea.setText("");
                    
                    count=0;
                 }else{
@@ -388,7 +392,7 @@ public class EnplegatuakMenu extends JFrame {
 				txtIzena.setEditable(false);
 				txtAbizena.setEditable(false);
 				txtSoldata.setEditable(false);
-				txtDepartamentuKodea.setEditable(false);
+				//txtDepartamentuKodea.setEditable(false);
 				
 				
 				btnAdd.setEnabled(true);
@@ -430,26 +434,6 @@ public class EnplegatuakMenu extends JFrame {
 				}
 			}
 		});
-        
-        txtDepartamentuKodea = new JTextField();
-        sp.putConstraint(SpringLayout.NORTH, comboBoxArdurak, 23, SpringLayout.SOUTH, txtDepartamentuKodea);
-        sp.putConstraint(SpringLayout.WEST, txtDepartamentuKodea, 18, SpringLayout.EAST, lblDepartkodea);
-        sp.putConstraint(SpringLayout.NORTH, txtDepartamentuKodea, -3, SpringLayout.NORTH, lblIzena);
-        sp.putConstraint(SpringLayout.EAST, txtDepartamentuKodea, 0, SpringLayout.EAST, comboBoxArdurak);
-        contenedor.add(txtDepartamentuKodea);
-        txtDepartamentuKodea.setColumns(10);
-        txtDepartamentuKodea.setEditable(false);
-        txtDepartamentuKodea.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(java.awt.event.KeyEvent evt) {
-				char validar =evt.getKeyChar();
-				if(Character.isLetter(validar)) {
-					getToolkit().beep();
-					evt.consume();	
-					JOptionPane.showMessageDialog(null, "Departamentu Kodea zenbaki oso bat izan behar du");
-				}
-			}
-		});
         sp.putConstraint(SpringLayout.NORTH, lblDepartkodea, 0, SpringLayout.NORTH, lblIzena);
         sp.putConstraint(SpringLayout.WEST, lblDepartkodea, 34, SpringLayout.EAST, txtIzena);
         contenedor.add(lblDepartkodea);
@@ -462,12 +446,8 @@ public class EnplegatuakMenu extends JFrame {
         sp.putConstraint(SpringLayout.EAST, comboBoxArdurak, 90, SpringLayout.EAST, txtSoldata);
         contenedor.add(comboBoxArdurak);
         txtSoldata.setEditable(false);
-        txtDepartamentuKodea.setEditable(false);
-        ardurak = Enplegatua.ardurakSelect();
-        //ardurak = kontroladorea.ardurakLista();
-        for (int i = 0; i < ardurak.size(); i++) {
-			comboBoxArdurak.addItem(ardurak.get(i).toString());
-		}
+        
+        
         
         
         
@@ -514,11 +494,16 @@ public class EnplegatuakMenu extends JFrame {
                             SpringLayout.EAST, contenedor);
             sp.putConstraint(SpringLayout.SOUTH, scroll, -50,
                             SpringLayout.SOUTH, contenedor);
-            lblMax = new JLabel("Max :");
-            sp.putConstraint(SpringLayout.WEST, lblMax, 6, SpringLayout.EAST, txtDepartamentuKodea);
             sp.putConstraint(SpringLayout.SOUTH, lblMax, 0, SpringLayout.SOUTH, lblIzena);
             contenedor.add(lblMax);
             lblMax.setText("Max : "+Departamentua.KodeAltuenaAtera());
+            
+            sp.putConstraint(SpringLayout.NORTH, comboBoxDepartamentuZenbakiak, 20, SpringLayout.SOUTH, txtSoldata);
+            sp.putConstraint(SpringLayout.WEST, comboBoxDepartamentuZenbakiak, 6, SpringLayout.EAST, lblDepartkodea);
+            sp.putConstraint(SpringLayout.SOUTH, comboBoxDepartamentuZenbakiak, 0, SpringLayout.SOUTH, lblIzena);
+            sp.putConstraint(SpringLayout.EAST, comboBoxDepartamentuZenbakiak, 0, SpringLayout.EAST, comboBoxArdurak);
+            contenedor.add(comboBoxDepartamentuZenbakiak);
+            
             
  
         //Se hace visible la ventana
@@ -833,7 +818,34 @@ public class EnplegatuakMenu extends JFrame {
 	
 }
     
+    public void SetMaxDepart() {
+    	
+        lblMax.setText("Max : "+Departamentua.KodeAltuenaAtera());
+
+    }
     
+    public void MaxEnple() {
+    	MaxEnple = Enplegatua.KodeAltuenaAtera();
+    }
+    
+    public void ComboboxForArdura() {
+    	ardurak = Enplegatua.ardurakSelect();
+        //ardurak = kontroladorea.ardurakLista();
+    	
+    	comboBoxArdurak.removeAllItems();
+        for (int i = 0; i < ardurak.size(); i++) {
+			comboBoxArdurak.addItem(ardurak.get(i).toString());
+		}
+    }
+    public void ComboboxForDepartamentuZenbakia() {
+    	DepartamentuZenbakia = Departamentua.DepartamentuenZenbakiak();
+        //ardurak = kontroladorea.ardurakLista();
+    	
+    	comboBoxDepartamentuZenbakiak.removeAllItems();
+        for (int i = 0; i < DepartamentuZenbakia.size(); i++) {
+			comboBoxDepartamentuZenbakiak.addItem(DepartamentuZenbakia.get(i).toString());
+		}
+    }
     
 
     public void sortuTaulaEnple(ArrayList<Enplegatua> enple) {

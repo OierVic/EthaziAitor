@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class Enplegatua {
 
@@ -121,7 +123,7 @@ public class Enplegatua {
 
 	//Enplegatua CSVtik irakurtzeko
 
-	public static ArrayList<Enplegatua> CSVEnplegatuakIrakurri (File fitxategiaEnplegatuak){
+	public static ArrayList<Enplegatua> CSVEnplegatuakIrakurri (File fitxategiaEnplegatuak) throws IOException{
 
 		//Bariableak
 		ArrayList<Enplegatua> arrayEnplegatuakCSV = new ArrayList<Enplegatua>();
@@ -141,7 +143,9 @@ public class Enplegatua {
 		String line = "";
 		//Se define separador ","
 		String cvsSplitBy = ",";
-		try {
+		
+		//try {
+		
 			br = new BufferedReader(new FileReader(csvFile));
 			//Lehengo linea ez irakurtzeko
 			br.readLine();
@@ -172,19 +176,19 @@ public class Enplegatua {
 
 
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (br != null) {
+//				try {
+//					br.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 
 
 		return arrayEnplegatuakCSV;
@@ -195,7 +199,7 @@ public class Enplegatua {
 	//Enplegatua XMLtik irakurtzeko
 
 
-	public static ArrayList<Enplegatua> XMLEnplegatuakIrakurri(File fitxategiaEnplegatuak) {
+	public static ArrayList<Enplegatua> XMLEnplegatuakIrakurri(File fitxategiaEnplegatuak) throws ParserConfigurationException, SAXException, IOException {
 
 		//Bariableak
 		ArrayList<Enplegatua> arrayEnplegatuaXML = new ArrayList<Enplegatua>();
@@ -213,7 +217,7 @@ public class Enplegatua {
 		//String xmlFile = ".\\src\\Oharrak.xml";
 		int count = 0;
 
-		try {
+		//try {
 
 			File archivo = new File(fitxategiaEnplegatuak.getAbsolutePath());
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -259,9 +263,9 @@ public class Enplegatua {
 				//if (nodo.getNodeName().equals("oharra")) break;
 
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		return arrayEnplegatuaXML;
 
@@ -269,14 +273,15 @@ public class Enplegatua {
 	}
 
 	
-public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia){
+public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia) throws IOException, ParseException{
 		ArrayList<Enplegatua> depArrayList = new ArrayList<Enplegatua>();
 		
 		//JSON parser object to parse read file
 		JSONParser jsonParser = new JSONParser();
 		
-		try (FileReader reader = new FileReader(fitxategia))
-		{
+		//try {
+		
+			FileReader reader = new FileReader(fitxategia);
 			//Read JSON file
             Object obj = jsonParser.parse(reader);
 
@@ -298,13 +303,13 @@ public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia){
             
           
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 			
 		
 		return depArrayList;
