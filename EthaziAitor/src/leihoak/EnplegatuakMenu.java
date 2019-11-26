@@ -320,6 +320,8 @@ public class EnplegatuakMenu extends JFrame {
   			public void actionPerformed(ActionEvent arg0) {
   				DefaultTableModel model = (DefaultTableModel) tabla.getModel();
   				int i = tabla.getSelectedRow();
+  				if (tabla.getSelectedRow()!=-1) {
+  				
   				if (count==0) {
 					
   					btnAdd.setEnabled(false);
@@ -369,7 +371,10 @@ public class EnplegatuakMenu extends JFrame {
                 }else{
 					JOptionPane.showMessageDialog(null, "Ezin izan da aldatu. Mesedez datuak berraztetu ");
                 }
-  			}
+  			}else {
+				JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
+			}
+  		}
   		});
         btnUpd.setEnabled(true);
         contenedor.add(btnUpd);
@@ -432,6 +437,14 @@ public class EnplegatuakMenu extends JFrame {
 					evt.consume();	
 					JOptionPane.showMessageDialog(null, "Soldata zenbaki oso bat izan behar du");
 				}
+				if(txtSoldata.getText().length()>=9) {
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Soldata bakarrik 9 digitoraino izan daiteke");
+				}
+				if(validar == ',') {
+					evt.consume();	
+					JOptionPane.showMessageDialog(null, "Soldataren koma punto (.) batekin idatzi mesedez");
+				}
 			}
 		});
         sp.putConstraint(SpringLayout.NORTH, lblDepartkodea, 0, SpringLayout.NORTH, lblIzena);
@@ -479,6 +492,7 @@ public class EnplegatuakMenu extends JFrame {
       				alta = tabla.getValueAt(row2, 4).toString();
       				departamentu_kodea = tabla.getValueAt(row2, 5).toString();
       				ardurak_arduraMota = tabla.getValueAt(row2, 6).toString();
+      				txtZenbakia.setText(zenbaki.toString());
       				
       				System.out.println(zenbaki+" "+izena+" "+abizena+" "+soldata+" "+alta+" "+departamentu_kodea+" "+ardurak_arduraMota);
       				//Betebehar dena	
@@ -907,6 +921,26 @@ public class EnplegatuakMenu extends JFrame {
 	    Date now = new Date();
 	    String Hora = sdfDate.format(now);
 	    return Hora;
+	}
+	
+	public void botoiakOndoJarriEnple() {
+		
+		txtZenbakia.setEditable(false);
+		txtIzena.setEditable(false);
+		txtAbizena.setEditable(false);
+		txtSoldata.setEditable(false);
+		//comboBoxArdurak.setEditable(false);
+		
+		txtZenbakia.setText("");
+		txtIzena.setText("");
+		txtAbizena.setText("");
+		txtSoldata.setText("");
+		
+		btnAtzera.setEnabled(true);
+		btnAdd.setEnabled(true);
+		btnDel.setEnabled(true);
+		btnUpd.setEnabled(true);
+		
 	}
 
     

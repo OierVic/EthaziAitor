@@ -398,13 +398,13 @@ public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia) thr
 //
 
 
-	public static void EnplegatuakIgo (ArrayList<Enplegatua> arraylistEnplegatua) {
+	public static void EnplegatuakIgo (ArrayList<Enplegatua> arraylistEnplegatua) throws SQLException {
 
 		Connection conexion = (Connection) konexioa.getConnection();
-		try {
+		//try {
 			Statement s = conexion.createStatement();
 
-			for (int i = 0; i < arraylistEnplegatua.size() - 1; i++) {
+			for (int i = 0; i < arraylistEnplegatua.size(); i++) {
 
 				s.executeUpdate("INSERT INTO `enplegatu` (`zenbaki`, `izena`, `abizena`, `soldata`, `alta`, `departamentu_kodea`, `ardurak_arduraMota`) VALUES"
 						+ " ("+ arraylistEnplegatua.get(i).getZenbaki() +", '"+ arraylistEnplegatua.get(i).getIzena() +"', '"+ arraylistEnplegatua.get(i).getAbizenak() +"', "+ arraylistEnplegatua.get(i).getSoldata() +",'"+ arraylistEnplegatua.get(i).getAlta() +"','"+ arraylistEnplegatua.get(i).getDepKod() +"', '"+ arraylistEnplegatua.get(i).getArduraMota() +"')");
@@ -413,9 +413,9 @@ public static ArrayList<Enplegatua> JSONEnplegatuakIrakurri(File fitxategia) thr
 			s.close();
 
 			System.out.println("Konexioa Eginda Enplegatuak Igo");
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
 
 
 	}

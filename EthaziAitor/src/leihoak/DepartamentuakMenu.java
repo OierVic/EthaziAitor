@@ -153,11 +153,11 @@ public class DepartamentuakMenu extends JFrame {
 					JOptionPane.showMessageDialog(null, "Izena kate oso bat izan behar du");
 					
 				}
-				if(Character.isUpperCase(c)) {
-					String cad=(""+c).toLowerCase();
-					c=cad.charAt(0);
-					evt.setKeyChar(c);
-				}
+//				if(Character.isUpperCase(c)) {
+//					String cad=(""+c).toLowerCase();
+//					c=cad.charAt(0);
+//					evt.setKeyChar(c);
+//				}
 
 			}
 		});
@@ -182,11 +182,11 @@ public class DepartamentuakMenu extends JFrame {
 					JOptionPane.showMessageDialog(null, "Kokapena kate oso bat izan behar du");
 					
 				}
-				if(Character.isUpperCase(c)) {
-					String cad=(""+c).toLowerCase();
-					c=cad.charAt(0);
-					evt.setKeyChar(c);
-				}
+//				if(Character.isUpperCase(c)) {
+//					String cad=(""+c).toLowerCase();
+//					c=cad.charAt(0);
+//					evt.setKeyChar(c);
+//				}
 
 			}
 		});
@@ -298,6 +298,9 @@ public class DepartamentuakMenu extends JFrame {
   				//kontrol.updateDepart(txtKodea.getText() ,txtIzena.getText() , txtKokapena.getText());
   				DefaultTableModel model = (DefaultTableModel) tabla.getModel();
   				int i = tabla.getSelectedRow();
+  				if (tabla.getSelectedRow()!=-1) {
+					
+				
   				if (count==0) {
 					
   					btnAdd.setEnabled(false);
@@ -337,6 +340,9 @@ public class DepartamentuakMenu extends JFrame {
                 }else{
 					JOptionPane.showMessageDialog(null, "Ezin izan da aldatu. Mesedez datuak berraztetu ");
                 }
+  			}else {
+				JOptionPane.showMessageDialog(null, "Ez duzu errekadarik aukeratu", "ERROR!", JOptionPane.WARNING_MESSAGE);
+  				}
   			}
   		});
         btnUpd.setEnabled(true);
@@ -610,6 +616,7 @@ public class DepartamentuakMenu extends JFrame {
       				kodea = tabla.getValueAt(row2, 0).toString();
       				izena = tabla.getValueAt(row2, 1).toString();
       				kokapena = tabla.getValueAt(row2, 2).toString();
+      				txtKodea.setText(kodea.toString());
       				System.out.println(kodea+" "+izena+" "+kokapena);
       				//Betebehar dena	
       			}
@@ -734,6 +741,24 @@ public class DepartamentuakMenu extends JFrame {
 			
 		return emaitza;
 	
+	}
+	
+	public void botoiakOndoJarriDepart() {
+		
+		txtKodea.setEditable(false);
+		txtIzena.setEditable(false);
+		txtKokapena.setEditable(false);
+		
+		//txtKodea.setText("");
+		txtIzena.setText("");
+		txtKokapena.setText("");
+		
+		btnAtzera.setEnabled(true);
+		btnAdd.setEnabled(true);
+		btnDel.setEnabled(true);
+		btnUpd.setEnabled(true);
+		
+		
 	}
     
     

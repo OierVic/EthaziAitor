@@ -556,14 +556,14 @@ public class Departamentua {
 	}
 
 	public static void DepartamentuakIgo(ArrayList<Departamentua> depArrayList) throws SQLException{ //Departamentu arrayList sartu bd
-		Departamentua p = new Departamentua(0, null, null);
+		//Departamentua p = new Departamentua(0, null, null);
 		Connection conexion = (Connection) konexioa.getConnection();
 		//try {
 			Statement s = conexion.createStatement();
 			for(int x=0;x<depArrayList.size();x++) {
-				p = depArrayList.get(x);
+				//p = depArrayList.get(x);
 				s.executeUpdate("INSERT INTO `departamentu` (`kodea`, `izena`, `kokapena`) VALUES"
-						+ " (" + p.getKodea() + ", '" + p.getIzena() + "', '" + p.getKokapena() + "')");	
+						+ " (" + depArrayList.get(x).getKodea() + ", '" + depArrayList.get(x).getIzena() + "', '" + depArrayList.get(x).getKokapena() + "')");	
 			}
 			s.close();
 

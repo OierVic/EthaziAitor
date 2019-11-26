@@ -71,6 +71,7 @@ public class Kontroladorea {
 		public void depatamentuMenuraEzEginBotoia() {
 			this.departamentuak = Departamentua.DepartamentuakSelect();
 			this.departamentuakmenu.sortuTaulaDepart(departamentuak);			
+			this.departamentuakmenu.botoiakOndoJarriDepart();
 			
 			this.fitxategiaukeratuDepartamentuak.setVisible(false);
 			this.departamentuakmenu.setVisible(true);
@@ -86,7 +87,7 @@ public class Kontroladorea {
 			this.departamentuak = Departamentua.DepartamentuakSelect();
 			this.departamentuakmenu.sortuTaulaDepart(departamentuak);
 			departamentuakmenu.FitxategikoaJTableraGehituDepartamentuak();
-			
+			this.departamentuakmenu.botoiakOndoJarriDepart();
 			
 			this.fitxategiaukeratuDepartamentuak.setVisible(false);
 			this.departamentuakmenu.setVisible(true);
@@ -106,6 +107,7 @@ public class Kontroladorea {
 			this.enplegatuakmenu.MaxEnple();
 			this.enplegatuakmenu.ComboboxForArdura();
 			this.enplegatuakmenu.ComboboxForDepartamentuZenbakia();
+			this.enplegatuakmenu.botoiakOndoJarriEnple();
 
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
@@ -120,6 +122,7 @@ public class Kontroladorea {
 			this.enplegatuakmenu.MaxEnple();
 			this.enplegatuakmenu.ComboboxForArdura();
 			this.enplegatuakmenu.ComboboxForDepartamentuZenbakia();
+			this.enplegatuakmenu.botoiakOndoJarriEnple();
 
 			this.fitxategiaukeratuEnplegatuak.setVisible(false);
 			this.enplegatuakmenu.setVisible(true);
